@@ -2,6 +2,8 @@
 
 one:
   name: 'Bob'
+  encrypted_password: <%= Operator.new.send(:password_digest, '123456') %>
 
 two:
   name: 'Ron'
+  encrypted_password: <%= Operator.new.send(:password_digest, '123456') %>

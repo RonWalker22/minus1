@@ -39,6 +39,7 @@ class OperatorTest < ActiveSupport::TestCase
     begin
       Operator.create!(name: 'Ron')
     rescue ActiveRecord::RecordNotUnique => invalid
+    rescue ActiveRecord::RecordInvalid => invalid
     end
     assert invalid
   end

@@ -5,6 +5,8 @@ Style/Documentation:
 AllCops:
   Exclude:
     - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'config/initializers/devise.rb'
 
 Lint/HandleExceptions:
   Enabled: true
