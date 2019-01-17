@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  objective: one
+  commander: one
+  name: 'gold'
+
+two:
+  objective: two
+  commander: two
+  name: 'blue'

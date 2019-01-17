@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 'defend house'
+  location: 'red house'
+  action: 'defend'
+  strategy: one
+
+two:
+  name: 'attack blue house'
+  location: 'blue house'
+  action: 'attack'
+  parent: one
+  strategy: two
+  next: one
+
+three:
+  name: 'attack blue house'
+  location: 'blue house'
+  action: 'attack'
+  strategy: two
+  next: two

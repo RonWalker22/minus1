@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 'Sick Shot'
+  commander: one
+
+two:
+  name: 'R3'
+  commander: two
