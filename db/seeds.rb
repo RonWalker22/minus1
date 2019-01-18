@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+3.times do |i|
+  new_game = Game.create! name: "test#{i}", website: "www.test#{i}.com"
+  Level.create! name: "test#{i}", game_id: new_game.id
+end

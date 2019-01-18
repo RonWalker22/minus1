@@ -7,6 +7,7 @@ AllCops:
     - 'db/schema.rb'
     - 'db/migrate/*'
     - 'config/initializers/devise.rb'
+    - 'app/views/**/*'
 
 Lint/HandleExceptions:
   Enabled: true
@@ -17,3 +18,6 @@ Metrics/MethodLength:
   Enabled: true
   Exclude:
     - 'db/**/*'
+
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
