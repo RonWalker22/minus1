@@ -1,8 +1,8 @@
 class Objective < ApplicationRecord
   belongs_to :strategy
-  belongs_to :parent,
+  belongs_to :master,
              class_name: 'Objective',
-             foreign_key: 'parent_id',
+             foreign_key: 'master_id',
              optional: true
   belongs_to :next,
              class_name: 'Objective',
@@ -12,9 +12,9 @@ class Objective < ApplicationRecord
            class_name: 'Objective',
            foreign_key: 'next_id'
   has_many :recipes
-  has_many :children,
+  has_many :slaves,
            class_name: 'Objective',
-           foreign_key: 'parent_id'
+           foreign_key: 'master_id'
   has_many :operator_rooms
   has_many :operators, through: :operator_rooms
 end

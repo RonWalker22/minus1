@@ -4,7 +4,7 @@ class ObjectiveTest < ActiveSupport::TestCase
   objective = Objective.find_by(name: 'defend house')
   recipe = objective.recipes.first
   child_objective = Objective.find_by(name: 'attack blue house')
-  parent_objective = Objective.find_by(name: 'defend house')
+  master_objective = Objective.find_by(name: 'defend house')
   previous_objective = Objective.find_by(name: 'attack blue house')
   next_objective = Objective.find_by(name: 'defend house')
 
@@ -17,22 +17,22 @@ class ObjectiveTest < ActiveSupport::TestCase
     assert_equal 'Ingredient', ingredient.class.name
   end
 
-  test 'has children' do
-    child = parent_objective.children.first
+  test 'has slaves' do
+    child = master_objective.slaves.first
     assert_equal 'Objective', child.class.name
   end
 
-  test 'has no children' do
-    assert child_objective.children.empty?
+  test 'has no slaves' do
+    assert child_objective.slaves.empty?
   end
 
-  test 'has parent' do
-    parent = child_objective.parent
-    assert_equal 'Objective', parent.class.name
+  test 'has master' do
+    master = child_objective.master
+    assert_equal 'Objective', master.class.name
   end
 
-  test 'has no parent' do
-    assert_not parent_objective.parent
+  test 'has no master' do
+    assert_not master_objective.master
   end
 
   test 'has operators' do

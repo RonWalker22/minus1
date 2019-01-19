@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :objectives
   resources :strategies
   devise_for :operators
 

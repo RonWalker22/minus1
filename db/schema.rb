@@ -45,11 +45,11 @@ ActiveRecord::Schema.define(version: 2019_01_17_203704) do
   end
 
   create_table "objectives", force: :cascade do |t|
-    t.bigint "parent_id"
+    t.bigint "master_id"
     t.bigint "next_id"
     t.bigint "strategy_id", null: false
     t.string "name", null: false
-    t.string "location", null: false
+    t.string "target", null: false
     t.string "action", null: false
     t.integer "delay", default: 0, null: false
     t.integer "min_ops", default: 1, null: false
@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 2019_01_17_203704) do
     t.integer "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["master_id"], name: "index_objectives_on_master_id"
     t.index ["next_id"], name: "index_objectives_on_next_id"
-    t.index ["parent_id"], name: "index_objectives_on_parent_id"
     t.index ["strategy_id"], name: "index_objectives_on_strategy_id"
   end
 
@@ -168,8 +168,8 @@ ActiveRecord::Schema.define(version: 2019_01_17_203704) do
     t.index ["name"], name: "index_teams_on_name", unique: true
   end
 
+  add_foreign_key "objectives", "objectives", column: "master_id"
   add_foreign_key "objectives", "objectives", column: "next_id"
-  add_foreign_key "objectives", "objectives", column: "parent_id"
   add_foreign_key "operator_strategies", "objectives", column: "default_id"
   add_foreign_key "operator_strategies", "objectives", column: "primary_id"
   add_foreign_key "operator_strategies", "objectives", column: "secondary_id"

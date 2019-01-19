@@ -2,21 +2,21 @@
 
 one:
   name: 'defend house'
-  location: 'red house'
+  target: 'red house'
   action: 'defend'
   strategy: one
 
 two:
   name: 'attack blue house'
-  location: 'blue house'
+  target: 'blue house'
   action: 'attack'
-  parent: one
+  master: one
   strategy: two
   next: one
 
 three:
   name: 'attack blue house'
-  location: 'blue house'
+  target: 'blue house'
   action: 'attack'
   strategy: two
   next: two
