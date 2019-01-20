@@ -7,14 +7,21 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 3.times do |i|
-  operator = Operator.create! name: "test#{i}", password: '123456'
-  new_game = Game.create! name: "test#{i}", website: "www.test#{i}.com"
-  level = Level.create! name: "test#{i}", game_id: new_game.id
+  operator = Operator.create! name: "operator#{i}", password: '123456'
+  new_game = Game.create! name: "game#{i}", website: "www.game#{i}.com"
+  level = Level.create! name: "level#{i}", game_id: new_game.id
   strategy = Strategy.create!(commander_id: operator.id,
                               level_id: level.id,
-                              name: "test#{i}")
-  Objective.create!(strategy_id: strategy.id,
-                    target: "test#{i}",
-                    action: "test#{i}",
-                    name: "test#{i}")
+                              name: "strategy#{i}")
+  objective = Objective.create!(strategy_id: strategy.id,
+                                target: "target#{i}",
+                                action: "action#{i}",
+                                name: "objective#{i}")
+  recipe = Recipe.create!(name: "recipe#{i}",
+                          objective_id: objective.id,
+                          commander_id: operator.id)
+  Ingredient.create!(name: "ingredient#{i}",
+                     recipe_id: recipe.id,
+                     step: 1,
+                     content: 'Go to the waterfall')
 end
