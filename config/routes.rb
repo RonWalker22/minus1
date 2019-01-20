@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :games
   resources :levels
   resources :ingredients
   resources :recipes
