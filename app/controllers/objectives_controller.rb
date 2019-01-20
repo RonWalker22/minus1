@@ -1,3 +1,4 @@
+require 'pry'
 class ObjectivesController < ApplicationController
   before_action :set_objective, only: [:show, :edit, :update, :destroy]
 
@@ -37,6 +38,7 @@ class ObjectivesController < ApplicationController
   # PATCH/PUT /objectives/1
   # PATCH/PUT /objectives/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @objective.update(objective_params)
         format.html { redirect_to @objective, notice: 'Objective was successfully updated.' }
@@ -67,7 +69,9 @@ class ObjectivesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def objective_params
-      params[:objective][:strategy_id] = params[:objective][:strategy_id].to_i
+      if params[:objective][:strategy_id]
+        params[:objective][:strategy_id] = params[:objective][:strategy_id].to_i
+      end
       params.fetch(:objective, {}).permit(:name, :target, :action, :strategy_id)
     end
 end

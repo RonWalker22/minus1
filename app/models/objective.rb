@@ -10,12 +10,12 @@ class Objective < ApplicationRecord
              optional: true
   has_many :previous,
            class_name: 'Objective',
-           foreign_key: 'next_id'
-  has_many :recipes
+           foreign_key: 'next_id', dependent: :nullify
+  has_many :recipes, dependent: :nullify
   has_many :slaves,
            class_name: 'Objective',
-           foreign_key: 'master_id'
-  has_many :operator_rooms
+           foreign_key: 'master_id', dependent: :nullify
+  has_many :operator_rooms, dependent: :nullify
   has_many :operators, through: :operator_rooms
   has_many :primaries,
            class_name: 'OperatorStrategy',

@@ -1,8 +1,9 @@
 require 'test_helper'
+require 'pry'
 class ObjectivesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    @objective = objectives(:three)
+    @objective = objectives(:one)
     @operator = operators(:one)
     @strategy = strategies(:one)
     sign_in @operator
@@ -39,7 +40,8 @@ class ObjectivesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update objective' do
-    patch objective_url(@objective), params: { objective: {} }
+    # binding.pry
+    patch objective_url(@objective), params: { objective: {name: 'new_obj'} }
     assert_redirected_to objective_url(@objective)
   end
 

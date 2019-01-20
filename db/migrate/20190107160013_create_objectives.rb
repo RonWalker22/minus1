@@ -11,7 +11,7 @@ class CreateObjectives < ActiveRecord::Migration[5.2]
       t.integer :delay, default: 0, null: false
       t.integer :min_ops, default: 1, null: false
       t.integer :max_ops
-      t.integer :priority
+      t.integer :priority, default: 10, null: false
       t.timestamps
     end
   end
