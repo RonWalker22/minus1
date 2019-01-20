@@ -39,7 +39,7 @@ class StrategiesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update strategy' do
-    patch strategy_url(@strategy), params: { strategy: {} }
+    patch strategy_url(@strategy), params: { strategy: { name: 'G44' } }
     assert_redirected_to strategy_url(@strategy)
   end
 

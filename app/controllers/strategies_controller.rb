@@ -1,6 +1,6 @@
+require 'pry'
 class StrategiesController < ApplicationController
   before_action :set_strategy, only: [:show, :edit, :update, :destroy]
-  before_action :make_strategy, only: [:create]
 
   # GET /strategies
   # GET /strategies.json
@@ -23,6 +23,8 @@ class StrategiesController < ApplicationController
   # POST /strategies
   # POST /strategies.json
   def create
+    @strategy = Strategy.new(strategy_params)
+
     respond_to do |format|
       if @strategy.save
         format.html { redirect_to @strategy, notice: 'Strategy was successfully created.' }
@@ -67,12 +69,7 @@ class StrategiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def strategy_params
-      params.fetch(:strategy, {})
-    end
-
-    def make_strategy
-      @strategy = Strategy.new(level_id: strategy_params[:level_id].to_i,
-                               name: strategy_params[:name],
-                               commander_id: current_operator.id)
+      params[:strategy][:commander_id] = current_operator.id
+      params.fetch(:strategy, {}).permit(:level_id, :name, :commander_id)
     end
 end
