@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2019_01_17_203704) do
     t.integer "delay", default: 0, null: false
     t.integer "min_ops", default: 1, null: false
     t.integer "max_ops"
-    t.integer "priority"
+    t.integer "priority", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["master_id"], name: "index_objectives_on_master_id"
