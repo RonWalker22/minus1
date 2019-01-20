@@ -1,0 +1,34 @@
+<%= form_with(model: room, local: true) do |form| %>
+  <% if room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+      <% room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %><br />
+    <%= form.text_field :name, autofocus: true, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :objective_preference, for: :override_preference%><br />
+    <%= form.select :override_preference, [["Operator's", false],
+    ["Commander's", true]], required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Access, for: :room_private %><br />
+    <%= form.select :private, [['Open', false], ['Private', true]],
+    required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
