@@ -17,4 +17,20 @@ class Objective < ApplicationRecord
            foreign_key: 'master_id'
   has_many :operator_rooms
   has_many :operators, through: :operator_rooms
+  has_many :primaries,
+           class_name: 'OperatorStrategy',
+           foreign_key: 'primary_id',
+           dependent: :nullify
+  has_many :secondaries,
+           class_name: 'OperatorStrategy',
+           foreign_key: 'secondary_id',
+           dependent: :nullify
+  has_many :tertiaries,
+           class_name: 'OperatorStrategy',
+           foreign_key: 'tertiary_id',
+           dependent: :nullify
+  has_many :defaults,
+           class_name: 'OperatorStrategy',
+           foreign_key: 'default_id',
+           dependent: :nullify
 end
