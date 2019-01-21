@@ -1,12 +1,20 @@
-html {
-  background: #71b280;
+@import 'custom-variables';
+
+body {
+  background-color: $primary-bg;
 }
 
 .inner-body {
-  background-color: #2c7744;
-  color: GREENYELLOW;
+  color: white;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #69737f 11px
+  );
+  min-height: 70vh;
 }
 
-header {
-  background-color: white;
+.center {
+  text-align: center;
 }

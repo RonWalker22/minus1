@@ -13,4 +13,4 @@
  *= require_tree .
  *= require_self
  */
-@import '_bulma-with-variables';
+@import '_bulma-custom';
