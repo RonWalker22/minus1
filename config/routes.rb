@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   end
 
   get '/about' => 'static_pages#about'
+  get '/docs' => 'static_pages#docs'
 end
