@@ -1,12 +1,63 @@
 <header>
-  <% if operator_signed_in? %>
-      <%= current_operator.name%>
-      <%= link_to "Log out", destroy_operator_session_path, method: :delete %>
-  <% else %>
-    <%= link_to 'Login', new_operator_session_path %>
-    <%= link_to 'Sign up', new_operator_registration_path %>
-  <% end %>
-  <br>
-  <br>
-  <%= link_to 'About', about_path%>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <%= image_tag 'm1-text-big.png', alt: 'Minus 1
+        logo.', id:'m1-logo'%>
+      </a>
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/">
+          Home
+        </a>
+        <a class="navbar-item">
+          Documentation
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
+          </a>
+
+          <div class="navbar-dropdown">
+            <%= link_to "About", about_path, class: "navbar-item" %> 
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+      <% if operator_signed_in? %>
+          <div class="navbar-item">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                <%= current_operator.name %>
+              </a>
+              <div class="navbar-dropdown">
+                <%= link_to "Settings", edit_operator_registration_path, class: "navbar-item" %> 
+                <hr class="navbar-divider">
+                <%= link_to "Log out", destroy_operator_session_path, method:
+              :delete, class: "navbar-item" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="navbar-item">
+          <div class="buttons">
+            <% unless operator_signed_in? %>
+              <%= link_to 'Login', new_operator_session_path, class: "button is-light" %>
+              <%= link_to 'Sign up', new_operator_registration_path, class: "button is-primary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>

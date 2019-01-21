@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :operators
   resources :operators, only: [:index, :show]
   resources :games
   resources :levels
@@ -8,7 +9,6 @@ Rails.application.routes.draw do
   resources :teams
   resources :objectives
   resources :strategies
-  devise_for :operators
 
   unauthenticated do
     root to: 'static_pages#about'
