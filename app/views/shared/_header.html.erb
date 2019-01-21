@@ -18,14 +18,47 @@
         <a class="navbar-item" href="/">
           Home
         </a>
-        <%= link_to "Docs", docs_path, class: 'navbar-item'%> 
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Strategies
+          </a>
+
+          <div class="navbar-dropdown">
+            <%= link_to "My Strategies", about_path, class: "navbar-item" %> 
+            <%= link_to "Team's Strategies", about_path, class: "navbar-item" %> 
+            <%= link_to "All Strategies", strategies_path, class: "navbar-item" %> 
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Teams
+          </a>
+
+          <div class="navbar-dropdown">
+            <%= link_to "My Teams", about_path, class: "navbar-item" %> 
+            <%= link_to "All Teams", teams_path, class: "navbar-item" %> 
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Rooms
+          </a>
+
+          <div class="navbar-dropdown">
+            <%= link_to "Situation Room", about_path, class: "navbar-item" %> 
+            <%= link_to "Team's Rooms", docs_path, class: 'navbar-item'%> 
+            <%= link_to "All Rooms", rooms_path, class: 'navbar-item'%> 
+          </div>
+        </div>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             More
           </a>
 
           <div class="navbar-dropdown">
+            <%= link_to "Operators", operators_path, class: "navbar-item" %> 
             <%= link_to "About", about_path, class: "navbar-item" %> 
+            <%= link_to "Docs", docs_path, class: 'navbar-item'%>
           </div>
         </div>
       </div>
