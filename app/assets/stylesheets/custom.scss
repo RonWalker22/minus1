@@ -1,10 +1,11 @@
 @import 'custom-variables';
 
-body {
+.html-bg {
   background-color: $primary-bg;
+  background: #225643ed;
 }
 
-.inner-body {
+body {
   color: white;
   background: repeating-linear-gradient(
     45deg,

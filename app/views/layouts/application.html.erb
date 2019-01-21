@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="html-bg">
   <head>
     <title>Minus1</title>
     <%= csrf_meta_tags %>
@@ -11,10 +11,8 @@
 
   <body>
     <%= render 'shared/header' %>
-    <div class="inner-body">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield%>
-    </div>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield%>
   </body>
 </html>
