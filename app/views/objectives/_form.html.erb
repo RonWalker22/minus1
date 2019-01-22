@@ -32,19 +32,19 @@
   <div class="field">
     <%= form.label :minimum_operators, for: :objective_min, class:"label" %>
     <br />
-    <%= form.number_field :min, min:1, value: 1, max:1000, disabled: true %>
+    <%= form.number_field :min, min:1, value: 1, max:1000, disabled: true, class:"input" %>
   </div>
 
   <div class="field">
     <%= form.label :maximum_operators, for: :objective_max, class:"label" %>
     <br />
-    <%= form.number_field :max, min:1, max:1000, disabled: true %>
+    <%= form.number_field :max, min:1, max:1000, disabled: true, class:"input" %>
   </div>
 
   <div class="field">
     <%= form.label :operator_distribution_priority, for: :objective_priority, class:"label"  %>
     <br />
-    <%= form.number_field :priority, value: 10, min:1, max:10, disabled: true %>
+    <%= form.number_field :priority, value: 10, min:1, max:10, disabled: true, class:"input" %>
   </div>
 
   <div class="field">

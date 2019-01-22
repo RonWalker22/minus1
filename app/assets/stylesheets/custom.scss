@@ -19,3 +19,9 @@ body {
 .box-margin {
   margin-top: 4em;
 }
+
+input {
+  &[type='number'] {
+    max-width: 5em;
+  }
+}
