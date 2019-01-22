@@ -16,8 +16,7 @@ body {
   );
 }
 
-.box-style {
-  margin-top: 4em;
+.box {
   background: repeating-linear-gradient(
     -45deg,
     #22463c,
@@ -31,3 +30,33 @@ input {
     max-width: 5em;
   }
 }
+
+.menu {
+  background: repeating-linear-gradient(
+    -45deg,
+    $menu-bg,
+    $menu-bg 10px,
+    #69737f61 11px
+  );
+}
+
+/* Mobile Landscape Screen Sizes */
+@media only screen and (min-width: 400px) {
+  .menu {
+    // max-width: 30vh;
+    text-align: center;
+  }
+}
+
+/* table Screen Sizes */
+@media only screen and (min-width: 770px) {
+  .menu {
+    float: left;
+    max-width: none;
+    text-align: left;
+  }
+}
+
+/* Desktop screen Sizes */
+// @media only screen and (min-width: 1024px) {
+// }
