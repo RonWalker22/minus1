@@ -1,3 +1,4 @@
+<%= render 'shared/form-box-start' %>
 <%= form_with(model: room, local: true) do |form| %>
   <% if room.errors.any? %>
     <div id="error_explanation">
@@ -12,23 +13,29 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %><br />
-    <%= form.text_field :name, autofocus: true, required: true %>
+    <%= form.label :name, class:"label" %><br />
+    <%= form.text_field :name, autofocus: true, required: true, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :objective_preference, for: :override_preference%><br />
-    <%= form.select :override_preference, [["Operator's", false],
-    ["Commander's", true]], required: true %>
+    <%= form.label :objective_preference, for: :override_preference,
+    class:"label"%><br />
+    <div class="select">
+      <%= form.select :override_preference, [["Operator's", false],
+      ["Commander's", true]], required: true %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :Access, for: :room_private %><br />
-    <%= form.select :private, [['Open', false], ['Private', true]],
-    required: true %>
+    <%= form.label :Access, for: :room_private, class:"label" %><br />
+    <div class="select">
+      <%= form.select :private, [['Open', false], ['Private', true]],
+      required: true %>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"button is-link"%>
   </div>
 <% end %>
+<%= render 'shared/form-box-end' %>

@@ -1,3 +1,4 @@
+<%= render 'shared/form-box-start' %>
 <%= form_with(model: recipe, local: true) do |form| %>
   <% if recipe.errors.any? %>
     <div id="error_explanation">
@@ -12,20 +13,23 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :objective %><br>
-    <%= form.collection_select :objective_id, 
-                            Objective.all, 
-                            :id, 
-                            :name,
-                            required: true %>
+    <%= form.label :objective, class:"label" %><br>
+    <div class="select">
+      <%= form.collection_select :objective_id, 
+                        Objective.all, 
+                        :id, 
+                        :name,
+                        required: true %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :name %><br />
-    <%= form.text_field :name, autofocus: true, required: true %>
+    <%= form.label :name, class:"label" %><br />
+    <%= form.text_field :name, autofocus: true, required: true, class:"input" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"button is-link" %>
   </div>
 <% end %>
+<%= render 'shared/form-box-end' %>

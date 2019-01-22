@@ -1,3 +1,4 @@
+<%= render 'shared/form-box-start' %>
 <%= form_with(model: strategy, local: true) do |form| %>
   <% if strategy.errors.any? %>
     <div id="error_explanation">
@@ -12,19 +13,24 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %><br />
-    <%= form.text_field :name, autofocus: true %>
+    <%= form.label :name, class:"label" %><br />
+    <%= form.text_field :name, autofocus: true, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.text_field :level_id, 
-                        value: params[:level], 
-                        hidden: true,                         
-                        readonly: true%>
+    <%= form.label :level, class:"label" %><br />
+    <div class="select">
+      <%= form.collection_select :level_id, 
+                        Level.all, 
+                        :id, 
+                        :name,
+                        required: true %>
+    </div>
   </div>
 
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"button is-link" %>
   </div>
 <% end %>
+<%= render 'shared/form-box-end' %>

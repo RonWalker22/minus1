@@ -1,3 +1,4 @@
+<%= render 'shared/form-box-start' %>
 <%= form_with(model: objective, local: true) do |form| %>
   <% if objective.errors.any? %>
     <div id="error_explanation">
@@ -12,51 +13,53 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %><br />
-    <%= form.text_field :name, autofocus: true, required: true %>
+    <%= form.label :name, class:"label" %><br />
+    <%= form.text_field :name, autofocus: true, required: true, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :action %><br />
+    <%= form.label :action, class:"label" %><br />
     <%= form.select :action, [ 'Attack', 'Defend', 'Capture'], { :include_blank => '-- Select One --' },
-    required: true %>
+    required: true, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :target%><br />
-    <%= form.text_field :target, required: true %>
+    <%= form.label :target, class:"label" %><br />
+    <%= form.text_field :target, required: true, class:"input" %>
   </div>
 
 
   <div class="field">
-    <%= form.label :minimum_operators, for: :objective_min %><br />
+    <%= form.label :minimum_operators, for: :objective_min, class:"label" %>
+    <br />
     <%= form.number_field :min, min:1, value: 1, max:1000, disabled: true %>
   </div>
 
   <div class="field">
-    <%= form.label :maximum_operators, for: :objective_max %><br />
+    <%= form.label :maximum_operators, for: :objective_max, class:"label" %>
+    <br />
     <%= form.number_field :max, min:1, max:1000, disabled: true %>
   </div>
 
   <div class="field">
-    <%= form.label :operator_distribution_priority, for: :objective_priority  %>
+    <%= form.label :operator_distribution_priority, for: :objective_priority, class:"label"  %>
     <br />
     <%= form.number_field :priority, value: 10, min:1, max:10, disabled: true %>
   </div>
 
   <div class="field">
-    <%= form.label :next %><br />
-    <%= form.text_field :next, disabled: true %>
+    <%= form.label :next, class:"label" %><br />
+    <%= form.text_field :next, disabled: true, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :master %><br />
-    <%= form.text_field :master, disabled: true %>
+    <%= form.label :master, class:"label" %><br />
+    <%= form.text_field :master, disabled: true, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :dealy %><br />
-    <%= form.number_field :delay, value: 0, min:0, max:10_000, disabled: true%>
+    <%= form.label :dealy, class:"label" %><br />
+    <%= form.number_field :delay, value: 0, min:0, max:10_000, disabled: true, class:"input"%>
   </div>
 
   <div class="field">
@@ -67,6 +70,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"button is-link" %>
   </div>
 <% end %>
+<%= render 'shared/form-box-end' %>
