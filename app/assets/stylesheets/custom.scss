@@ -9,14 +9,20 @@ body {
   background: repeating-linear-gradient(
     45deg,
     transparent,
-    transparent 10px,
-    #69737f 11px
+    transparent 49px,
+    #225643a1 50px
   );
   min-height: 70vh;
 }
 
-.box-margin {
+.box-style {
   margin-top: 4em;
+  background: repeating-linear-gradient(
+    -45deg,
+    #22463c,
+    #22463c 10px,
+    #ce53105e 11px
+  );
 }
 
 input {
