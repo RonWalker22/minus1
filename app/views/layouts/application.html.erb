@@ -13,7 +13,9 @@
     <%= render 'shared/header' %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield%>
+    <div class="inner-body">
+      <%= yield%>
+    </div>
     <%= render 'shared/footer' %>
   </body>
 </html>
