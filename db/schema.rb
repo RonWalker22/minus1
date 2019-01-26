@@ -150,12 +150,14 @@ ActiveRecord::Schema.define(version: 2019_01_17_203704) do
   create_table "strategies", force: :cascade do |t|
     t.bigint "commander_id", null: false
     t.bigint "level_id"
+    t.bigint "inspiration_id"
     t.string "name", null: false
     t.boolean "private", default: false, null: false
     t.boolean "natural_flow", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commander_id"], name: "index_strategies_on_commander_id"
+    t.index ["inspiration_id"], name: "index_strategies_on_inspiration_id"
     t.index ["level_id"], name: "index_strategies_on_level_id"
   end
 
@@ -177,5 +179,6 @@ ActiveRecord::Schema.define(version: 2019_01_17_203704) do
   add_foreign_key "recipes", "operators", column: "commander_id"
   add_foreign_key "rooms", "operators", column: "commander_id"
   add_foreign_key "strategies", "operators", column: "commander_id"
+  add_foreign_key "strategies", "strategies", column: "inspiration_id"
   add_foreign_key "teams", "operators", column: "commander_id"
 end

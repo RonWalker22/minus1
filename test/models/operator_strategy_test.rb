@@ -4,8 +4,8 @@ class OperatorStrategyTest < ActiveSupport::TestCase
   operator_strat = OperatorStrategy.all[random_index]
   test 'disallows duplicate OperatorStrategy' do
     begin
-      OperatorStrategy.create!(operator_id: Operator.first.id,
-                               strategy_id: Strategy.first.id)
+      OperatorStrategy.create!(operator_id: operators(:one).id,
+                               strategy_id: strategies(:one).id)
     rescue ActiveRecord::RecordNotUnique => invalid
     end
     assert invalid

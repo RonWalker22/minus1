@@ -9,3 +9,9 @@ two:
   name: 'Hold the Line'
   commander: two
   level: two
+
+three:
+  name: 'Hold the Line'
+  commander: one
+  level: one
+  inspiration: one
