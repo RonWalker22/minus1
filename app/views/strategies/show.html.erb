@@ -1,4 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+
+<%= render 'shared/show-start' %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Created By</th>
+      <th>Inspired By</th>
+      <th>Inspirations</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= link_to @strategy.commander.name, @strategy.commander %></td>
+      <td>----</td>
+      <td><%= @strategy.inspirations.count %></td>
+      <td>----</td>
+    </tr>
+  </tbody>
+</table>
 <%= link_to 'Edit', edit_strategy_path(@strategy) %> |
 <%= link_to 'Back', strategies_path %>
+<%= render 'shared/show-end' %>
