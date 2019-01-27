@@ -1,8 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<%= render 'shared/index-start' %>
+<%= render 'shared/index-start', myclass: 'strategy-box' %>
 <%= link_to 'New Strategy', new_strategy_path %>
-<table class="table is-bordered is-striped is-fullwidth">
+
+<div class="tabs is-centered">
+  <ul>
+    <li><a id="index-btn">All</a></li>
+    <li><a id="team-btn">Team's</a></li>
+    <li class="is-active"><a id="personal-btn">Personal</a></li>
+  </ul>
+</div>
+
+<table id="index-tabel" class="table is-hoverable is-bordered is-striped is-fullwidth">
   <thead>
     <tr>
       <th>Strategy</th>
@@ -15,6 +24,55 @@
 
   <tbody>
     <% @strategies.each do |strat| %>
+      <tr>
+        <td><%= link_to strat.name, strat%></td>
+        <td><%= link_to strat.commander.name, strat.commander %></td>
+        <td>----</td>
+        <td><%= strat.inspirations.count %></td>
+        <td>----</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table id="team-tabel" class="table is-hoverable is-bordered is-striped is-fullwidth">
+  <thead>
+    <tr>
+      <th>Strategy</th>
+      <th>Created By</th>
+      <th>Inspired By</th>
+      <th>Inspirations</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @strategies.each do |strat| %>
+      <% next unless strat.commander.id == current_operator.id %>
+      <tr>
+        <td><%= link_to strat.name, strat%></td>
+        <td><%= link_to strat.commander.name, strat.commander %></td>
+        <td>----</td>
+        <td><%= strat.inspirations.count %></td>
+        <td>----</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<table id="personal-tabel" class="table is-hoverable is-bordered is-striped is-fullwidth">
+  <thead>
+    <tr>
+      <th>Strategy</th>
+      <th>Created By</th>
+      <th>Inspired By</th>
+      <th>Inspirations</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @strategies.each do |strat| %>
+      <% next unless strat.commander.id == current_operator.id %>
       <tr>
         <td><%= link_to strat.name, strat%></td>
         <td><%= link_to strat.commander.name, strat.commander %></td>

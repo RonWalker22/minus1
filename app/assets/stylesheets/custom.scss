@@ -40,6 +40,18 @@ table {
   }
 }
 
+.strategy-box {
+  height: 40em;
+}
+
+#team-tabel {
+  display: none;
+}
+
+#index-tabel {
+  display: none;
+}
+
 /* Mobile Landscape Screen Sizes */
 @media only screen and (min-width: 400px) {
   .menu {
