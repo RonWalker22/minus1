@@ -49,7 +49,7 @@
         <tr>
           <td><%= link_to obj.name, objective_path(obj.id) %></td>
           <td>
-            <%= obj.next ? obj.next.count : '----'%>
+            <%= obj.next ? obj.next.name : '----'%>
           </td>
           <td>
             <%= obj.previous.count > 0 ? obj.previous.count : '----'%>
