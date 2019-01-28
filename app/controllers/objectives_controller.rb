@@ -1,5 +1,7 @@
 class ObjectivesController < ApplicationController
   before_action :set_objective, only: [:show, :edit, :update, :destroy]
+  before_action :set_simple_attributes, only: [:show]
+  before_action :set_variables, only: [:show]
 
   # GET /objectives
   # GET /objectives.json
@@ -65,6 +67,24 @@ class ObjectivesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_objective
       @objective = Objective.find(params[:id])
+    end
+
+    def set_simple_attributes
+      @simple_attributes = {}
+      key_skip_list = %w[name id next_id strategy_id master_id]
+      value_skip_list = [nil, 0]
+
+      @objective.attributes.each do |key, value|
+        next if key_skip_list.include?(key) || value_skip_list.include?(value)
+
+        @simple_attributes[key.capitalize] = value
+      end
+    end
+
+    def set_variables
+      @strategy = Strategy.find(@objective.strategy_id)
+      @next = Objective.find(@objective.next_id) if @objective.next
+      @master = Objective.find(@objective.master_id) if @objective.master
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
