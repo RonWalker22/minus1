@@ -52,7 +52,7 @@
             <%= obj.next ? obj.next.name : '----'%>
           </td>
           <td>
-            <%= obj.previous.count > 0 ? obj.previous.count : '----'%>
+            <%= obj.previous.count.zero? ? '----' : obj.previous.count%>
           </td>
         </tr>
       <% end %>
