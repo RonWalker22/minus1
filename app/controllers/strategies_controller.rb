@@ -10,7 +10,9 @@ class StrategiesController < ApplicationController
 
   # GET /strategies/1
   # GET /strategies/1.json
-  def show; end
+  def show
+    @objectives = @strategy.objectives
+  end
 
   # GET /strategies/new
   def new

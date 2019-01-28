@@ -13,6 +13,8 @@ class ObjectivesController < ApplicationController
 
   # GET /objectives/new
   def new
+    @selected_strat = params[:strat].to_i
+    @strategies = Strategy.all
     @objective = Objective.new
   end
 

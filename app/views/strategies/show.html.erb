@@ -2,25 +2,55 @@
 
 
 <%= render 'shared/show-start' %>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Created By</th>
-      <th>Inspired By</th>
-      <th>Inspirations</th>
-      <th>Rating</th>
-    </tr>
-  </thead>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Created By</th>
+        <th>Inspired By</th>
+        <th>Inspirations</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr>
-      <td><%= link_to @strategy.commander.name, @strategy.commander %></td>
-      <td>----</td>
-      <td><%= @strategy.inspirations.count %></td>
-      <td>----</td>
-    </tr>
-  </tbody>
-</table>
+    <tbody>
+      <tr>
+        <td><%= link_to @strategy.commander.name, @strategy.commander %></td>
+        <td>----</td>
+        <td><%= @strategy.inspirations.count %></td>
+        <td>----</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="box">
+  <%=  link_to "New", 
+              new_objective_path(strat: @strategy.id),
+              class: 'button is-small is-rounded is-pulled-left' %>
+  <h1 class="title is-5 has-text-centered">Objectives</h1>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Objective</th>
+        <th>Next</th>
+        <th>Previous</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @objectives.each do |obj| %>
+        <tr>
+          <td><%= link_to obj.name, objective_path(obj.id) %></td>
+          <td>
+            <%= obj.next ? obj.next.count : '----'%>
+          </td>
+          <td>
+            <%= obj.previous.count > 0 ? obj.previous.count : '----'%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <%= link_to 'Edit', edit_strategy_path(@strategy) %> |
 <%= link_to 'Back', strategies_path %>
 <%= render 'shared/show-end' %>
