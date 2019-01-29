@@ -85,6 +85,7 @@ class ObjectivesController < ApplicationController
       @strategy = Strategy.find(@objective.strategy_id)
       @next = Objective.find(@objective.next_id) if @objective.next
       @master = Objective.find(@objective.master_id) if @objective.master
+      @recipes = @objective.recipes
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,55 +1,94 @@
 <p id="notice"><%= notice %></p>
 
-<%= render 'shared/show-start' %>
-  <h1 class="title is-5 has-text-centered">
-    <%= "#{@objective.name} #{controller_name.capitalize.singularize}" %>
-  </h1>
-<table class="table is-striped">
-  <caption>Attributes</caption>
-  <tr>
-    <th>Strategy</th>
-    <td><%= link_to @strategy.name, strategy_path(@strategy) %></td>
-  </tr>
-  <% if @master %>
-    <tr>
-      <th>Master Objective</th>
-      <td>
-        <%= link_to(@master.name, objective_path(@master)) %>
-      </td>
-    </tr>
-  <% end %>
-  <% if @objective.slaves.count > 0 %>
-    <tr>
-      <th>Slave Objectives</th>
-      <td>
-        <%= @objective.slaves.count %>
-      </td>
-    </tr>
-  <% end %>
-  <% if @next %>
-    <tr>
-      <th>Next Objective</th>
-      <td>
-        <%= link_to(@next.name, objective_path(@next)) %>
-      </td>
-    </tr>
-  <% end %>
-  <% if @objective.previous.count > 0 %>
-    <tr>
-      <th>Previous Objectives</th>
-      <td>
-        <%= @objective.previous.count%>
-      </td>
-    </tr>
-  <% end %>
-  <% @simple_attributes.each do |key, value| %>
-    <tr>
-      <th><%= key %></th>
-      <td><%= value%></td>
-    </tr>
-  <% end %>
-</table>
-<%= link_to 'Edit', edit_objective_path(@objective) %> |
-<%= link_to 'Back', objectives_path %>
-<%= render 'shared/show-end' %>
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <div class="box">
+      <h1 class="title is-5 has-text-centered">
+        <%= "#{@objective.name} #{controller_name.capitalize.singularize}" %>
+      </h1>
+      <table class="table is-striped">
+        <caption>Attributes</caption>
+        <tr>
+          <th>Strategy</th>
+          <td><%= link_to @strategy.name, strategy_path(@strategy) %></td>
+        </tr>
+        <% if @master %>
+          <tr>
+            <th>Master Objective</th>
+            <td>
+              <%= link_to(@master.name, objective_path(@master)) %>
+            </td>
+          </tr>
+        <% end %>
+        <% if @objective.slaves.count > 0 %>
+          <tr>
+            <th>Slave Objectives</th>
+            <td>
+              <%= @objective.slaves.count %>
+            </td>
+          </tr>
+        <% end %>
+        <% if @next %>
+          <tr>
+            <th>Next Objective</th>
+            <td>
+              <%= link_to(@next.name, objective_path(@next)) %>
+            </td>
+          </tr>
+        <% end %>
+        <% if @objective.previous.count > 0 %>
+          <tr>
+            <th>Previous Objectives</th>
+            <td>
+              <%= @objective.previous.count%>
+            </td>
+          </tr>
+        <% end %>
+        <% @simple_attributes.each do |key, value| %>
+          <tr>
+            <th><%= key %></th>
+            <td><%= value%></td>
+          </tr>
+        <% end %>
+      </table>
+      <%= link_to 'Edit', edit_objective_path(@objective) %> |
+      <%= link_to 'Back', objectives_path %>
+    </div>
+  </div>
+  <div class="column is-narrow">
+    <div class="box">
+      <table class="table is-bordered">
+        <caption class="title is-5">Recipes</caption>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Created By</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @recipes.each do |recipe| %>
+            <tr>
+              <td>
+                <%= recipe.name %>
+              </td>
+              <td>
+                <%= link_to recipe.commander.name, 
+                            operator_path(recipe.commander) %> 
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= recipe.name %>
+              </td>
+              <td>
+                <%= link_to recipe.commander.name, 
+                            operator_path(recipe.commander) %> 
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
