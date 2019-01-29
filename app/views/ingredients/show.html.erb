@@ -1,5 +1,59 @@
 <%= render 'shared/breadcrumb'%>
+
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_ingredient_path(@ingredient) %> |
-<%= link_to 'Back', ingredients_path %>
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <div class="box">
+      <% if @previous_ingredient || @next_ingredient %>
+        <div class="tabs is-fullwidth">
+          <ul>
+            <% if @previous_ingredient %>
+              <li>
+                <a href="<%=ingredient_path(@previous_ingredient)%>">
+                  <span class="icon"><i class="fas fa-angle-left" aria-hidden="true"></i></span>
+                  <span>Previous Ingredient</span>
+                </a>
+              </li>
+            <% end %>
+            <% if @next_ingredient %>
+              <li>
+                <a href="<%=ingredient_path(@next_ingredient)%>">
+                  <span>Next Ingredient</span>
+                  <span class="icon"><i class="fas fa-angle-right" aria-hidden="true"></i></span>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <h1 class="title is-5 has-text-centered">Ingredient</h1>
+      <table class="table is-striped">
+        <caption>Attributes</caption>
+        <% @ingredient.attributes.each do |key, value| %>
+          <% skip_list = %w(id recipe_id private) %>
+          <% next if skip_list.include?(key) %>
+          <tr>
+            <th><%= key %></th>
+            <td><%= value %></td>
+          </tr>
+        <% end %>
+        <tr class="half-opacity">
+          <th>Strategy</th>
+          <td><%= link_to @strategy.name, strategy_path(@strategy) %></td>
+        </tr>
+        <tr class="half-opacity">
+          <th>Objective</th>
+          <td><%= link_to @objective.name, objective_path(@objective) %></td>
+        </tr>
+        <tr class="half-opacity">
+          <th>Recipe</th>
+          <td><%= link_to @recipe.name, objective_path(@recipe) %></td>
+        </tr>
+      </table>
+      <%= link_to 'Edit', 
+                  edit_ingredient_path(@ingredient), 
+                  class: "button is-rounded"%>
+    </div>
+  </div>
+</div>
