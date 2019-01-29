@@ -60,6 +60,12 @@ caption {
   color: $text;
 }
 
+nav {
+  ul {
+    background: white;
+  }
+}
+
 /* Mobile Landscape Screen Sizes */
 @media only screen and (min-width: 400px) {
   .menu {
