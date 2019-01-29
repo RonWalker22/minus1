@@ -1,6 +1,7 @@
 class IngredientsController < ApplicationController
   before_action :add_step_to_params, only: [:create]
   before_action :set_ingredient, only: [:show, :edit, :update, :destroy]
+  before_action :set_variables, only: [:show, :new, :edit]
 
   # GET /ingredients
   # GET /ingredients.json
@@ -79,5 +80,12 @@ class IngredientsController < ApplicationController
     def add_step_to_params
       recipe = Recipe.find(params[:ingredient][:recipe_id])
       params[:ingredient][:step] = recipe.ingredients.count + 1
+    end
+
+    def set_variables
+      recipe = params[:recipe]
+      @recipe = recipe ? Recipe.find(recipe) : @ingredient.recipe
+      @objective = @recipe.objective
+      @strategy = @objective.strategy
     end
 end

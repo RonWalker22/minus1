@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :set_selected_recipe, only: [:new]
+  before_action :set_variables, only: [:new, :show, :edit]
 
   # GET /recipes
   # GET /recipes.json
@@ -73,7 +73,9 @@ class RecipesController < ApplicationController
       params.fetch(:recipe, {}).permit(:name, :objective_id, :commander_id)
     end
 
-    def set_selected_recipe
-      @selected_objective = params[:obj].to_i
+    def set_variables
+      params_obj = params[:obj]
+      @objective = params_obj ? Objective.find(params_obj) : @recipe.objective
+      @strategy = @objective.strategy
     end
 end

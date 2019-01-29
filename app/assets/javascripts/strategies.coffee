@@ -34,7 +34,5 @@ table_switch = ->
 
 document.addEventListener 'turbolinks:load', -> 
   body = document.querySelector('body')
-  body.className == "strategies index"
-  console.log(body.className)
   if(body.className == "strategies index" ||  body.className == "rooms index")
     table_switch()

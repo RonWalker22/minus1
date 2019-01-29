@@ -1,7 +1,8 @@
 class ObjectivesController < ApplicationController
   before_action :set_objective, only: [:show, :edit, :update, :destroy]
   before_action :set_simple_attributes, only: [:show]
-  before_action :set_variables, only: [:show]
+  before_action :set_variables, only: [:show, :edit]
+  before_action :set_strategy, only: [:show, :new, :edit]
 
   # GET /objectives
   # GET /objectives.json
@@ -15,8 +16,6 @@ class ObjectivesController < ApplicationController
 
   # GET /objectives/new
   def new
-    @selected_strat = params[:strat].to_i
-    @strategies = Strategy.all
     @objective = Objective.new
   end
 
@@ -81,11 +80,16 @@ class ObjectivesController < ApplicationController
       end
     end
 
+    def set_strategy
+      strat = params[:strat]
+      @strategy = strat ? Strategy.find(strat) : @objective.strategy
+    end
+
     def set_variables
-      @strategy = Strategy.find(@objective.strategy_id)
       @next = Objective.find(@objective.next_id) if @objective.next
       @master = Objective.find(@objective.master_id) if @objective.master
       @recipes = @objective.recipes
+      @strategies = Strategy.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
