@@ -78,6 +78,10 @@
   </div>
   <div class="column is-narrow">
     <div class="box">
+      <a class="button is-rounded is-small" 
+      href="<%= "#{new_recipe_path}?obj=#{@objective.id}"%>">
+        <i class="fas fa-plus" aria-hidden="true"></i> New
+      </a>
       <table class="table is-bordered">
         <caption class="title is-5">Recipes</caption>
         <thead>
