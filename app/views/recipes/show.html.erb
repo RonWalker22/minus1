@@ -1,5 +1,71 @@
 <%= render 'shared/breadcrumb'%>
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <div class="box">
+      <h1 class="title is-5 has-text-centered">
+        <%= "#{controller_name.capitalize.singularize}" %>
+      </h1>
+      <table class="table is-striped">
+        <caption>Recipe Attributes</caption>
+        <tr>
+          <th>Name</th>
+          <td><%= @recipe.name%></td>
+        </tr>
+        <tr>
+          <th>Objective</th>
+          <td><%= @objective.name%></td>
+        </tr>
+        <tr>
+          <th>Strategy</th>
+          <td><%= @strategy.name %></td>
+        </tr>
+        <tr>
+          <th>Created By</th>
+          <% commander = @recipe.commander%>
+          <td><%= link_to commander.name, operator_path(commander)%></td>
+        </tr>
+        <tr>
+          <th>Created At</th>
+          <td><%= @recipe.created_at%></td>
+        </tr>
+        <tr>
+          <th>Updated At</th>
+          <td><%= @recipe.updated_at %></td>
+        </tr>
+      </table>
+      <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+      <%= link_to 'Back', recipes_path %>
+    </div>
+  </div>
+  <div class="column is-narrow">
+    <div class="box">
+      <a class="button is-rounded is-small" 
+      href="<%= "#{new_ingredient_path}?recipe=#{@recipe.id}"%>">
+        <i class="fas fa-plus" aria-hidden="true"></i> New
+      </a>
+      <table class="table is-bordered">
+        <caption class="title is-5">Ingredients</caption>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Step</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @ingredients.each do |ingredient| %>
+            <tr>
+              <td>
+                <%= link_to ingredient.name, ingredient_path(ingredient) %>
+              </td>
+              <td>
+                <%= ingredient.step %> 
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
