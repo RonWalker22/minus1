@@ -4,7 +4,7 @@ class StrategiesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @strategy = strategies(:one)
-    @level = levels(:one)
+    @mode = modes(:one)
     @operator = operators(:one)
     sign_in @operator
   end
@@ -22,7 +22,7 @@ class StrategiesControllerTest < ActionDispatch::IntegrationTest
   test 'should create strategy' do
     assert_difference('Strategy.count') do
       post strategies_url, params: { strategy: { name: 'G2',
-                                                 level_id: @level.id } }
+                                                 mode_id: @mode.id } }
     end
 
     assert_redirected_to strategy_url(Strategy.last)

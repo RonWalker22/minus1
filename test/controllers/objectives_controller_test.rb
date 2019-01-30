@@ -14,7 +14,7 @@ class ObjectivesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    get new_objective_url
+    get new_objective_url strat: @strategy.id
     assert_response :success
   end
 

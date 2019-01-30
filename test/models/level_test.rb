@@ -13,7 +13,4 @@ class LevelTest < ActiveSupport::TestCase
     end
     assert invalid
   end
-  test 'has strategies' do
-    assert_equal 'Strategy', level.strategies.first.class.name
-  end
 end

@@ -19,8 +19,8 @@ class StrategyTest < ActiveSupport::TestCase
     assert_equal 'Objective', @strategy.objectives.first.class.name
   end
 
-  test 'has a level' do
-    assert_equal 'Level', @strategy.level.class.name
+  test 'has a mode' do
+    assert_equal 'Mode', @strategy.mode.class.name
   end
 
   test 'has an inpiration' do

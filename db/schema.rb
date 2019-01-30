@@ -44,6 +44,14 @@ ActiveRecord::Schema.define(version: 2019_01_17_203704) do
     t.index ["name", "game_id"], name: "index_levels_on_name_and_game_id", unique: true
   end
 
+  create_table "modes", force: :cascade do |t|
+    t.bigint "level_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id"], name: "index_modes_on_level_id"
+  end
+
   create_table "objectives", force: :cascade do |t|
     t.bigint "master_id"
     t.bigint "next_id"
@@ -149,7 +157,7 @@ ActiveRecord::Schema.define(version: 2019_01_17_203704) do
 
   create_table "strategies", force: :cascade do |t|
     t.bigint "commander_id", null: false
-    t.bigint "level_id"
+    t.bigint "mode_id"
     t.bigint "inspiration_id"
     t.string "name", null: false
     t.boolean "private", default: false, null: false
@@ -158,7 +166,7 @@ ActiveRecord::Schema.define(version: 2019_01_17_203704) do
     t.datetime "updated_at", null: false
     t.index ["commander_id"], name: "index_strategies_on_commander_id"
     t.index ["inspiration_id"], name: "index_strategies_on_inspiration_id"
-    t.index ["level_id"], name: "index_strategies_on_level_id"
+    t.index ["mode_id"], name: "index_strategies_on_mode_id"
   end
 
   create_table "teams", force: :cascade do |t|

@@ -10,8 +10,9 @@
   operator = Operator.create! name: "operator#{i}", password: '123456'
   new_game = Game.create! name: "game#{i}", website: "www.game#{i}.com"
   level = Level.create! name: "level#{i}", game_id: new_game.id
+  mode = Mode.create! name: "mode#{i}", level_id: level.id
   strategy = Strategy.create!(commander_id: operator.id,
-                              level_id: level.id,
+                              mode_id: mode.id,
                               name: "strategy#{i}")
   objective = Objective.create!(strategy_id: strategy.id,
                                 target: "target#{i}",

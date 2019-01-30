@@ -14,7 +14,7 @@ class IngredientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    get new_ingredient_url
+    get new_ingredient_url recipe: @recipe.id
     assert_response :success
   end
 

@@ -72,6 +72,6 @@ class StrategiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def strategy_params
       params[:strategy][:commander_id] = current_operator.id
-      params.fetch(:strategy, {}).permit(:level_id, :name, :commander_id)
+      params.fetch(:strategy, {}).permit(:mode_id, :name, :commander_id)
     end
 end

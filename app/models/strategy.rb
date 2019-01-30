@@ -1,6 +1,6 @@
 class Strategy < ApplicationRecord
   belongs_to :commander, class_name: 'Operator'
-  belongs_to :level
+  belongs_to :mode
   belongs_to :inspiration, class_name: 'Strategy', optional: true
   has_many :inspirations,
            class_name: 'Strategy',

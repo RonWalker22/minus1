@@ -18,13 +18,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :level, class:"label" %><br />
+    <%= form.label :mode, class:"label" %><br />
     <div class="select">
-      <%= form.collection_select :level_id, 
-                        Level.all, 
-                        :id, 
-                        :name,
-                        required: true %>
+      <%= form.collection_select :mode_id, 
+                                  Mode.all, 
+                                  :id, 
+                                  :name,
+                                  required: true %>
     </div>
   </div>
 
