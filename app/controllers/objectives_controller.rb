@@ -83,13 +83,13 @@ class ObjectivesController < ApplicationController
     def set_strategy
       strat = params[:strat]
       @strategy = strat ? Strategy.find(strat) : @objective.strategy
+      @strategies = Strategy.all
     end
 
     def set_variables
       @next = Objective.find(@objective.next_id) if @objective.next
       @master = Objective.find(@objective.master_id) if @objective.master
       @recipes = @objective.recipes
-      @strategies = Strategy.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
