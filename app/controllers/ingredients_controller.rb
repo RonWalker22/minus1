@@ -2,7 +2,7 @@ class IngredientsController < ApplicationController
   before_action :add_step_to_params, only: [:create]
   before_action :set_ingredient, only: [:show, :edit, :update, :destroy]
   before_action :set_variables, only: [:show, :new, :edit]
-  before_action :set_ingredients_tab, only: [:show]
+  before_action :set_ingredients_variables, only: [:show]
 
   # GET /ingredients
   # GET /ingredients.json
@@ -90,20 +90,22 @@ class IngredientsController < ApplicationController
       @strategy = @objective.strategy
     end
 
-    def set_ingredients_tab
+    def set_ingredients_variables
       @ingredients = @recipe.ingredients.order(:step)
-      
+      return unless @ingredients.count > 1
+
+      create_previous_next
+    end
+
+    def create_previous_next
       @ingredients.each_with_index do |ingredient, index|
         next unless ingredient.id == @ingredient.id
+
         case index
-        when 0
-          @next_ingredient = @ingredients[index + 1] if @ingredients.count > 1
-        when @ingredients.count - 1
-          @previous_ingredient = @ingredients[index - 1]
-        else
-          @previous_ingredient = @ingredients[index - 1]
-          @next_ingredient = @ingredients[index + 1]
+        when 0 then return @next_ingredient = @ingredients[index + 1]
+        else @next_ingredient = @ingredients[index + 1]
         end
+        @previous_ingredient = @ingredients[index - 1]
       end
     end
 end

@@ -34,8 +34,10 @@
           <% skip_list = %w(id recipe_id private) %>
           <% next if skip_list.include?(key) %>
           <tr>
-            <th><%= key %></th>
-            <td><%= value %></td>
+            <th><%= key  %></th>
+            <td>
+              <%= key == 'step' ? "#{value} of #{@ingredients.count}" : value %>
+            </td>
           </tr>
         <% end %>
         <tr class="half-opacity">
