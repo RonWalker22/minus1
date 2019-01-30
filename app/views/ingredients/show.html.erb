@@ -39,16 +39,16 @@
           </tr>
         <% end %>
         <tr class="half-opacity">
-          <th>Strategy</th>
-          <td><%= link_to @strategy.name, strategy_path(@strategy) %></td>
+          <th>Recipe</th>
+          <td><%= link_to @recipe.name, objective_path(@recipe) %></td>
         </tr>
         <tr class="half-opacity">
           <th>Objective</th>
           <td><%= link_to @objective.name, objective_path(@objective) %></td>
         </tr>
         <tr class="half-opacity">
-          <th>Recipe</th>
-          <td><%= link_to @recipe.name, objective_path(@recipe) %></td>
+          <th>Strategy</th>
+          <td><%= link_to @strategy.name, strategy_path(@strategy) %></td>
         </tr>
       </table>
       <%= link_to 'Edit', 
