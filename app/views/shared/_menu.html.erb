@@ -12,17 +12,17 @@
   <ul class="menu-list">
     <li><a>Level</a>
       <ul>
-        <li><a>Members</a></li>
-        <li><a>Plugins</a></li>
-        <li><a>Add a member</a></li>
+      <% Level.all.each do |level| %>
+        <li><a href=""><%= level.name %></a></li>
+      <% end %>
       </ul>
     </li>
     <li>
       <a class="is-active">Mode</a>
       <ul>
-        <li><a>Members</a></li>
-        <li><a>Plugins</a></li>
-        <li><a>Add a member</a></li>
+      <% Mode.all.each do |mode| %>
+        <li><a href=""><%= mode.name %></a></li>
+      <% end %>
       </ul>
     </li>
   </ul>
