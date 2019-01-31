@@ -20,14 +20,14 @@
         </a>
         <%=  link_to "Strategies", strategies_path, class: 'navbar-item' %>
         <%=  link_to "Rooms", rooms_path, class: 'navbar-item' %>
-        <%=  link_to "Teams", teams_path, class: 'navbar-item' %>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             More
           </a>
 
           <div class="navbar-dropdown">
-            <%= link_to "Operators", operators_path, class: "navbar-item" %> 
+            <%= link_to "Operators", operators_path, class: "navbar-item" %>
+            <%=  link_to "Teams", teams_path, class: 'navbar-item' %> 
             <%= link_to "About", about_path, class: "navbar-item" %> 
             <%= link_to "Docs", docs_path, class: 'navbar-item'%>
           </div>
