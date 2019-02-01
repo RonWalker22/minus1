@@ -3,6 +3,7 @@ class CreateOperators < ActiveRecord::Migration[5.2]
     create_table :operators do |t|
       t.string :name, null: true
       t.boolean :online, default: false, null: false
+      t.references :game_setting, foreign_key: { to_table: :games }
       t.timestamps
     end
     add_index :operators, [:name], unique: true

@@ -20,4 +20,5 @@ Rails.application.routes.draw do
 
   get '/about' => 'static_pages#about'
   get '/docs' => 'static_pages#docs'
+  get '/game/:id/switch' => 'games#switch', as: 'switch_game'
 end
