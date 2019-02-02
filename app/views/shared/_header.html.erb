@@ -42,7 +42,8 @@
           </a>
           <div class="navbar-dropdown">
             <% current_operator.favorited_games.each do |game| %>
-              <a href="<%= switch_game_path(game.id) %>" class="navbar-item" >
+              <%= link_to switch_game_path(game.id), method: :patch,
+                          class: "navbar-item" do %>
                 <% if game.id == current_operator.game_setting_id  %>
                   <%= game.name %>
                   <i class="fas fa-check" title="Current Game"></i>
@@ -50,7 +51,7 @@
                 <% else %>
                   <%= game.name %>
                 <% end %>
-              </a>
+              <% end %>
             <% end %>
             <hr class="navbar-divider">
             <%= link_to "All Games", games_path, class: 'navbar-item'%>

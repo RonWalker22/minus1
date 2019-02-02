@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :switch]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :switch, :favorite, :unfavorite]
 
   # GET /games
   # GET /games.json
@@ -60,8 +60,20 @@ class GamesController < ApplicationController
   end
 
   def switch
-    current_operator.game_setting_id = @game.id
-    current_operator.save
+    if @game
+      current_operator.game_setting_id = @game.id
+      current_operator.save
+    end
+    redirect_back(fallback_location: root_path)
+  end
+
+  def favorite
+    current_operator.favorite(@game) if @game
+    redirect_back(fallback_location: root_path)
+  end
+
+  def unfavorite
+    current_operator.remove_favorite(@game) if @game
     redirect_back(fallback_location: root_path)
   end
 
