@@ -145,6 +145,8 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
     t.string "name"
     t.boolean "online", default: false, null: false
     t.bigint "game_setting_id"
+    t.string "uid"
+    t.string "provider"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :operators
+  devise_for :operators,
+             controllers: { omniauth_callbacks: 'operators/omniauth_callbacks' }
   resources :operators, only: [:index, :show]
   resources :games
   resources :levels

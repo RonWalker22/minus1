@@ -4,7 +4,8 @@ class Operator < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   acts_as_favoritor
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable,
+         omniauth_providers: [:steam]
   has_many :commander_seats,
            class_name: 'Room',
            foreign_key: 'commander_id'
@@ -33,5 +34,19 @@ class Operator < ApplicationRecord
 
   def will_save_change_to_email?
     false
+  end
+
+  def self.from_omniauth(auth)
+    nickname = auth.info.nickname
+    name = auth.info.name
+
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.password = Devise.friendly_token[0, 20]
+      user.name = if nickname
+                    nickname.empty? ? name : nickname
+                  else
+                    name
+                  end
+    end
   end
 end
