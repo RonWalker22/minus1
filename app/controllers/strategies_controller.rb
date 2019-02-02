@@ -5,7 +5,10 @@ class StrategiesController < ApplicationController
   # GET /strategies
   # GET /strategies.json
   def index
-    @strategies = Strategy.all
+    @game = Game.find(current_operator.game_setting_id || 1)
+    @levels = @game.levels
+    @modes = @game.modes
+    @strategies = @game.strategies
   end
 
   # GET /strategies/1

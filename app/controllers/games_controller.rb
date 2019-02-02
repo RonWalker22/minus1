@@ -64,7 +64,7 @@ class GamesController < ApplicationController
       current_operator.game_setting_id = @game.id
       current_operator.save
     end
-    redirect_back(fallback_location: root_path)
+    redirect_to strategies_path
   end
 
   def favorite

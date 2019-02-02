@@ -5,6 +5,8 @@ class CreateStrategies < ActiveRecord::Migration[5.2]
                    foreign_key: { to_table: :operators },
                    null: false
       t.references :mode
+      t.references :level
+      t.references :game
       t.references :inspiration, foreign_key: { to_table: :strategies }
       t.string :name, null: false
       t.boolean :private, default: false, null: false

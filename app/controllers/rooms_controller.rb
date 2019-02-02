@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
+    @game = Game.find(current_operator.game_setting_id || 1)
     @rooms = Room.all
   end
 

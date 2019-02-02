@@ -64,10 +64,12 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
   end
 
   create_table "modes", force: :cascade do |t|
+    t.bigint "game_id", null: false
     t.bigint "level_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_modes_on_game_id"
     t.index ["level_id"], name: "index_modes_on_level_id"
   end
 
@@ -183,6 +185,8 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
   create_table "strategies", force: :cascade do |t|
     t.bigint "commander_id", null: false
     t.bigint "mode_id"
+    t.bigint "level_id"
+    t.bigint "game_id"
     t.bigint "inspiration_id"
     t.string "name", null: false
     t.boolean "private", default: false, null: false
@@ -192,7 +196,9 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
     t.text "favoritable_score"
     t.text "favoritable_total"
     t.index ["commander_id"], name: "index_strategies_on_commander_id"
+    t.index ["game_id"], name: "index_strategies_on_game_id"
     t.index ["inspiration_id"], name: "index_strategies_on_inspiration_id"
+    t.index ["level_id"], name: "index_strategies_on_level_id"
     t.index ["mode_id"], name: "index_strategies_on_mode_id"
   end
 
