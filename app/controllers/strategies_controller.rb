@@ -1,4 +1,3 @@
-require 'pry'
 class StrategiesController < ApplicationController
   before_action :set_strategy, only: [:show, :edit, :update, :destroy]
 
