@@ -1,0 +1,24 @@
+<%= form_with(model: character, local: true) do |form| %>
+  <% if character.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(character.errors.count, "error") %> prohibited this character from being saved:</h2>
+
+      <ul>
+      <% character.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :game_id, value: @game.id %>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:"button is-link is-pulled-left"%>
+  </div>
+<% end %>

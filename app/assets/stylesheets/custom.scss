@@ -70,6 +70,30 @@ nav {
   opacity: 0.5;
 }
 
+.enter-btn {
+  margin-left: 4em;
+  margin-top: 2em;
+}
+
+.columns:last-child {
+  margin-bottom: 0rem;
+}
+
+.idgb-game:nth-child(3n) {
+  background: black;
+}
+.idgb-game:nth-child(1) {
+  background: $third-bg;
+}
+
+.idgb-game:nth-child(3n + 4) {
+  background: $third-bg;
+}
+
+.hide {
+  display: none !important;
+}
+
 /* Mobile Landscape Screen Sizes */
 @media only screen and (min-width: 400px) {
   .menu {

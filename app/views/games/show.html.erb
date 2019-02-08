@@ -1,4 +1,316 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<div class="columns is-centered is-multiline">
+  <div class="column is-narrow">
+    <div class="box">
+      <%= link_to 'Edit', edit_game_path(@game) %>
+        <h1 class="title is-5 has-text-centered">
+          <%= @game.name%>
+        </h1>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Status:</th>
+              <% if @game.status == 'supported' %>
+              <td>
+                  <div class="tags has-addons">
+                    <span class="tag">Supported</span>
+                    <span class="tag is-success"><i class="fas fa-check"></i></span>
+                  </div>
+              </td>
+              <% elsif @game.status == 'proposal'  %>
+                <td>
+                    <div class="tags has-addons">
+                      <span class="tag">Proposal</span>
+                      <span class="tag is-warning">In progress</span>
+                    </div>
+                </td>
+              <% else %>
+                <td>
+                  <div class="tags has-addons">
+                    <span class="tag">Proposal</span>
+                    <span class="tag is-success"><i class="fas
+                    fa-check"></i></span>
+                    <span class="tag">Review</span>
+                    <span class="tag is-warning">In progress</span>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+            <tr>
+              <th>Maintainers:</th>
+                <% @game.maintainers.map do |operator| %>
+                  <td>
+                    <%= link_to operator.name, operator_path(operator.id)%>
+                  </td>
+                <% end %>
+            </tr>
+          </tbody>
+        </table>
+        <% if @game.image_id %>
+          <%= image_tag  "https://images.igdb.com/igdb/image/upload/t_cover_big/#{@game.image_id}.jpg"%>
+        <% end %> 
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns is-centered is-multiline">
+      <div class="column">
+        <div class="box">
+        <% if @game.status == 'proposal' %>
+          <button class='button new-character-btn is-small is-rounded'>
+            New Character 
+          </button>
+        <% end %>
+        <p class="title is-5 has-text-centered">Characters</p>
+        <div class="field is-grouped is-grouped-multiline">
+            <% @game.characters.each_with_index do |character, i| %>
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-black">#<%= i + 1 %></span>
+                  <span class="tag is-info is-readyonly">
+                    <% if @game.status == 'proposal' %>
+                        <%= link_to character.name, 
+                                    edit_character_path(character, 
+                                                        game_id: @game.id) %>
+                    <% else %>
+                      <%= character.name %>
+                    <% end %>
+                  </span>
+                  <% if @game.status == 'proposal' %>
+                  <%= link_to "", character_path(character), 
+                                  method: :delete,
+                                  data: { 
+                                    confirm: 
+                                    "Are you sure you want to delete #{character.name}?" 
+                                  }, 
+                                  class: "tag is-delete" %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box">
+          <% if @game.status == 'proposal' %>
+            <button class='button new-mode-btn is-small is-rounded'>
+              New Mode 
+            </button>
+          <% end %>
+          <p class="title is-5 has-text-centered">Modes</p>
+        <div class="field is-grouped is-grouped-multiline">
+            <% @game.modes.each_with_index do |mode, i| %>
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-black">#<%= i + 1 %></span>
+                  <span class="tag is-info is-readyonly">
+                    <% if @game.status == 'proposal' %>
+                    <%= link_to mode.name, 
+                                edit_mode_path(mode, game_id: @game.id) %>
+                    <% else %>
+                    <%= mode.name %>
+                    <% end %>
+                  </span>
+                <% if @game.status == 'proposal' %>
+                  <%= link_to "", mode_path(mode), 
+                                  method: :delete,
+                                  data: { 
+                                    confirm: 
+                                    "Are you sure you want to delete #{mode.name}?" 
+                                  }, 
+                                  class: "tag is-delete" %>
+                <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="column is-full">
+        <div class="box">
+          <% if @game.status == 'proposal' %>
+            <button class='button new-level-btn is-small is-rounded'>
+              New Level
+            </button>
+            <button class='button new-respawn-btn is-small is-rounded is-pulled-right'>
+              New Respawn
+            </button>
+          <% end %>
+          <table class="table is-fullwidth is-bordered is-hoverable">
+            <caption class="title is-5 has-text-centered">Levels &
+            Respawns</caption>
+            <thead>
+              <th>Level</th>
+              <th>Respawns</th>
+            </thead>
+            <tbody>
+              <% @game.levels.each_with_index do |level, i|%>
+                  <tr>
+                    <td>
+                      <div class="tags has-addons">
+                        <div class="tag is-black">#<%= i + 1 %></div>
+                        <div class="tag is-info">
+                           <% if @game.status == 'proposal' %>
+                          <%= link_to level.name, 
+                                edit_level_path(level, game_id: @game.id) %>
+                          <% else %>
+                          <%= level.name %>
+                          <% end %>
+                        </div>
+                          <% if @game.status == 'proposal' %>
+                          <%= link_to "", level_path(level), 
+                            method: :delete,
+                            data: { 
+                              confirm: 
+                              "Are you sure you want to delete #{level.name}?" 
+                              }, 
+                            class: "tag is-delete" %>
+                            <% end %>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="field is-grouped is-grouped-multiline">
+                        <% level.respawns.each_with_index do |respawn, i| %>
+                          <div class="control">
+                            <div class="tags has-addons">
+                              <span class="tag is-black">#<%= i + 1 %></span>
+                              <% if @game.status == 'proposal' %>
+                                <span class="tag is-info">
+                                  <%= link_to respawn.name, 
+                                  edit_respawn_path(respawn, game_id: @game.id) %>
+                                </span>
+                              <% else %>
+                                <span class="tag is-info">
+                                  <%= respawn.name %>
+                                </span>
+                              <% end %>
+                              <% if @game.status == 'proposal' %>
+                                <%= link_to "", respawn_path(respawn), 
+                                  method: :delete,
+                                  data: { 
+                                    confirm: 
+                                    "Are you sure you want to delete #{respawn.name}? This will remove the respawn from every level."
+                                    }, 
+                                  class: "tag is-delete" %>
+                                <% end %>
+                            </div>
+                          </div>
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="column is-full">
+        <div class="box">
+          <% if @game.status == 'proposal' %>
+            <button class='button new-location-btn is-small is-rounded'>
+              New Location
+            </button>
+          <% end %>
+          <table class="table is-fullwidth is-bordered is-hoverable">
+            <caption class="title is-5 has-text-centered">Level & Locations
+            </caption>
+            <thead>
+              <th>Level</th>
+              <th>Locations</th>
+            </thead>
+            <tbody>
+              <% @game.levels.each_with_index do |level, i|%>
+                  <tr>
+                    <td>
+                      <div class="tags has-addons">
+                        <div class="tag is-black">#<%= i + 1 %></div>
+                        <div class="tag is-info">
+                          <%= level.name %>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="field is-grouped is-grouped-multiline">
+                        <% level.locations.each_with_index do |location, i| %>
+                          <div class="control">
+                            <div class="tags has-addons">
+                              <span class="tag is-black">#<%= i + 1 %></span>
+                              <% if @game.status == 'proposal' %>
+                                <span class="tag is-info">
+                                  <%= link_to location.name, 
+                                  edit_location_path(location) %>
+                                </span>
+                              <% else %>
+                                <span class="tag is-info">
+                                  <%= location.name %>
+                                </span>
+                              <% end %>
+                              <% if @game.status == 'proposal' %>
+                                <%= link_to "", location_path(location), 
+                                  method: :delete,
+                                  data: { 
+                                    confirm: 
+                                    "Are you sure you want to delete #{location.name}?"
+                                    }, 
+                                  class: "tag is-delete" %>
+                                <% end %>
+                            </div>
+                          </div>
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+ <% if @game.status != 'supported' %>
+  <div class="columns is-centered">
+    <div class="column is-three-quarters is-centered">
+      <div class="box">
+      <% if @game.status == 'reviewing' %>
+        <%= link_to "Edit Proposal", 
+                    game_path(@game, game: {status:'proposal'}), method: :patch,
+                    class:'button is-fullwidth is-rounded is-black is-medium' 
+        %>
+      <% elsif @game.status == 'proposal' %>
+        <%= link_to "Submit Proposal", 
+                    game_path(@game, game: {status:'reviewing'}), method: :patch,
+                    class:'button is-fullwidth is-rounded is-success is-medium' 
+        %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head" >
+      <p class="modal-card-title"></p>
+      <button class="delete close-btn" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="mode-form">
+        <%= render '/modes/form', mode: @mode %>
+      </div>
+      <div class="level-form">
+        <%= render '/levels/form', level: @level %>
+      </div>
+      <div class="character-form">
+        <%= render '/characters/form', character: @character %>
+      </div>
+      <div class="respawn-form">
+        <%= render '/respawns/form', respawn: @respawn %>
+      </div>
+      <div class="location-form">
+        <%= render '/locations/form', location: @location %>
+      </div>
+    </section>
+  </div>
+</div>

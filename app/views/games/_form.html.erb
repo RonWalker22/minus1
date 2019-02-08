@@ -13,18 +13,35 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name, class:"label" %><br />
+    <%= form.label :name, class:"label" %>
     <%= form.text_field :name, autofocus: true, required: true, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :website, class:"label" %><br />
-    <%= form.text_field :website, required: true, class:"input" %>
+    <%= form.label :website, class:"label" %>
+    <%= form.text_field :website, class:"input" %>
+  </div>
+ 
+  <div class="field">
+    <%= form.label :image_id, class:"label" %>
+    <%= form.text_field :image_id, class:"input" %>
   </div>
 
+  <div class="field">
+    <%= form.label :igdb_id, class:"label" %>
+    <%= form.text_field :igdb_id, class:"input" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status, class: 'label'%>
+    <div class="select">
+      <%= form.select :status, ['proposal', 'reviewing', 'supported'], class:
+      'select'%>
+    </div>
+  </div>
 
   <div class="actions">
-    <%= form.submit class:"button is-link"%>
+    <%= form.submit class:"button is-link" %>
   </div>
 <% end %>
 <%= render 'shared/form-box-end' %>

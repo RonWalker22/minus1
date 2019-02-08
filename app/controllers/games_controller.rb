@@ -1,3 +1,6 @@
+require 'net/http'
+require 'json'
+
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :switch, :favorite, :unfavorite]
 
@@ -5,11 +8,18 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     @games = Game.all
+    @igdb_games = igdb_search if params[:search]
   end
 
   # GET /games/1
   # GET /games/1.json
-  def show; end
+  def show
+    @location = Location.new
+    @level = Level.new
+    @mode = Mode.new
+    @respawn = Respawn.new
+    @character = Character.new
+  end
 
   # GET /games/new
   def new
@@ -28,6 +38,10 @@ class GamesController < ApplicationController
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
+        current_operator.update_attributes game_setting_id: @game.id
+        current_operator.favorite(@game)
+        GameOperator.create!(game_id: @game.id,
+                             operator_id: current_operator.id)
       else
         format.html { render :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -64,7 +78,7 @@ class GamesController < ApplicationController
       current_operator.game_setting_id = @game.id
       current_operator.save
     end
-    redirect_to strategies_path
+    redirect_to @game
   end
 
   def favorite
@@ -86,6 +100,18 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.fetch(:game, {}).permit(:website, :name)
+      params.fetch(:game, {}).permit(:website, :name, :status, :image_id, :igdb_id)
+    end
+
+    def igdb_search
+      http = Net::HTTP.new('api-v3.igdb.com', 80)
+
+      base = 'https://api-v3.igdb.com/games?'
+      game_like = "search='#{params[:search]}'&"
+      params = "category=0&fields='name','cover.image_id'&limit=24&filter[version_parent][not_exists]=1"
+      uri = URI("#{base}#{game_like}#{params}")
+      api_key = Rails.application.credentials.igdb[:api_key]
+      request = Net::HTTP::Get.new(uri, 'user-key' => api_key)
+      response = JSON.parse(http.request(request).body)
     end
 end

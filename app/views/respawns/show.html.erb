@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @respawn.game %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @respawn.name %>
+</p>
+
+<%= link_to 'Edit', edit_respawn_path(@respawn) %> |
+<%= link_to 'Back', respawns_path %>

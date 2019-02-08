@@ -3,15 +3,21 @@
 one:
   name: 'Rush It'
   commander: one
+  game: one
+  level: one
   mode: one
 
 two:
   name: 'Hold the Line'
   commander: two
+  game: two
+  level: two
   mode: two
 
 three:
   name: 'Hold the Line'
   commander: one
+  game: one
+  level: one
   mode: one
   inspiration: one

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :locations
+  resources :respawns
+  resources :modes
+  resources :characters
   devise_for :operators,
              controllers: { omniauth_callbacks: 'operators/omniauth_callbacks' }
   resources :operators, only: [:index, :show]
@@ -21,7 +25,7 @@ Rails.application.routes.draw do
 
   get '/about' => 'static_pages#about'
   get '/docs' => 'static_pages#docs'
-  patch '/game/:id/switch' => 'games#switch', as: 'switch_game'
+  patch '/games/:id/switch/' => 'games#switch', as: 'switch_game'
   put '/games/:id/favorite' => 'games#favorite', as: 'favorite_game'
   delete '/games/:id/favorite' => 'games#unfavorite'
 end

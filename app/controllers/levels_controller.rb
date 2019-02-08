@@ -17,46 +17,51 @@ class LevelsController < ApplicationController
   end
 
   # GET /levels/1/edit
-  def edit; end
+  def edit
+    @game = Game.find params[:game_id]
+  end
 
   # POST /levels
   # POST /levels.json
   def create
-    @level = Level.new(level_params)
-
-    respond_to do |format|
+    @game = Game.find level_params[:game_id]
+    maintainers = @game.maintainers.ids
+    if maintainers.include?(current_operator.id)
+      @level = Level.new(level_params)
       if @level.save
-        format.html { redirect_to @level, notice: 'Level was successfully created.' }
-        format.json { render :show, status: :created, location: @level }
+        flash[:notice] = "Level was successfully created."
       else
-        format.html { render :new }
-        format.json { render json: @level.errors, status: :unprocessable_entity }
+        flash[:alter] = "Level was not created."
       end
     end
+    redirect_back fallback_location: root_path
   end
 
   # PATCH/PUT /levels/1
   # PATCH/PUT /levels/1.json
   def update
-    respond_to do |format|
+    @game = Game.find level_params[:game_id]
+    maintainers = @game.maintainers.ids
+
+    if maintainers.include?(current_operator.id)
       if @level.update(level_params)
-        format.html { redirect_to @level, notice: 'Level was successfully updated.' }
-        format.json { render :show, status: :ok, location: @level }
-      else
-        format.html { render :edit }
-        format.json { render json: @level.errors, status: :unprocessable_entity }
+        flash[:notice] = "Level was successfully created."
+      else 
+        flash[:notice] = "Level was successfully created."
       end
-    end
+    end 
+    redirect_to game_path(@game)
   end
 
   # DELETE /levels/1
   # DELETE /levels/1.json
   def destroy
-    @level.destroy
-    respond_to do |format|
-      format.html { redirect_to levels_url, notice: 'Level was successfully destroyed.' }
-      format.json { head :no_content }
+    if @level.destroy
+      flash[:notice] = "Level was successfully destroyed."
+    else
+      flash[:alter] = "Level was not destroyed."
     end
+    redirect_back fallback_location: root_path
   end
 
   private

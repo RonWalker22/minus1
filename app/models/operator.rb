@@ -27,6 +27,8 @@ class Operator < ApplicationRecord
   has_many :operator_teams
   has_many :teams, through: :operator_teams
   validates :name, uniqueness: { case_sensitive: false }
+  has_many :game_operators
+  has_many :maintaining, through: :game_operators, source: :game
 
   def email_required?
     false

@@ -1,0 +1,24 @@
+<%= form_with(model: mode, local: true) do |form| %>
+  <% if mode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mode.errors.count, "error") %> prohibited this mode from being saved:</h2>
+
+      <ul>
+      <% mode.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, required: true, class: 'input' %>
+  </div>
+
+  <%= form.hidden_field :game_id, required: true, value: @game.id %>
+
+  <div class="actions">
+    <%= form.submit class:"button is-link is-pulled-left" %>
+  </div>
+<% end %>

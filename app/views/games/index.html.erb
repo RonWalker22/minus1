@@ -1,48 +1,67 @@
-<div class="columns is-centered">
-  <div class="column is-narrow">
-    <div class="box">
-      <p id="notice"><%= notice %></p>
-
-      <h1 class="title is-5">Games</h1>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Favorite?</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @games.each do |game| %>
-            <% if game.favorited_by?(current_operator) %>
-              <tr>
-                <td><%= link_to game.name, game %>
-                </td>
-                <td>
-                  <%= link_to favorite_game_path(game.id), method: :delete  do %>
-                    <span class="sr-only">Favorite:</span>
-                    <i class="fas fa-heart" aria-hidden="true" title="UnFavorite"></i>
-                  <% end %>
-                </td>
-                </td>
-              </tr>
-            <% else %>
-              <tr>
-                <td><%= link_to game.name, game %>
-                </td>
-                <td>
-                <%= link_to favorite_game_path(game.id), method: :put do %>
-                    <span class="sr-only">Not Favorite:</span>
-                    <i class="far fa-heart" aria-hidden="true" title="Favorite"></i>
-                  <% end %>
-                </td>
-              </tr>
+<% if @igdb_games %>
+  <div id="igdb-container" class="columns is-multiline">
+    <% @igdb_games.each do |game| %>
+      <div class="column idgb-game is-one-quarter-tablet">
+          <div><%= game['name']%></div>
+          <% if game['cover'] %>
+            <%= image_tag(
+              "https://images.igdb.com/igdb/image/upload/t_thumb/#{game['cover']['image_id']}.jpg")%>
+              <%= link_to "Add to M1", 
+              games_path({game: {image_id: game['cover']['image_id'],
+                                      name: game['name'], 
+                                      igdb_id: game['id'] }
+                          }), 
+              method: :post, name: game[:name],
+              class: "button enter-btn" %>
+          <% else %>
+         <%= link_to "Add to M1", 
+                     games_path({game: {name: game['name'], 
+                                        igdb_id: game['id'] }
+                                  }), 
+                     method: :post, name: game[:name],
+                     class: "button enter-btn" %>
+          <% end %> 
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div id="igdb-container" class="columns is-multiline">
+    <% Game.all.sort.each do |game| %>
+      <div class="column idgb-game is-one-quarter-tablet">
+        <% if game.favorited_by?(current_operator) %>
+            <%= link_to favorite_game_path(game.id), method: :delete  do %>
+              <span class="sr-only">Favorite:</span>
+              <i class="fas fa-heart fa-2x is-pulled-right" aria-hidden="true" title="UnFavorite"></i>
             <% end %>
+        <% else %>
+            <%= link_to favorite_game_path(game.id), method: :put do %>
+                <span class="sr-only">Not Favorite:</span>
+                <i class="far fa-heart fa-2x is-pulled-right" aria-hidden="true" title="Favorite"></i>
+            <% end %>
+        <% end %>
+          <div><%= game.name %></div>
+          <% if game.image_id %>
+            <%= image_tag  "https://images.igdb.com/igdb/image/upload/t_thumb/#{game.image_id}.jpg"%>
           <% end %>
-        </tbody>
-      </table>
-      <%= link_to 'New Game', new_game_path %>
+          <% if game.status == 'supported' %>
+          <%= link_to "Enter", switch_game_path(game.id), method: :patch,
+                          class: "button enter-btn" %>
+          <% else %>
+            <%= link_to "Preview", game_path(game), class: "button enter-btn" %>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
+    <%= form_tag(games_path, :method => "get", id: "search-form") do %>
+  <br>
+  <div class="field has-addons">
+    <div class="control">
+      <%= text_field_tag :search, params[:search], required: true, placeholder: "Add Game to M1", class: 'input' %>
+    </div>
+    <div class="control">
+      <%= submit_tag "Add", :name => nil, class: 'button' %>
     </div>
   </div>
-</div>
+  <% end %>
+<% end %>
+<br>

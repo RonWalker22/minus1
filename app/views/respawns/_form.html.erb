@@ -1,0 +1,29 @@
+<%= form_with(model: respawn, local: true) do |form| %>
+  <% if respawn.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(respawn.errors.count, "error") %> prohibited this respawn from being saved:</h2>
+
+      <ul>
+      <% respawn.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :game_id, value: @game.id %>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input', required: true %>
+  </div>
+
+  <div class="field select is-multiple">
+  <%= form.collection_select(:level_id, @game.levels, :id, :name,
+  {}, {required: true, multiple: true, include_hidden: false}) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:"button is-link is-pulled-left"%>
+  </div>
+<% end %>

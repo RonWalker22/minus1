@@ -6,11 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+new_game = Game.create! name: "Tom Clancy's Rainbow Six® Siege",
+                    igdb_id: 7360,
+                    image_id: 'ktvusahfu7kmoqbpjbkz'
+
 3.times do |i|
   operator = Operator.create! name: "operator#{i}", password: '123456'
-  new_game = Game.create! name: "game#{i}", website: "www.game#{i}.com"
   level = Level.create! name: "level#{i}", game_id: new_game.id
-  mode = Mode.create! name: "mode#{i}", level_id: level.id, game_id: new_game.id
+  mode = Mode.create! name: "mode#{i}", game_id: new_game.id
   strategy = Strategy.create!(commander_id: operator.id,
                               game_id: new_game.id,
                               level_id: level.id,
@@ -27,4 +30,9 @@
                      recipe_id: recipe.id,
                      step: 1,
                      content: 'Go to the waterfall')
+  GameOperator.create! operator_id: i + 1, game_id: 1
+  respawn = Respawn.create! name: "respawn#{i}", game_id: new_game.id
+  LevelRespawn.create level_id: level.id, respawn_id: respawn.id
+  Character.create! name: "character#{i}", game_id: new_game.id
+  Location.create! name: "loation#{i}", level_id: level.id
 end

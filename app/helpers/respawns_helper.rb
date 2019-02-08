@@ -1,0 +1,2 @@
+module RespawnsHelper
+end

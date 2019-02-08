@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_31_214608) do
+ActiveRecord::Schema.define(version: 2019_02_08_151009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "characters", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_characters_on_game_id"
+    t.index ["name", "game_id"], name: "index_characters_on_name_and_game_id", unique: true
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.string "favoritable_type", null: false
@@ -32,14 +41,27 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
     t.index ["scope"], name: "index_favorites_on_scope"
   end
 
+  create_table "game_operators", force: :cascade do |t|
+    t.bigint "operator_id", null: false
+    t.bigint "game_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_operators_on_game_id"
+    t.index ["operator_id", "game_id"], name: "index_game_operators_on_operator_id_and_game_id", unique: true
+    t.index ["operator_id"], name: "index_game_operators_on_operator_id"
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "name", null: false
-    t.string "website", null: false
+    t.string "website"
+    t.string "image_id"
+    t.integer "igdb_id"
+    t.string "status", default: "proposal", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "favoritable_score"
     t.text "favoritable_total"
-    t.index ["website"], name: "index_games_on_website", unique: true
+    t.index ["igdb_id"], name: "index_games_on_igdb_id", unique: true
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -54,6 +76,16 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
+  create_table "level_respawns", force: :cascade do |t|
+    t.bigint "level_id", null: false
+    t.bigint "respawn_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id", "respawn_id"], name: "index_level_respawns_on_level_id_and_respawn_id", unique: true
+    t.index ["level_id"], name: "index_level_respawns_on_level_id"
+    t.index ["respawn_id"], name: "index_level_respawns_on_respawn_id"
+  end
+
   create_table "levels", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.string "name", null: false
@@ -63,14 +95,21 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
     t.index ["name", "game_id"], name: "index_levels_on_name_and_game_id", unique: true
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.bigint "level_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id"], name: "index_locations_on_level_id"
+    t.index ["name", "level_id"], name: "index_locations_on_name_and_level_id", unique: true
+  end
+
   create_table "modes", force: :cascade do |t|
     t.bigint "game_id", null: false
-    t.bigint "level_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_modes_on_game_id"
-    t.index ["level_id"], name: "index_modes_on_level_id"
   end
 
   create_table "objectives", force: :cascade do |t|
@@ -172,6 +211,15 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
     t.index ["objective_id"], name: "index_recipes_on_objective_id"
   end
 
+  create_table "respawns", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_respawns_on_game_id"
+    t.index ["name", "game_id"], name: "index_respawns_on_name_and_game_id", unique: true
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.bigint "commander_id", null: false
     t.string "name"
@@ -211,6 +259,12 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
     t.index ["name"], name: "index_teams_on_name", unique: true
   end
 
+  add_foreign_key "characters", "games"
+  add_foreign_key "game_operators", "games"
+  add_foreign_key "game_operators", "operators"
+  add_foreign_key "level_respawns", "levels"
+  add_foreign_key "level_respawns", "respawns"
+  add_foreign_key "locations", "levels"
   add_foreign_key "objectives", "objectives", column: "master_id"
   add_foreign_key "objectives", "objectives", column: "next_id"
   add_foreign_key "operator_strategies", "objectives", column: "default_id"
@@ -219,6 +273,7 @@ ActiveRecord::Schema.define(version: 2019_01_31_214608) do
   add_foreign_key "operator_strategies", "objectives", column: "tertiary_id"
   add_foreign_key "operators", "games", column: "game_setting_id"
   add_foreign_key "recipes", "operators", column: "commander_id"
+  add_foreign_key "respawns", "games"
   add_foreign_key "rooms", "operators", column: "commander_id"
   add_foreign_key "strategies", "operators", column: "commander_id"
   add_foreign_key "strategies", "strategies", column: "inspiration_id"

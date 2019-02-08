@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Respawns</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @respawns.each do |respawn| %>
+      <tr>
+        <td><%= respawn.game %></td>
+        <td><%= respawn.name %></td>
+        <td><%= link_to 'Show', respawn %></td>
+        <td><%= link_to 'Edit', edit_respawn_path(respawn) %></td>
+        <td><%= link_to 'Destroy', respawn, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Respawn', new_respawn_path %>

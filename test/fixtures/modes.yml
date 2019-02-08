@@ -6,8 +6,8 @@
 #
 one:
   name: 'FFA'
-  level: one
+  game: one
 
 two:
   name: 'One Life'
-  level: two
+  game: two

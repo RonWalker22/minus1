@@ -1,4 +1,8 @@
-<%= render 'form', level: @level %>
+<div class="columns is-centered">
+  <div class="column is-one-third">
+    <h1>Editing Level</h1>
 
-<%= link_to 'Show', @level %> |
-<%= link_to 'Back', levels_path %>
+    <%= render 'form', level: @level %>
+    <%= link_to 'Cancel', game_path(@game), class:"is-pulled-right button is-black" %>
+  </div>
+</div>
