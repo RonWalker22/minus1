@@ -16,16 +16,11 @@
     <%= form.text_field :name, class: 'input' %>
   </div>
 
-  <div class="field">
-    <%= form.label :level_id, class:"label" %>
-    <div class="select">
-      <%= form.collection_select :level_id, 
-                                 @game.levels, 
-                                 :id, 
-                                 :name,
-                                 {include_blank: '-- Select One --'}, 
-                                 required: true%>
-    </div>
+  <%= form.hidden_field :game_id, required: true, value: @game.id %>
+
+  <div class="field select is-multiple">
+  <%= form.collection_select(:level_id, @game.levels, :id, :name,
+  {}, {required: true, multiple: true, include_hidden: false}) %>
   </div>
 
   <div class="actions">

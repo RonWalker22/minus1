@@ -18,21 +18,18 @@ class LevelsController < ApplicationController
 
   # GET /levels/1/edit
   def edit
-    @game = Game.find params[:game_id]
+    @game = @level.game
   end
 
   # POST /levels
   # POST /levels.json
   def create
-    @game = Game.find level_params[:game_id]
-    maintainers = @game.maintainers.ids
-    if maintainers.include?(current_operator.id)
-      @level = Level.new(level_params)
-      if @level.save
-        flash[:notice] = "Level was successfully created."
-      else
-        flash[:alter] = "Level was not created."
-      end
+    @level = Level.new(level_params)
+    if @level.save
+      flash[:notice] = "Level was successfully created."
+      add_contributor(@level.game)
+    else
+      flash[:alter] = "Level was not created."
     end
     redirect_back fallback_location: root_path
   end
@@ -40,22 +37,20 @@ class LevelsController < ApplicationController
   # PATCH/PUT /levels/1
   # PATCH/PUT /levels/1.json
   def update
-    @game = Game.find level_params[:game_id]
-    maintainers = @game.maintainers.ids
+    authorize @level
+    if @level.update(level_params)
+      flash[:notice] = "Level was successfully created."
+    else 
+      flash[:notice] = "Level was successfully created."
+    end
 
-    if maintainers.include?(current_operator.id)
-      if @level.update(level_params)
-        flash[:notice] = "Level was successfully created."
-      else 
-        flash[:notice] = "Level was successfully created."
-      end
-    end 
-    redirect_to game_path(@game)
+    redirect_to game_path(@level.game)
   end
 
   # DELETE /levels/1
   # DELETE /levels/1.json
   def destroy
+    authorize @level
     if @level.destroy
       flash[:notice] = "Level was successfully destroyed."
     else
@@ -73,6 +68,7 @@ class LevelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.fetch(:level, {}).permit(:name, :game_id)
+      params[:level][:operator_id] = current_operator.id
+      params.fetch(:level, {}).permit(:name, :game_id, :operator_id)
     end
 end

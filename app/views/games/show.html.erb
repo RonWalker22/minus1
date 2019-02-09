@@ -1,7 +1,7 @@
 <div class="columns is-centered is-multiline">
   <div class="column is-narrow">
     <div class="box">
-      <%= link_to 'Edit', edit_game_path(@game) %>
+      <%= link_to 'Edit', edit_game_path(@game), class: 'is-link'%>
         <h1 class="title is-5 has-text-centered">
           <%= @game.name%>
         </h1>
@@ -37,11 +37,19 @@
             </tr>
             <tr>
               <th>Maintainers:</th>
-                <% @game.maintainers.map do |operator| %>
-                  <td>
-                    <%= link_to operator.name, operator_path(operator.id)%>
-                  </td>
-                <% end %>
+                <td>
+                  <% @maintainers.map do |operator| %>
+                      <%= link_to operator.name, operator_path(operator.id)%>
+                  <% end %>
+                </td>
+            </tr>
+            <tr>
+              <th>Contributors:</th>
+                <td>
+                  <% @contributors.map do |operator| %>
+                      <%= link_to operator.name, operator_path(operator.id)%>
+                  <% end %>
+                </td>
             </tr>
           </tbody>
         </table>
@@ -66,15 +74,15 @@
                 <div class="tags has-addons">
                   <span class="tag is-black">#<%= i + 1 %></span>
                   <span class="tag is-info is-readyonly">
-                    <% if @game.status == 'proposal' %>
+                    <% if @game.status == 'proposal' && policy(character).edit? %>
                         <%= link_to character.name, 
-                                    edit_character_path(character, 
-                                                        game_id: @game.id) %>
+                                    edit_character_path(character), 
+                                    class: 'is-link'  %>
                     <% else %>
                       <%= character.name %>
                     <% end %>
                   </span>
-                  <% if @game.status == 'proposal' %>
+                  <% if @game.status == 'proposal' && policy(character).destroy? %>
                   <%= link_to "", character_path(character), 
                                   method: :delete,
                                   data: { 
@@ -103,14 +111,14 @@
                 <div class="tags has-addons">
                   <span class="tag is-black">#<%= i + 1 %></span>
                   <span class="tag is-info is-readyonly">
-                    <% if @game.status == 'proposal' %>
+                    <% if @game.status == 'proposal' && policy(mode).edit? %>
                     <%= link_to mode.name, 
-                                edit_mode_path(mode, game_id: @game.id) %>
+                                edit_mode_path(mode), class: 'is-link'%>
                     <% else %>
                     <%= mode.name %>
                     <% end %>
                   </span>
-                <% if @game.status == 'proposal' %>
+                <% if @game.status == 'proposal' && policy(mode).destroy?%>
                   <%= link_to "", mode_path(mode), 
                                   method: :delete,
                                   data: { 
@@ -149,14 +157,14 @@
                       <div class="tags has-addons">
                         <div class="tag is-black">#<%= i + 1 %></div>
                         <div class="tag is-info">
-                           <% if @game.status == 'proposal' %>
+                           <% if @game.status == 'proposal' && policy(level).edit? %>
                           <%= link_to level.name, 
-                                edit_level_path(level, game_id: @game.id) %>
+                                edit_level_path(level), class: 'is-link'  %>
                           <% else %>
                           <%= level.name %>
                           <% end %>
                         </div>
-                          <% if @game.status == 'proposal' %>
+                          <% if @game.status == 'proposal' && policy(level).destroy? %>
                           <%= link_to "", level_path(level), 
                             method: :delete,
                             data: { 
@@ -173,17 +181,18 @@
                           <div class="control">
                             <div class="tags has-addons">
                               <span class="tag is-black">#<%= i + 1 %></span>
-                              <% if @game.status == 'proposal' %>
+                              <% if @game.status == 'proposal' && policy(respawn).edit?%>
                                 <span class="tag is-info">
                                   <%= link_to respawn.name, 
-                                  edit_respawn_path(respawn, game_id: @game.id) %>
+                                  edit_respawn_path(respawn), 
+                                  class: 'is-link' %>
                                 </span>
                               <% else %>
                                 <span class="tag is-info">
                                   <%= respawn.name %>
                                 </span>
                               <% end %>
-                              <% if @game.status == 'proposal' %>
+                              <% if @game.status == 'proposal' && policy(respawn).destroy? %>
                                 <%= link_to "", respawn_path(respawn), 
                                   method: :delete,
                                   data: { 
@@ -238,17 +247,18 @@
                           <div class="control">
                             <div class="tags has-addons">
                               <span class="tag is-black">#<%= i + 1 %></span>
-                              <% if @game.status == 'proposal' %>
+                              <% if @game.status == 'proposal' && policy(location).edit? %>
                                 <span class="tag is-info">
                                   <%= link_to location.name, 
-                                  edit_location_path(location) %>
+                                  edit_location_path(location), 
+                                  class: 'is-link'%>
                                 </span>
                               <% else %>
                                 <span class="tag is-info">
                                   <%= location.name %>
                                 </span>
                               <% end %>
-                              <% if @game.status == 'proposal' %>
+                              <% if @game.status == 'proposal' && policy(location).destroy? %>
                                 <%= link_to "", location_path(location), 
                                   method: :delete,
                                   data: { 

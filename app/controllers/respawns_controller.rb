@@ -19,34 +19,25 @@ class RespawnsController < ApplicationController
 
   # GET /respawns/1/edit
   def edit
-    @game = Game.find params[:game_id]
-    maintainers = @game.maintainers.ids
-
-    if maintainers.exclude?(current_operator.id)
-      return redirect_back fallback_location: root_path
-    end
+    @game = @respawn.game
   end
 
   # POST /respawns
   # POST /respawns.json
   def create
-    @game = Game.find respawn_params[:game_id]
-    levels = @game.levels.ids
-    maintainers = @game.maintainers.ids
+    @respawn = Respawn.new(respawn_params)
+    levels = @respawn.game.levels.ids
+    if @respawn.save
+      params[:respawn][:level_id].each do |level_id|
+        level_id = level_id.to_i
+        next if levels.exclude?(level_id)
 
-    if maintainers.include?(current_operator.id)
-      @respawn = Respawn.new(respawn_params)
-      if @respawn.save
-        params[:respawn][:level_id].each do |level_id|
-          level_id = level_id.to_i
-          next if levels.exclude?(level_id)
-
-          LevelRespawn.create! level_id: level_id, respawn_id: @respawn.id
-        end
-        flash[:notice] = "Respawn was successfully created."
-      else
-        flash[:alter] = "Respawn was not created."
+        LevelRespawn.create! level_id: level_id, respawn_id: @respawn.id
       end
+      add_contributor(@respawn.game)
+      flash[:notice] = "Respawn was successfully created."
+    else
+      flash[:alter] = "Respawn was not created."
     end
     redirect_back fallback_location: root_path
   end
@@ -54,35 +45,34 @@ class RespawnsController < ApplicationController
   # PATCH/PUT /respawns/1
   # PATCH/PUT /respawns/1.json
   def update
-    @game = Game.find respawn_params[:game_id]
-    levels = @game.levels.ids
-    maintainers = @game.maintainers.ids
+    authorize @respawn
+    levels = @respawn.game.levels.ids
 
-    if maintainers.include?(current_operator.id)
-      if @respawn.update(respawn_params)
-        LevelRespawn.where(respawn_id: @respawn.id).destroy_all
-        params[:respawn][:level_id].each do |level_id|
-          level_id = level_id.to_i
-          next if levels.exclude?(level_id)
+    if @respawn.update(respawn_params)
+      LevelRespawn.where(respawn_id: @respawn.id).destroy_all
+      params[:respawn][:level_id].each do |level_id|
+        level_id = level_id.to_i
+        next if levels.exclude?(level_id)
 
-          LevelRespawn.create! level_id: level_id, respawn_id: @respawn.id
-        end
-        flash[:notice] = "Respawn was successfully created."
-      else 
-        flash[:notice] = "Respawn was successfully created."
+        LevelRespawn.create! level_id: level_id, respawn_id: @respawn.id
       end
-    end 
-    redirect_to game_path(@game)
+      flash[:notice] = "Respawn was successfully created."
+    else 
+      flash[:notice] = "Respawn was successfully created."
+    end
+    redirect_to game_path(@respawn.game)
   end
 
   # DELETE /respawns/1
   # DELETE /respawns/1.json
   def destroy
-    @respawn.destroy
-    respond_to do |format|
-      format.html { redirect_to respawns_url, notice: 'Respawn was successfully destroyed.' }
-      format.json { head :no_content }
+    authorize @respawn
+    if @respawn.destroy
+      flash[:notice] = "Respawn was successfully destroyed."
+    else
+      flash[:alter] = "Respawn was not destroyed."
     end
+    redirect_back fallback_location: root_path
   end
 
   private
@@ -93,6 +83,7 @@ class RespawnsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def respawn_params
-      params.require(:respawn).permit(:game_id, :name)
+      params[:respawn][:operator_id] = current_operator.id
+      params.require(:respawn).permit(:game_id, :name, :operator_id)
     end
 end

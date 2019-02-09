@@ -19,24 +19,14 @@ class ModesController < ApplicationController
 
   # GET /modes/1/edit
   def edit
-    @game = Game.find params[:game_id]
-    maintainers = @game.maintainers.ids
-
-    if maintainers.exclude?(current_operator.id)
-      return redirect_back fallback_location: root_path
-    end
+    @game = @mode.game
   end
 
   # POST /modes
   # POST /modes.json
   def create
-    @game = Game.find mode_params[:game_id]
-    maintainers_ids = @game.maintainers.ids
-
-    if maintainers_ids.include?(current_operator.id)
-      mode = Mode.new(mode_params)
-      mode.save
-    end
+    mode = Mode.new(mode_params)
+    add_contributor(mode.game) if mode.save
 
     redirect_back fallback_location: root_path
   end
@@ -44,22 +34,20 @@ class ModesController < ApplicationController
   # PATCH/PUT /modes/1
   # PATCH/PUT /modes/1.json
   def update
-    @game = Game.find mode_params[:game_id]
-    maintainers = @game.maintainers.ids
+    authorize @mode
 
-    if maintainers.include?(current_operator.id)
-      if @mode.update(mode_params)
-        flash[:notice] = "Mode was successfully updated."
-      else 
-        flash[:notice] = "Mode was successfully updated."
-      end
-    end 
-    redirect_to game_path(@game)
+    if @mode.update(mode_params)
+      flash[:notice] = "Mode was successfully updated."
+    else 
+      flash[:notice] = "Mode was successfully updated."
+    end
+    redirect_to game_path(@mode.game)
   end
 
   # DELETE /modes/1
   # DELETE /modes/1.json
   def destroy
+    authorize @mode
     if @mode.destroy
       flash[:notice] = "Mode was successfully destroyed."
     else
@@ -76,6 +64,7 @@ class ModesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mode_params
-      params.require(:mode).permit(:name, :game_id)
+      params[:mode][:operator_id] = current_operator.id
+      params.require(:mode).permit(:name, :game_id, :operator_id)
     end
 end

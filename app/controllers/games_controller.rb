@@ -2,7 +2,8 @@ require 'net/http'
 require 'json'
 
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :switch, :favorite, :unfavorite]
+  before_action :set_game, only: [:edit, :update, :destroy, :switch, :favorite, :unfavorite]
+  before_action :set_game_eager, only: [:show]
 
   # GET /games
   # GET /games.json
@@ -14,6 +15,8 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    @maintainers = Operator.with_role(:maintainer, @game)
+    @contributors = Operator.with_role(:contributor, @game)
     @location = Location.new
     @level = Level.new
     @mode = Mode.new
@@ -40,8 +43,7 @@ class GamesController < ApplicationController
         format.json { render :show, status: :created, location: @game }
         current_operator.update_attributes game_setting_id: @game.id
         current_operator.favorite(@game)
-        GameOperator.create!(game_id: @game.id,
-                             operator_id: current_operator.id)
+        current_operator.add_role :contributor, @game
       else
         format.html { render :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -96,6 +98,10 @@ class GamesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_game
       @game = Game.find(params[:id])
+    end
+
+    def set_game_eager
+      @game = Game.eager_load(:modes, :characters, levels: [:respawns, :locations]).where(id: params[:id]).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

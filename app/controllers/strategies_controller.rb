@@ -4,6 +4,7 @@ class StrategiesController < ApplicationController
   # GET /strategies
   # GET /strategies.json
   def index
+    authorize @game
     @game = Game.find(current_operator.game_setting_id || 1)
     @levels = @game.levels
     @modes = @game.modes
@@ -14,6 +15,7 @@ class StrategiesController < ApplicationController
   # GET /strategies/1.json
   def show
     @objectives = @strategy.objectives
+    authorize @strategy
   end
 
   # GET /strategies/new

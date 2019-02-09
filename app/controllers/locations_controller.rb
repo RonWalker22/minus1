@@ -25,36 +25,39 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @game = Level.find(location_params[:level_id]).game
-    maintainers_ids = @game.maintainers.ids
+    @location = Location.new(location_params)
+    levels = @location.game.levels.ids
+    if @location.save
+      params[:location][:level_id].each do |level_id|
+        level_id = level_id.to_i
+        next if levels.exclude?(level_id)
 
-    if maintainers_ids.include?(current_operator.id)
-      @location = Location.new(location_params)
-      @location.save
+        LevelLocation.create! level_id: level_id, location_id: @location.id
+      end
+      add_contributor(@location.game)
+      flash[:notice] = "Location was successfully created."
+    else
+      flash[:alter] = "Location was not created."
     end
-
     redirect_back fallback_location: root_path
   end
 
   # PATCH/PUT /locations/1
   # PATCH/PUT /locations/1.json
   def update
-    @game = @location.level.game
-    maintainers = @game.maintainers.ids
-
-    if maintainers.include?(current_operator.id)
-      if @location.update(location_params)
-        flash[:notice] = "Location was successfully updated."
-      else 
-        flash[:notice] = "Location was successfully updated."
-      end
-    end 
-    redirect_to game_path(@game)
+    authorize @location
+    if @location.update(location_params)
+      flash[:notice] = "Location was successfully updated."
+    else 
+      flash[:notice] = "Location was successfully updated."
+    end
+    redirect_to game_path(@location.game)
   end
 
   # DELETE /locations/1
   # DELETE /locations/1.json
   def destroy
+    authorize @location
     if @location.destroy
       flash[:notice] = "Location was successfully destroyed."
     else
@@ -71,6 +74,7 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:name, :level_id)
+      params[:location][:operator_id] = current_operator.id
+      params.require(:location).permit(:name, :game_id, :operator_id)
     end
 end

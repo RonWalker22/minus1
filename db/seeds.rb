@@ -12,8 +12,10 @@ new_game = Game.create! name: "Tom Clancy's Rainbow Six® Siege",
 
 3.times do |i|
   operator = Operator.create! name: "operator#{i}", password: '123456'
-  level = Level.create! name: "level#{i}", game_id: new_game.id
-  mode = Mode.create! name: "mode#{i}", game_id: new_game.id
+  level = Level.create! name: "level#{i}", game_id: new_game.id, 
+                        operator_id: operator.id
+  mode = Mode.create! name: "mode#{i}", game_id: new_game.id,
+                      operator_id: operator.id
   strategy = Strategy.create!(commander_id: operator.id,
                               game_id: new_game.id,
                               level_id: level.id,
@@ -30,9 +32,12 @@ new_game = Game.create! name: "Tom Clancy's Rainbow Six® Siege",
                      recipe_id: recipe.id,
                      step: 1,
                      content: 'Go to the waterfall')
-  GameOperator.create! operator_id: i + 1, game_id: 1
-  respawn = Respawn.create! name: "respawn#{i}", game_id: new_game.id
+  respawn = Respawn.create! name: "respawn#{i}", game_id: new_game.id, 
+                            operator_id: operator.id
   LevelRespawn.create level_id: level.id, respawn_id: respawn.id
-  Character.create! name: "character#{i}", game_id: new_game.id
-  Location.create! name: "loation#{i}", level_id: level.id
+  Character.create! name: "character#{i}", game_id: new_game.id, 
+                    operator_id: operator.id
+  location = Location.create! name: "loation#{i}", game_id: new_game.id,
+                              operator_id: operator.id
+  LevelLocation.create! level_id: level.id, location_id: location.id
 end

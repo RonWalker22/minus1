@@ -1,7 +1,6 @@
 # users
 class Operator < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  rolify
   acts_as_favoritor
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,
@@ -27,8 +26,6 @@ class Operator < ApplicationRecord
   has_many :operator_teams
   has_many :teams, through: :operator_teams
   validates :name, uniqueness: { case_sensitive: false }
-  has_many :game_operators
-  has_many :maintaining, through: :game_operators, source: :game
 
   def email_required?
     false
