@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
 
   create_table "ingredients", force: :cascade do |t|
     t.bigint "recipe_id", null: false
-    t.string "name"
+    t.string "name", null: false
     t.integer "step", null: false
-    t.text "content"
+    t.text "content", null: false
     t.boolean "private", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
   end
 
   create_table "level_locations", force: :cascade do |t|
-    t.bigint "level_id"
-    t.bigint "location_id"
+    t.bigint "level_id", null: false
+    t.bigint "location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["level_id", "location_id"], name: "index_level_locations_on_level_id_and_location_id", unique: true
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
-    t.bigint "game_id"
+    t.bigint "game_id", null: false
     t.bigint "operator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
 
   create_table "operator_strategies", force: :cascade do |t|
     t.bigint "operator_id", null: false
-    t.bigint "strategy_id"
+    t.bigint "strategy_id", null: false
     t.bigint "primary_id"
     t.bigint "secondary_id"
     t.bigint "tertiary_id"
@@ -184,8 +184,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
   end
 
   create_table "operator_teams", force: :cascade do |t|
-    t.bigint "operator_id"
-    t.bigint "team_id"
+    t.bigint "operator_id", null: false
+    t.bigint "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operator_id", "team_id"], name: "index_operator_teams_on_operator_id_and_team_id", unique: true
@@ -253,7 +253,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
 
   create_table "rooms", force: :cascade do |t|
     t.bigint "commander_id", null: false
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "private", default: false, null: false
@@ -282,7 +282,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.bigint "commander_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
