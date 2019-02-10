@@ -2,7 +2,7 @@ class CreateOperatorStrategies < ActiveRecord::Migration[5.2]
   def change
     create_table :operator_strategies do |t|
       t.references :operator, null: false
-      t.references :strategy
+      t.references :strategy, null: false
       t.references :primary, foreign_key: { to_table: :objectives }
       t.references :secondary, foreign_key: { to_table: :objectives }
       t.references :tertiary, foreign_key: { to_table: :objectives }

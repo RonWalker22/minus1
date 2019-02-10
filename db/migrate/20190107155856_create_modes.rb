@@ -6,5 +6,6 @@ class CreateModes < ActiveRecord::Migration[5.2]
       t.references :operator, foreign_key: true
       t.timestamps
     end
+    add_index :modes, [:name, :game_id], unique: true
   end
 end

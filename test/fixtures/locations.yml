@@ -2,8 +2,8 @@
 
 one:
   name: 'location1'
-  level: one
+  game: one
 
 two:
   name: 'location2'
-  level: two
+  game: two

@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
   end
 
   create_table "level_respawns", force: :cascade do |t|
-    t.bigint "level_id"
-    t.bigint "respawn_id"
+    t.bigint "level_id", null: false
+    t.bigint "respawn_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["level_id", "respawn_id"], name: "index_level_respawns_on_level_id_and_respawn_id", unique: true
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_modes_on_game_id"
+    t.index ["name", "game_id"], name: "index_modes_on_name_and_game_id", unique: true
     t.index ["operator_id"], name: "index_modes_on_operator_id"
   end
 
