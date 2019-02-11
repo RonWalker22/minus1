@@ -3,7 +3,9 @@
 one:
   name: 'DG'
   game: one
+  author: one
 
 two:
   name: 'FostFire'
   game: two
+  author: two

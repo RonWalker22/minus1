@@ -4,7 +4,9 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @team = teams(:one)
+    @game = games(:one)
     @operator = operators(:one)
+    @operator.game_setting_id = @game.id
     sign_in @operator
   end
 

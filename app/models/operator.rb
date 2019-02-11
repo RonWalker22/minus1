@@ -26,6 +26,7 @@ class Operator < ApplicationRecord
   has_many :operator_teams
   has_many :teams, through: :operator_teams
   validates :name, uniqueness: { case_sensitive: false }
+  belongs_to :game_setting, class_name: 'Game', foreign_key: 'game_setting_id'
 
   def email_required?
     false

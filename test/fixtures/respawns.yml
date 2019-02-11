@@ -3,7 +3,9 @@
 one:
   game: one
   name: 'Respawn1'
+  author: one
 
 two:
   game: two
   name: 'Respawn2'
+  author: two

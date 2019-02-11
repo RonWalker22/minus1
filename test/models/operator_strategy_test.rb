@@ -2,10 +2,15 @@ require 'test_helper'
 
 class OperatorStrategyTest < ActiveSupport::TestCase
   operator_strat = OperatorStrategy.all[random_index]
+  setup do
+    @operator = operators(:one)
+    @strategy = strategies(:one)
+  end
+
   test 'disallows duplicate OperatorStrategy' do
     begin
-      OperatorStrategy.create!(operator_id: operators(:one).id,
-                               strategy_id: strategies(:one).id)
+      OperatorStrategy.create!(operator_id: @operator.id,
+                               strategy_id: @strategy.id)
     rescue ActiveRecord::RecordNotUnique => invalid
     end
     assert invalid

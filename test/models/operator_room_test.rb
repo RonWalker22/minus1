@@ -1,10 +1,15 @@
 require 'test_helper'
 
 class OperatorRoomTest < ActiveSupport::TestCase
+  setup do
+    @operator = operators(:one)
+    @room = rooms(:one)
+  end
+
   test 'disallows duplicate OperatorRooms' do
     begin
-      OperatorRoom.create!(operator_id: Operator.first.id,
-                           room_id: Room.first.id)
+      OperatorRoom.create!(operator_id: @operator.id,
+                           room_id: @room.id)
     rescue ActiveRecord::RecordNotUnique => invalid
     end
     assert invalid

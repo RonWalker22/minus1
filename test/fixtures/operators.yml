@@ -3,7 +3,27 @@
 one:
   name: 'Bob'
   encrypted_password: <%= Operator.new.send(:password_digest, '123456') %>
+  game_setting: one
 
 two:
   name: 'Ron'
   encrypted_password: <%= Operator.new.send(:password_digest, '123456') %>
+  game_setting: two
+
+three:
+  name: 'Admin'
+  encrypted_password: <%= Operator.new.send(:password_digest, '123456') %>
+  game_setting: one
+  roles: admin_role
+
+four:
+  name: 'Maintainer1'
+  encrypted_password: <%= Operator.new.send(:password_digest, '123456') %>
+  game_setting: one
+  roles: maintainer_role
+
+five:
+  name: 'Contributor1'
+  encrypted_password: <%= Operator.new.send(:password_digest, '123456') %>
+  game_setting: one
+  roles: contributor_role

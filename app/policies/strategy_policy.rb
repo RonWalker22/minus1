@@ -13,4 +13,8 @@ class StrategyPolicy < ApplicationPolicy
       record.game.status == 'supported'
     end
   end
+
+  def create?
+    record.game.status == 'supported'
+  end
 end

@@ -1,9 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: 'Socom'
+  name: Socom
   website: 'socom.com'
+  status: 'supported'
 
 two:
-  name: 'Rainbow'
+  name: Rainbow
   website: 'rainbow.com'
+
+three:
+  name: COD
+  website: 'cod.com'
+  id: 1

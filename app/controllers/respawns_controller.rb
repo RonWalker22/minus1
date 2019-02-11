@@ -27,6 +27,7 @@ class RespawnsController < ApplicationController
   def create
     @respawn = Respawn.new(respawn_params)
     levels = @respawn.game.levels.ids
+
     if @respawn.save
       params[:respawn][:level_id].each do |level_id|
         level_id = level_id.to_i

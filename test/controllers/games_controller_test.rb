@@ -40,12 +40,4 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     patch game_url(@game), params: { game: { name: 'new game' } }
     assert_redirected_to game_url(@game)
   end
-
-  test 'should destroy game' do
-    assert_difference('Game.count', -1) do
-      delete game_url(@game)
-    end
-
-    assert_redirected_to games_url
-  end
 end

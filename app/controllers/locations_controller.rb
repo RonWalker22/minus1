@@ -19,7 +19,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/1/edit
   def edit
-    @game = @location.level.game
+    @game = @location.game
   end
 
   # POST /locations
@@ -39,7 +39,7 @@ class LocationsController < ApplicationController
     else
       flash[:alter] = "Location was not created."
     end
-    redirect_back fallback_location: root_path
+    redirect_back fallback_location: games_path
   end
 
   # PATCH/PUT /locations/1

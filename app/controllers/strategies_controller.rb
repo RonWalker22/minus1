@@ -4,8 +4,8 @@ class StrategiesController < ApplicationController
   # GET /strategies
   # GET /strategies.json
   def index
-    authorize @game
     @game = Game.find(current_operator.game_setting_id || 1)
+    authorize @game
     @levels = @game.levels
     @modes = @game.modes
     @strategies = @game.strategies
@@ -30,6 +30,7 @@ class StrategiesController < ApplicationController
   # POST /strategies.json
   def create
     @strategy = Strategy.new(strategy_params)
+    authorize @strategy
 
     respond_to do |format|
       if @strategy.save
@@ -76,6 +77,6 @@ class StrategiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def strategy_params
       params[:strategy][:commander_id] = current_operator.id
-      params.fetch(:strategy, {}).permit(:mode_id, :name, :commander_id)
+      params.fetch(:strategy, {}).permit(:mode_id, :name, :commander_id, :level_id, :game_id)
     end
 end

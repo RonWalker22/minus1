@@ -3,7 +3,9 @@
 one:
   name: 'location1'
   game: one
+  author: one
 
 two:
   name: 'location2'
   game: two
+  author: two

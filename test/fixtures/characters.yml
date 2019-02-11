@@ -3,7 +3,9 @@
 one:
   game: one
   name: 'C1'
+  author: one
 
 two:
   game: two
   name: 'C2'
+  author: teo

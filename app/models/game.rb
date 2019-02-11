@@ -7,4 +7,5 @@ class Game < ApplicationRecord
   has_many :respawns
   has_many :characters
   has_many :strategies
+  has_many :operators
 end

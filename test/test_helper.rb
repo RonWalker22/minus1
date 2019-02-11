@@ -1,6 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
+require 'pry'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -9,5 +10,49 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   def self.random_index
     [0, 1].sample
+  end
+
+  
+  module AuthorizationTests
+    extend ActiveSupport::Concern
+    included do
+      # this operator is not authorized(did not create)
+      # binding.pry
+      test "should not destroy" do
+        assert_no_difference(@record.class.name + ".count", -1) do
+          begin
+            delete url_for(@record)
+          rescue Pundit::NotAuthorizedError => invalid
+          end
+          assert invalid
+        end
+      end
+
+      test "should allow admin to destroy" do
+        @operator.add_role(:admin)
+        assert_difference(@record.class.name + ".count", -1) do
+          delete url_for(@record)
+        end
+      end
+
+      test "should allow maintainer to destroy" do
+        @operator.add_role(:maintainer, @game_two)
+        assert_difference(@record.class.name + ".count", -1) do
+          delete url_for(@record)
+        end
+      end
+
+      # this operator is not authorized(did not create)
+      test "should not allow contributor to destroy" do
+        @operator.add_role(:contributor, @game_two)
+        assert_no_difference(@record.class.name + ".count", -1) do
+          begin
+            delete url_for(@record)
+          rescue Pundit::NotAuthorizedError => invalid
+          end
+          assert invalid
+        end
+      end
+    end
   end
 end
