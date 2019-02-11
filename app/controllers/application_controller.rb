@@ -11,19 +11,17 @@ class ApplicationController < ActionController::Base
     end
 
     def add_contributor(contribution)
-      unless current_operator.has_role?(:contributor, contribution)
-        current_operator.add_role(:contributor, contribution)
-      end
+      current_operator.add_role(:contributor, contribution) unless current_operator.has_role?(:contributor, contribution)
     end
 
     def check_signed_in
-      if !operator_signed_in?
-        flash[:notice] = "You must be signed in to access that area."
-        return redirect_to(new_operator_session_path)
-      end
+      return if operator_signed_in?
+
+      flash[:notice] = 'You must be signed in to access that area.'
+      redirect_to(new_operator_session_path)
     end
 
     def guests_controllers?
-      devise_controller? || controller_name == "static_pages"
+      devise_controller? || controller_name == 'static_pages'
     end
 end

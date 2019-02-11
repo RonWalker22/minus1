@@ -35,17 +35,18 @@ class RespawnsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update respawn' do
     patch respawn_url(@respawn), params: { respawn: { game_id: @respawn.game_id,
-                                              name: @respawn.name, 
-                                              level_id: [@game.levels.first] } }
+                                                      name: @respawn.name,
+                                                      level_id: [@game.levels.first] } }
   end
 
   # this operator is not authorized(did not create)
   test 'should not update respawn' do
     begin
-      patch respawn_url(@respawn_two), params: { respawn: { 
-                                            game_id:@respawn.game_id, 
-                                            name: @respawn.name, 
-                                            level_id: [@game.levels.first] } }
+      patch respawn_url(@respawn_two), params: { respawn: {
+        game_id: @respawn.game_id,
+        name: @respawn.name,
+        level_id: [@game.levels.first]
+      } }
     rescue Pundit::NotAuthorizedError => invalid
     end
     assert invalid

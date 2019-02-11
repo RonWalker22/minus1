@@ -9,8 +9,7 @@ class RespawnsController < ApplicationController
 
   # GET /respawns/1
   # GET /respawns/1.json
-  def show
-  end
+  def show; end
 
   # GET /respawns/new
   def new
@@ -36,9 +35,9 @@ class RespawnsController < ApplicationController
         LevelRespawn.create! level_id: level_id, respawn_id: @respawn.id
       end
       add_contributor(@respawn.game)
-      flash[:notice] = "Respawn was successfully created."
+      flash[:notice] = 'Respawn was successfully created.'
     else
-      flash[:alter] = "Respawn was not created."
+      flash[:alter] = 'Respawn was not created.'
     end
     redirect_back fallback_location: root_path
   end
@@ -57,9 +56,9 @@ class RespawnsController < ApplicationController
 
         LevelRespawn.create! level_id: level_id, respawn_id: @respawn.id
       end
-      flash[:notice] = "Respawn was successfully created."
-    else 
-      flash[:notice] = "Respawn was successfully created."
+      flash[:notice] = 'Respawn was successfully created.'
+    else
+      flash[:notice] = 'Respawn was not created.'
     end
     redirect_to game_path(@respawn.game)
   end
@@ -69,14 +68,15 @@ class RespawnsController < ApplicationController
   def destroy
     authorize @respawn
     if @respawn.destroy
-      flash[:notice] = "Respawn was successfully destroyed."
+      flash[:notice] = 'Respawn was successfully destroyed.'
     else
-      flash[:alter] = "Respawn was not destroyed."
+      flash[:alter] = 'Respawn was not destroyed.'
     end
     redirect_back fallback_location: root_path
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_respawn
       @respawn = Respawn.find(params[:id])

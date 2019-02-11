@@ -118,6 +118,6 @@ class GamesController < ApplicationController
       uri = URI("#{base}#{game_like}#{params}")
       api_key = Rails.application.credentials.igdb[:api_key]
       request = Net::HTTP::Get.new(uri, 'user-key' => api_key)
-      response = JSON.parse(http.request(request).body)
+      JSON.parse(http.request(request).body)
     end
 end

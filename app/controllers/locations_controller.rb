@@ -9,8 +9,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/1
   # GET /locations/1.json
-  def show
-  end
+  def show; end
 
   # GET /locations/new
   def new
@@ -35,9 +34,9 @@ class LocationsController < ApplicationController
         LevelLocation.create! level_id: level_id, location_id: @location.id
       end
       add_contributor(@location.game)
-      flash[:notice] = "Location was successfully created."
+      flash[:notice] = 'Location was successfully created.'
     else
-      flash[:alter] = "Location was not created."
+      flash[:alter] = 'Location was not created.'
     end
     redirect_back fallback_location: games_path
   end
@@ -46,11 +45,11 @@ class LocationsController < ApplicationController
   # PATCH/PUT /locations/1.json
   def update
     authorize @location
-    if @location.update(location_params)
-      flash[:notice] = "Location was successfully updated."
-    else 
-      flash[:notice] = "Location was successfully updated."
-    end
+    flash[:notice] = if @location.update(location_params)
+                       'Location was successfully updated.'
+                     else
+                       'Location was not updated.'
+                     end
     redirect_to game_path(@location.game)
   end
 
@@ -59,14 +58,15 @@ class LocationsController < ApplicationController
   def destroy
     authorize @location
     if @location.destroy
-      flash[:notice] = "Location was successfully destroyed."
+      flash[:notice] = 'Location was successfully destroyed.'
     else
-      flash[:alert] = "Location was not destroyed."
+      flash[:alert] = 'Location was not destroyed.'
     end
     redirect_back fallback_location: root_path
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_location
       @location = Location.find(params[:id])

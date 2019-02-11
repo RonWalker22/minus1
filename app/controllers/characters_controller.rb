@@ -9,8 +9,7 @@ class CharactersController < ApplicationController
 
   # GET /characters/1
   # GET /characters/1.json
-  def show
-  end
+  def show; end
 
   # GET /characters/new
   def new
@@ -35,11 +34,11 @@ class CharactersController < ApplicationController
   # PATCH/PUT /characters/1.json
   def update
     authorize @character
-    if @character.update(character_params)
-      flash[:notice] = "Character was successfully created."
-    else 
-      flash[:notice] = "Character was successfully created."
-    end
+    flash[:notice] = if @character.update(character_params)
+                       'Character was successfully created.'
+                     else
+                       'Character was not created.'
+                     end
     redirect_to game_path(@character.game)
   end
 
@@ -48,14 +47,15 @@ class CharactersController < ApplicationController
   def destroy
     authorize @character
     if @character.destroy
-      flash[:notice] = "Character was successfully destroyed."
+      flash[:notice] = 'Character was successfully destroyed.'
     else
-      flash[:alert] = "Character was not destroyed."
+      flash[:alert] = 'Character was not destroyed.'
     end
     redirect_back fallback_location: root_path
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_character
       @character = Character.find(params[:id])

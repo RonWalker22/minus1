@@ -7,9 +7,10 @@ class StrategyPolicy < ApplicationPolicy
 
   def show?
     return false unless user.game_setting_id
+
     if record.class == Class
       Game.find(user.game_setting_id).status == 'supported'
-    else 
+    else
       record.game.status == 'supported'
     end
   end

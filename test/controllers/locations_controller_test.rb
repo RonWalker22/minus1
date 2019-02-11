@@ -14,14 +14,16 @@ class LocationsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create location' do
     assert_difference('Location.count') do
-      post locations_url, params: { location: { name: 'New Location22', game_id: @game.id, level_id: [@location.level_ids.first] } }
+      post locations_url, params: { location: { name: 'New Location22',
+                                                game_id: @game.id, level_id: [@location.level_ids.first] } }
     end
   end
 
   test 'should not create location' do
     assert_no_difference('Location.count') do
       begin
-        post locations_url, params: { location: { name: @location.name, game_id: @game.id, level_id: [@location.level_ids.first] } }
+        post locations_url, params: { location: { name: @location.name,
+                                                  game_id: @game.id, level_id: [@location.level_ids.first] } }
       rescue ActiveRecord::RecordNotUnique => invalid
       end
       assert invalid
@@ -34,7 +36,8 @@ class LocationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update location' do
-    patch location_url(@location), params: { location: { name: 'New level', game_id: @game.id, level_id: [@location.level_ids.first] } }
+    patch location_url(@location), params: { location: { name: 'New level',
+                                                         game_id: @game.id, level_id: [@location.level_ids.first] } }
   end
 
   test 'should destroy location' do

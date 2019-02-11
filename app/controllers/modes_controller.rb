@@ -9,8 +9,7 @@ class ModesController < ApplicationController
 
   # GET /modes/1
   # GET /modes/1.json
-  def show
-  end
+  def show; end
 
   # GET /modes/new
   def new
@@ -36,11 +35,11 @@ class ModesController < ApplicationController
   def update
     authorize @mode
 
-    if @mode.update(mode_params)
-      flash[:notice] = "Mode was successfully updated."
-    else 
-      flash[:notice] = "Mode was successfully updated."
-    end
+    flash[:notice] = if @mode.update(mode_params)
+                       'Mode was successfully updated.'
+                     else
+                       'Mode was not updated.'
+                     end
     redirect_to game_path(@mode.game)
   end
 
@@ -49,14 +48,15 @@ class ModesController < ApplicationController
   def destroy
     authorize @mode
     if @mode.destroy
-      flash[:notice] = "Mode was successfully destroyed."
+      flash[:notice] = 'Mode was successfully destroyed.'
     else
-      flash[:alert] = "Mode was not destroyed."
+      flash[:alert] = 'Mode was not destroyed.'
     end
     redirect_back fallback_location: root_path
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_mode
       @mode = Mode.find(params[:id])

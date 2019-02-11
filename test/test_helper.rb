@@ -12,14 +12,13 @@ class ActiveSupport::TestCase
     [0, 1].sample
   end
 
-  
   module AuthorizationTests
     extend ActiveSupport::Concern
     included do
       # this operator is not authorized(did not create)
       # binding.pry
-      test "should not destroy" do
-        assert_no_difference(@record.class.name + ".count", -1) do
+      test 'should not destroy' do
+        assert_no_difference(@record.class.name + '.count', -1) do
           begin
             delete url_for(@record)
           rescue Pundit::NotAuthorizedError => invalid
@@ -28,24 +27,24 @@ class ActiveSupport::TestCase
         end
       end
 
-      test "should allow admin to destroy" do
+      test 'should allow admin to destroy' do
         @operator.add_role(:admin)
-        assert_difference(@record.class.name + ".count", -1) do
+        assert_difference(@record.class.name + '.count', -1) do
           delete url_for(@record)
         end
       end
 
-      test "should allow maintainer to destroy" do
+      test 'should allow maintainer to destroy' do
         @operator.add_role(:maintainer, @game_two)
-        assert_difference(@record.class.name + ".count", -1) do
+        assert_difference(@record.class.name + '.count', -1) do
           delete url_for(@record)
         end
       end
 
       # this operator is not authorized(did not create)
-      test "should not allow contributor to destroy" do
+      test 'should not allow contributor to destroy' do
         @operator.add_role(:contributor, @game_two)
-        assert_no_difference(@record.class.name + ".count", -1) do
+        assert_no_difference(@record.class.name + '.count', -1) do
           begin
             delete url_for(@record)
           rescue Pundit::NotAuthorizedError => invalid
