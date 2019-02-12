@@ -135,11 +135,11 @@
     <% end %>
     <table class="table is-fullwidth">
       <thead>
-      <tr class="tags-padding">
-        <th>Level</th>
-        <th>Locations</th>
-        <th>Respawns</th>
-      </tr>
+        <tr class="tags-padding">
+          <th>Level</th>
+          <th>Locations</th>
+          <th>Respawns</th>
+        </tr>
       </thead>
       <tbody>
         <% @game.levels.each_with_index do |level, i|%>
@@ -204,6 +204,13 @@
             </tr>
         <% end %>
       </tbody>
+      <tfoot>
+        <tr class="tags-padding">
+          <th>Level</th>
+          <th>Locations</th>
+          <th>Respawns</th>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </div>
