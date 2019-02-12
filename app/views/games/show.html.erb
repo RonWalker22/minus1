@@ -82,15 +82,6 @@
                       <%= character.name %>
                     <% end %>
                   </span>
-                  <% if @game.status == 'proposal' && policy(character).destroy? %>
-                  <%= link_to "", character_path(character), 
-                                  method: :delete,
-                                  data: { 
-                                    confirm: 
-                                    "Are you sure you want to delete #{character.name}?" 
-                                  }, 
-                                  class: "tag is-delete" %>
-                  <% end %>
                 </div>
               </div>
             <% end %>
@@ -118,15 +109,6 @@
                     <%= mode.name %>
                     <% end %>
                   </span>
-                <% if @game.status == 'proposal' && policy(mode).destroy?%>
-                  <%= link_to "", mode_path(mode), 
-                                  method: :delete,
-                                  data: { 
-                                    confirm: 
-                                    "Are you sure you want to delete #{mode.name}?" 
-                                  }, 
-                                  class: "tag is-delete" %>
-                <% end %>
                 </div>
               </div>
             <% end %>
@@ -164,15 +146,6 @@
                           <%= level.name %>
                           <% end %>
                         </div>
-                          <% if @game.status == 'proposal' && policy(level).destroy? %>
-                          <%= link_to "", level_path(level), 
-                            method: :delete,
-                            data: { 
-                              confirm: 
-                              "Are you sure you want to delete #{level.name}?" 
-                              }, 
-                            class: "tag is-delete" %>
-                            <% end %>
                       </div>
                     </td>
                     <td>
@@ -192,15 +165,6 @@
                                   <%= respawn.name %>
                                 </span>
                               <% end %>
-                              <% if @game.status == 'proposal' && policy(respawn).destroy? %>
-                                <%= link_to "", respawn_path(respawn), 
-                                  method: :delete,
-                                  data: { 
-                                    confirm: 
-                                    "Are you sure you want to delete #{respawn.name}? This will remove the respawn from every level."
-                                    }, 
-                                  class: "tag is-delete" %>
-                                <% end %>
                             </div>
                           </div>
                         <% end %>
@@ -258,15 +222,6 @@
                                   <%= location.name %>
                                 </span>
                               <% end %>
-                              <% if @game.status == 'proposal' && policy(location).destroy? %>
-                                <%= link_to "", location_path(location), 
-                                  method: :delete,
-                                  data: { 
-                                    confirm: 
-                                    "Are you sure you want to delete #{location.name}?"
-                                    }, 
-                                  class: "tag is-delete" %>
-                                <% end %>
                             </div>
                           </div>
                         <% end %>
