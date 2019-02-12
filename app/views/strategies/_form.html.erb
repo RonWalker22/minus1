@@ -12,16 +12,29 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :game_id, value: @game.id %>
+
   <div class="field">
-    <%= form.label :name, class:"label" %><br />
+    <%= form.label :name, class:"label" %>
     <%= form.text_field :name, autofocus: true, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :mode, class:"label" %><br />
+    <%= form.label :level, class:"label" %>
+    <div class="select">
+      <%= form.collection_select :level_id, 
+                                  @game.levels, 
+                                  :id, 
+                                  :name,
+                                  required: true %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :mode, class:"label" %>
     <div class="select">
       <%= form.collection_select :mode_id, 
-                                  Mode.all, 
+                                  @game.modes, 
                                   :id, 
                                   :name,
                                   required: true %>

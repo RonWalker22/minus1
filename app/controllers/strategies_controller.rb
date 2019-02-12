@@ -20,11 +20,14 @@ class StrategiesController < ApplicationController
 
   # GET /strategies/new
   def new
+    @game = Game.find(current_operator.game_setting_id)
     @strategy = Strategy.new
   end
 
   # GET /strategies/1/edit
-  def edit; end
+  def edit
+    @game = Game.find(current_operator.game_setting_id)
+  end
 
   # POST /strategies
   # POST /strategies.json
