@@ -19,17 +19,17 @@
               <% elsif @game.status == 'proposal'  %>
                 <td>
                     <div class="tags has-addons">
-                      <span class="tag">Proposal</span>
+                      <span class="tag is-white">Proposal</span>
                       <span class="tag is-warning">In progress</span>
                     </div>
                 </td>
               <% else %>
                 <td>
                   <div class="tags has-addons">
-                    <span class="tag">Proposal</span>
+                    <span class="tag is-white">Proposal</span>
                     <span class="tag is-success"><i class="fas
                     fa-check"></i></span>
-                    <span class="tag">Review</span>
+                    <span class="tag is-white">Review</span>
                     <span class="tag is-warning">In progress</span>
                   </div>
                 </td>
@@ -73,7 +73,7 @@
               <div class="control">
                 <div class="tags has-addons">
                   <span class="tag is-black">#<%= i + 1 %></span>
-                  <span class="tag is-info is-readyonly">
+                  <span class="tag">
                     <% if @game.status == 'proposal' && policy(character).edit? %>
                         <%= link_to character.name, 
                                     edit_character_path(character), 
@@ -110,7 +110,7 @@
               <div class="control">
                 <div class="tags has-addons">
                   <span class="tag is-black">#<%= i + 1 %></span>
-                  <span class="tag is-info is-readyonly">
+                  <span class="tag">
                     <% if @game.status == 'proposal' && policy(mode).edit? %>
                     <%= link_to mode.name, 
                                 edit_mode_path(mode), class: 'is-link'%>
@@ -156,7 +156,7 @@
                     <td>
                       <div class="tags has-addons">
                         <div class="tag is-black">#<%= i + 1 %></div>
-                        <div class="tag is-info">
+                        <div class="tag">
                            <% if @game.status == 'proposal' && policy(level).edit? %>
                           <%= link_to level.name, 
                                 edit_level_path(level), class: 'is-link'  %>
@@ -182,13 +182,13 @@
                             <div class="tags has-addons">
                               <span class="tag is-black">#<%= i + 1 %></span>
                               <% if @game.status == 'proposal' && policy(respawn).edit?%>
-                                <span class="tag is-info">
+                                <span class="tag">
                                   <%= link_to respawn.name, 
                                   edit_respawn_path(respawn), 
                                   class: 'is-link' %>
                                 </span>
                               <% else %>
-                                <span class="tag is-info">
+                                <span class="tag">
                                   <%= respawn.name %>
                                 </span>
                               <% end %>
@@ -236,7 +236,7 @@
                     <td>
                       <div class="tags has-addons">
                         <div class="tag is-black">#<%= i + 1 %></div>
-                        <div class="tag is-info">
+                        <div class="tag">
                           <%= level.name %>
                         </div>
                       </div>
@@ -248,13 +248,13 @@
                             <div class="tags has-addons">
                               <span class="tag is-black">#<%= i + 1 %></span>
                               <% if @game.status == 'proposal' && policy(location).edit? %>
-                                <span class="tag is-info">
+                                <span class="tag">
                                   <%= link_to location.name, 
                                   edit_location_path(location), 
                                   class: 'is-link'%>
                                 </span>
                               <% else %>
-                                <span class="tag is-info">
+                                <span class="tag">
                                   <%= location.name %>
                                 </span>
                               <% end %>
