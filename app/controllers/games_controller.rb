@@ -101,7 +101,7 @@ class GamesController < ApplicationController
     end
 
     def set_game_eager
-      @game = Game.eager_load(:modes, :characters, levels: [:respawns, :locations]).where(id: params[:id]).first
+      @game = Game.includes(:modes, :characters, levels: [:respawns, :locations]).where(id: params[:id]).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
