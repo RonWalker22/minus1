@@ -115,123 +115,98 @@
           </div>
         </div>
       </div>
-      <div class="column is-full">
-        <div class="box">
-          <% if @game.status == 'proposal' %>
-            <button class='button new-level-btn is-small is-rounded'>
-              New Level
-            </button>
-            <button class='button new-respawn-btn is-small is-rounded is-pulled-right'>
-              New Respawn
-            </button>
-          <% end %>
-          <table class="table is-fullwidth is-bordered">
-            <caption class="title is-5 has-text-centered">Levels &
-            Respawns</caption>
-            <thead>
-              <th>Level</th>
-              <th>Respawns</th>
-            </thead>
-            <tbody>
-              <% @game.levels.each_with_index do |level, i|%>
-                  <tr>
-                    <td>
-                      <div class="tags has-addons">
-                        <div class="tag is-black">#<%= i + 1 %></div>
-                        <div class="tag">
-                           <% if @game.status == 'proposal' && policy(level).edit? %>
-                          <%= link_to level.name, 
-                                edit_level_path(level), class: 'is-link'  %>
-                          <% else %>
-                          <%= level.name %>
-                          <% end %>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="field is-grouped is-grouped-multiline">
-                        <% level.respawns.each_with_index do |respawn, i| %>
-                          <div class="control">
-                            <div class="tags has-addons">
-                              <span class="tag is-black">#<%= i + 1 %></span>
-                              <% if @game.status == 'proposal' && policy(respawn).edit?%>
-                                <span class="tag">
-                                  <%= link_to respawn.name, 
-                                  edit_respawn_path(respawn), 
-                                  class: 'is-link' %>
-                                </span>
-                              <% else %>
-                                <span class="tag">
-                                  <%= respawn.name %>
-                                </span>
-                              <% end %>
-                            </div>
-                          </div>
-                        <% end %>
-                      </div>
-                    </td>
-                  </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   </div>
 </div>
-      <div class="column is-full">
-        <div class="box">
-          <% if @game.status == 'proposal' %>
-            <button class='button new-location-btn is-small is-rounded'>
-              New Location
-            </button>
-          <% end %>
-          <table class="table is-fullwidth is-bordered">
-            <caption class="title is-5 has-text-centered">Level & Locations
-            </caption>
-            <thead>
-              <th>Level</th>
-              <th>Locations</th>
-            </thead>
-            <tbody>
-              <% @game.levels.each_with_index do |level, i|%>
-                  <tr>
-                    <td>
+<div class="column is-full">
+  <div class="box">
+    <% if @game.status == 'proposal' %>
+      <div class="buttons">
+        <button class='button new-level-btn'>
+          New Level
+        </button>
+        <button class='button new-location-btn'>
+          New Location
+        </button>
+        <button class='button new-respawn-btn'>
+          New Respawn
+        </button>
+      </div>
+    <% end %>
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr class="tags-padding">
+        <th>Level</th>
+        <th>Locations</th>
+        <th>Respawns</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @game.levels.each_with_index do |level, i|%>
+            <tr>
+              <td>
+                <div class="tags has-addons">
+                  <div class="tag is-black">#<%= i + 1 %></div>
+                  <div class="tag">
+                      <% if @game.status == 'proposal' && policy(level).edit? %>
+                    <%= link_to level.name, 
+                          edit_level_path(level), class: 'is-link'  %>
+                    <% else %>
+                    <%= level.name %>
+                    <% end %>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="field is-grouped is-grouped-multiline">
+                  <% level.locations.each_with_index do |location, i| %>
+                    <div class="control">
                       <div class="tags has-addons">
-                        <div class="tag is-black">#<%= i + 1 %></div>
-                        <div class="tag">
-                          <%= level.name %>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="field is-grouped is-grouped-multiline">
-                        <% level.locations.each_with_index do |location, i| %>
-                          <div class="control">
-                            <div class="tags has-addons">
-                              <span class="tag is-black">#<%= i + 1 %></span>
-                              <% if @game.status == 'proposal' && policy(location).edit? %>
-                                <span class="tag">
-                                  <%= link_to location.name, 
-                                  edit_location_path(location), 
-                                  class: 'is-link'%>
-                                </span>
-                              <% else %>
-                                <span class="tag">
-                                  <%= location.name %>
-                                </span>
-                              <% end %>
-                            </div>
-                          </div>
+                        <span class="tag is-black">#<%= i + 1 %></span>
+                        <% if @game.status == 'proposal' && policy(location).edit? %>
+                          <span class="tag">
+                            <%= link_to location.name, 
+                            edit_location_path(location), 
+                            class: 'is-link'%>
+                          </span>
+                        <% else %>
+                          <span class="tag">
+                            <%= location.name %>
+                          </span>
                         <% end %>
                       </div>
-                    </td>
-                  </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </td>
+              <td>
+                <div class="field is-grouped is-grouped-multiline">
+                  <% level.respawns.each_with_index do |respawn, i| %>
+                    <div class="control">
+                      <div class="tags has-addons">
+                        <span class="tag is-black">#<%= i + 1 %></span>
+                        <% if @game.status == 'proposal' && policy(respawn).edit?%>
+                          <span class="tag">
+                            <%= link_to respawn.name, 
+                            edit_respawn_path(respawn), 
+                            class: 'is-link' %>
+                          </span>
+                        <% else %>
+                          <span class="tag">
+                            <%= respawn.name %>
+                          </span>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
  <% if @game.status != 'supported' %>
   <div class="columns is-centered">
     <div class="column is-three-quarters is-centered">
