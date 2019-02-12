@@ -1,6 +1,18 @@
-<h1>Editing Location</h1>
+<div class="columns is-centered">
+  <div class="column is-one-third">
+    <% if @game.status == 'proposal' && policy(@location).destroy? %>	
+      <%= link_to "Delete this location", location_path(@location), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete #{@location.name}?" 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
+    <% end %>
+    <h1>Editing Location</h1>
 
-<%= render 'form', location: @location %>
+    <%= render 'form', location: @location %>
 
-<%= link_to 'Show', @location %> |
-<%= link_to 'Back', locations_path %>
+    <%= link_to 'Cancel', game_path(@game), class:"is-pulled-right button is-black" %>
+  </div>
+</div>

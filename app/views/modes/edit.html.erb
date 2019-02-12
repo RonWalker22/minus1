@@ -1,7 +1,15 @@
 <div class="columns is-centered">
   <div class="column is-one-third">
+    <% if @game.status == 'proposal' && policy(@mode).destroy? %>	
+      <%= link_to "Delete this mode", mode_path(@mode), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete #{@mode.name}?" 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
+    <% end %>
     <h1>Editing Mode</h1>
-
     <%= render 'form', mode: @mode %>
     <%= link_to 'Cancel', game_path(@game), class:"is-pulled-right button is-black" %>
   </div>

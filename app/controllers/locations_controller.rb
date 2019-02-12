@@ -62,7 +62,7 @@ class LocationsController < ApplicationController
     else
       flash[:alert] = 'Location was not destroyed.'
     end
-    redirect_back fallback_location: root_path
+    redirect_to game_path(@location.game)
   end
 
   private

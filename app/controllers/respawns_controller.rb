@@ -72,7 +72,7 @@ class RespawnsController < ApplicationController
     else
       flash[:alter] = 'Respawn was not destroyed.'
     end
-    redirect_back fallback_location: root_path
+    redirect_to game_path(@respawn.game)
   end
 
   private

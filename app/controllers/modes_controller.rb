@@ -52,7 +52,7 @@ class ModesController < ApplicationController
     else
       flash[:alert] = 'Mode was not destroyed.'
     end
-    redirect_back fallback_location: root_path
+    redirect_to game_path(@mode.game)
   end
 
   private

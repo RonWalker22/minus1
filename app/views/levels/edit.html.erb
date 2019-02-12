@@ -1,5 +1,14 @@
 <div class="columns is-centered">
   <div class="column is-one-third">
+      <% if @game.status == 'proposal' && policy(@level).destroy? %>	
+      <%= link_to "Delete this level", level_path(@level), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete #{@level.name}?" 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
+    <% end %>
     <h1>Editing Level</h1>
 
     <%= render 'form', level: @level %>

@@ -1,5 +1,14 @@
 <div class="columns is-centered">
   <div class="column is-one-third">
+    <% if @game.status == 'proposal' && policy(@respawn).destroy? %>	
+      <%= link_to "Delete this respawn", respawn_path(@respawn), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete #{@respawn.name}?" 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
+    <% end %>
     <h1>Editing Respawn</h1>
 
     <%= render 'form', respawn: @respawn %>

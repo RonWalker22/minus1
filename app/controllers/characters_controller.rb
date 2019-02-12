@@ -51,7 +51,7 @@ class CharactersController < ApplicationController
     else
       flash[:alert] = 'Character was not destroyed.'
     end
-    redirect_back fallback_location: root_path
+    redirect_to game_path(@character.game)
   end
 
   private

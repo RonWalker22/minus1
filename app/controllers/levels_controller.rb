@@ -56,7 +56,7 @@ class LevelsController < ApplicationController
     else
       flash[:alter] = 'Level was not destroyed.'
     end
-    redirect_back fallback_location: root_path
+    redirect_to game_path(@level.game)
   end
 
   private
