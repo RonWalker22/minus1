@@ -94,6 +94,15 @@ nav {
   display: none !important;
 }
 
+.tag {
+  .is-link {
+    color: white;
+  }
+  .is-link:hover {
+    color: $link-color;
+  }
+}
+
 /* Mobile Landscape Screen Sizes */
 @media only screen and (min-width: 400px) {
   .menu {
