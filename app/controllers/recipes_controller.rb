@@ -79,5 +79,6 @@ class RecipesController < ApplicationController
       params_obj = params[:obj]
       @objective = params_obj ? Objective.find(params_obj) : @recipe.objective
       @strategy = @objective.strategy
+      @game = @strategy.game
     end
 end

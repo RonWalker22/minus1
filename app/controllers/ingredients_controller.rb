@@ -88,6 +88,7 @@ class IngredientsController < ApplicationController
       @recipe = recipe ? Recipe.find(recipe) : @ingredient.recipe
       @objective = @recipe.objective
       @strategy = @objective.strategy
+      @game = @strategy.game
     end
 
     def set_ingredients_variables

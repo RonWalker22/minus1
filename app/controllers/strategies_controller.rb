@@ -14,6 +14,7 @@ class StrategiesController < ApplicationController
   # GET /strategies/1
   # GET /strategies/1.json
   def show
+    @game = @strategy.game
     @objectives = @strategy.objectives
     authorize @strategy
   end
@@ -26,7 +27,7 @@ class StrategiesController < ApplicationController
 
   # GET /strategies/1/edit
   def edit
-    @game = Game.find(current_operator.game_setting_id)
+    @game = @strategy.game
   end
 
   # POST /strategies

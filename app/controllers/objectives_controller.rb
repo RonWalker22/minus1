@@ -11,7 +11,8 @@ class ObjectivesController < ApplicationController
 
   # GET /objectives/1
   # GET /objectives/1.json
-  def show; end
+  def show
+  end
 
   # GET /objectives/new
   def new
@@ -78,6 +79,7 @@ class ObjectivesController < ApplicationController
       @next = Objective.find(@objective.next_id) if @objective.next
       @master = Objective.find(@objective.master_id) if @objective.master
       @recipes = @objective.recipes
+      @game = @objective.strategy.game
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
