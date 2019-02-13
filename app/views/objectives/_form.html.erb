@@ -17,17 +17,7 @@
     <%= form.text_field :name, autofocus: true, required: true, class:"input" %>
   </div>
 
-  <div class="field">
-    <%= form.label :strategy, class:"label" %><br />
-    <div class="select">
-      <%= form.collection_select :strategy_id, 
-                                 @strategies, 
-                                 :id, 
-                                 :name,
-                                 required: true,
-                                 selected: @strategy.id %>
-    </div>
-  </div>
+  <%= form.hidden_field :strategy_id, value: @strategy.id  %>
 
   <div class="field">
     <%= form.label :action, class:"label" %><br />
@@ -37,7 +27,14 @@
 
   <div class="field">
     <%= form.label :target, class:"label" %><br />
-    <%= form.text_field :target, required: true, class:"input" %>
+    <div class="select">
+      <%= form.collection_select :target_id, 
+                                 @locations, 
+                                 :id, 
+                                 :name, 
+                                 { :include_blank => '-- Select One --' },
+                                 required: true %>
+    </div>
   </div>
 
 

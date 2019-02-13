@@ -14,7 +14,8 @@ def create_r6_game
   @r6_game = Game.create! name: "Tom Clancy's Rainbow Six® Siege",
                           igdb_id: 7360,
                           image_id: 'ktvusahfu7kmoqbpjbkz',
-                          website: 'https://store.steampowered.com/app/359550/Tom_Clancys_Rainbow_Six_Siege/'
+                          website: 'https://store.steampowered.com/app/359550/Tom_Clancys_Rainbow_Six_Siege/',
+                          status: 'supported'
 end
 
 def create_admin
@@ -952,11 +953,16 @@ def create_r6_levels_locations
   end
 end
 
+def create_mode
+  Mode.create! name: 'Bomb', game_id: @r6_game.id, operator_id: @admin.id
+end
+
 def create_rainbow_six
   create_r6_game
   create_admin
   create_r6_characters
   create_r6_levels_locations
+  create_mode
 end
 
 create_rainbow_six

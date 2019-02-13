@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.bigint "next_id"
     t.bigint "strategy_id", null: false
     t.string "name", null: false
-    t.string "target", null: false
+    t.bigint "target_id"
     t.string "action", null: false
     t.integer "delay", default: 0, null: false
     t.integer "min_ops", default: 1, null: false
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.index ["master_id"], name: "index_objectives_on_master_id"
     t.index ["next_id"], name: "index_objectives_on_next_id"
     t.index ["strategy_id"], name: "index_objectives_on_strategy_id"
+    t.index ["target_id"], name: "index_objectives_on_target_id"
   end
 
   create_table "operator_recipes", force: :cascade do |t|
@@ -301,6 +302,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
   add_foreign_key "locations", "games"
   add_foreign_key "locations", "operators"
   add_foreign_key "modes", "operators"
+  add_foreign_key "objectives", "locations", column: "target_id"
   add_foreign_key "objectives", "objectives", column: "master_id"
   add_foreign_key "objectives", "objectives", column: "next_id"
   add_foreign_key "operator_strategies", "objectives", column: "default_id"

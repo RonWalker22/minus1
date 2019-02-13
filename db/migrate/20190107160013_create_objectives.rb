@@ -6,7 +6,7 @@ class CreateObjectives < ActiveRecord::Migration[5.2]
       t.references :next, foreign_key: { to_table: :objectives }
       t.references :strategy, null: false
       t.string :name, null: false
-      t.string :target, null: false
+      t.references :target, foreign_key: { to_table: :locations }
       t.string :action, null: false
       t.integer :delay, default: 0, null: false
       t.integer :min_ops, default: 1, null: false

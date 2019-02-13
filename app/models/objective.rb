@@ -1,5 +1,8 @@
 class Objective < ApplicationRecord
   belongs_to :strategy
+  belongs_to :target,
+             class_name: 'Location',
+             optional: true
   belongs_to :master,
              class_name: 'Objective',
              foreign_key: 'master_id',
