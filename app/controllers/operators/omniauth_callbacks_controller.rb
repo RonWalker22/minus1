@@ -1,5 +1,3 @@
-require 'pry'
-
 class Operators::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_action :verify_authenticity_token, only: [:steam, :discord]
   def steam

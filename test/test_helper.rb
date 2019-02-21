@@ -1,7 +1,6 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
-require 'pry'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -16,7 +15,6 @@ class ActiveSupport::TestCase
     extend ActiveSupport::Concern
     included do
       # this operator is not authorized(did not create)
-      # binding.pry
       test 'should not destroy' do
         assert_no_difference(@record.class.name + '.count', -1) do
           begin
