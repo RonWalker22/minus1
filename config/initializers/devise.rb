@@ -257,7 +257,10 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :steam, Rails.application.credentials[:steam][:api_key]
-
+  
+  discord_client_id = Rails.application.credentials[:discord][:client_id]
+  discord_secret = Rails.application.credentials[:discord][:client_secret]
+  config.omniauth :discord, discord_client_id, discord_secret
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

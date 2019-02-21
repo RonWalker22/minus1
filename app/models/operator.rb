@@ -4,7 +4,7 @@ class Operator < ApplicationRecord
   acts_as_favoritor
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,
-         omniauth_providers: [:steam]
+         omniauth_providers: [:steam, :discord]
   has_many :commander_seats,
            class_name: 'Room',
            foreign_key: 'commander_id'
@@ -47,6 +47,15 @@ class Operator < ApplicationRecord
                   else
                     name
                   end
+    end
+  end
+
+  def self.from_omniauth_discord(auth)
+    name = auth.info.name
+    uid = auth.uid
+    where(provider: auth.provider, uid: uid).first_or_create do |user|
+      user.password = Devise.friendly_token[0, 20]
+      user.name = name
     end
   end
 end
