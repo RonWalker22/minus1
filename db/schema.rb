@@ -152,19 +152,6 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.index ["recipe_id"], name: "index_operator_recipes_on_recipe_id"
   end
 
-  create_table "operator_rooms", force: :cascade do |t|
-    t.bigint "operator_id", null: false
-    t.bigint "objective_id"
-    t.bigint "room_id", null: false
-    t.boolean "alive", default: true, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["objective_id"], name: "index_operator_rooms_on_objective_id"
-    t.index ["operator_id", "room_id"], name: "index_operator_rooms_on_operator_id_and_room_id", unique: true
-    t.index ["operator_id"], name: "index_operator_rooms_on_operator_id"
-    t.index ["room_id"], name: "index_operator_rooms_on_room_id"
-  end
-
   create_table "operator_strategies", force: :cascade do |t|
     t.bigint "operator_id", null: false
     t.bigint "strategy_id", null: false
@@ -198,6 +185,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.string "name"
     t.boolean "online", default: false, null: false
     t.bigint "game_setting_id", default: 1
+    t.bigint "room_id"
     t.string "uid"
     t.string "provider"
     t.datetime "created_at", null: false
@@ -211,6 +199,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.index ["game_setting_id"], name: "index_operators_on_game_setting_id"
     t.index ["name"], name: "index_operators_on_name", unique: true
     t.index ["reset_password_token"], name: "index_operators_on_reset_password_token", unique: true
+    t.index ["room_id"], name: "index_operators_on_room_id"
   end
 
   create_table "operators_roles", id: false, force: :cascade do |t|

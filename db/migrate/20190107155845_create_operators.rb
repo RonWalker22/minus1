@@ -4,6 +4,7 @@ class CreateOperators < ActiveRecord::Migration[5.2]
       t.string :name, null: true
       t.boolean :online, default: false, null: false
       t.references :game_setting, foreign_key: { to_table: :games }, default: 1
+      t.references :room
       t.string :uid
       t.string :provider
       t.timestamps

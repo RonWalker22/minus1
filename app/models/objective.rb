@@ -18,8 +18,6 @@ class Objective < ApplicationRecord
   has_many :slaves,
            class_name: 'Objective',
            foreign_key: 'master_id', dependent: :nullify
-  has_many :operator_rooms, dependent: :nullify
-  has_many :operators, through: :operator_rooms
   has_many :primaries,
            class_name: 'OperatorStrategy',
            foreign_key: 'primary_id',

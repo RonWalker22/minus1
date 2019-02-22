@@ -17,8 +17,7 @@ class Operator < ApplicationRecord
   has_many :commander_strategies,
            class_name: 'Strategy',
            foreign_key: 'commander_id'
-  has_many :operator_rooms
-  has_many :rooms, through: :operator_rooms
+  belongs_to :room
   has_many :operator_strategies
   has_many :strategies, through: :operator_strategies
   has_many :operator_recipes
