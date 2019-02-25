@@ -7,6 +7,7 @@ class CreateStrategies < ActiveRecord::Migration[5.2]
       t.references :mode
       t.references :level
       t.references :game
+      t.integer :assignment_flow, array: true, default: []
       t.references :inspiration, foreign_key: { to_table: :strategies }
       t.string :name, null: false
       t.boolean :private, default: false, null: false

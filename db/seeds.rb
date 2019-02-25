@@ -20,7 +20,7 @@ end
 
 def create_admin
   @admin = Operator.create! name: 'admin',
-                            password: '123456',
+                            password: Rails.application.credentials.admin[:password],
                             game_setting_id: @r6_game.id
 end
 
@@ -965,4 +965,41 @@ def create_rainbow_six
   create_mode
 end
 
+def create_strategies
+  Strategy.create commander_id: @admin.id,
+                  mode_id: 1,
+                  level_id: 1,
+                  game_id: 1,
+                  name: 'Rush'
+end
+
+def create_objectives
+  10.times do
+    10.times do |i|
+      Objective.create strategy_id: 1,
+                       name: "Objective #{i + 1}",
+                       priority: i + 1,
+                       min_ops: i + 1,
+                       target_id: 1,
+                       action: 'attack'
+    end
+  end
+end
+
+def create_room
+  Room.create commander_id: 1, name: 'happy'
+end
+
+def create_operators
+  100.times do |i|
+    Operator.create name: "Op #{i}",
+                    password: '123456',
+                    game_setting_id: @r6_game.id
+  end
+end
+
 create_rainbow_six
+create_strategies
+create_objectives
+create_operators
+create_room

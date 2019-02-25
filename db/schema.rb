@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.bigint "mode_id"
     t.bigint "level_id"
     t.bigint "game_id"
+    t.integer "assignment_flow", default: [], array: true
     t.bigint "inspiration_id"
     t.string "name", null: false
     t.boolean "private", default: false, null: false
