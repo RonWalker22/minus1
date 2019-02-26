@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.string "action", null: false
     t.integer "delay", default: 0, null: false
     t.integer "min_ops", default: 1, null: false
-    t.integer "max_ops"
+    t.integer "max_ops", default: 1, null: false
     t.integer "priority", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

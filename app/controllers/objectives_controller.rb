@@ -26,8 +26,23 @@ class ObjectivesController < ApplicationController
   # POST /objectives.json
   def create
     @objective = Objective.new(objective_params)
+    direction = params[:objective][:direction]
+    dependency = params[:objective][:dependency]
+    next_id = params[:objective][:next_id]
+    master_id = params[:objective][:master_id]
+    @objective.next_id = nil if direction == "previous"
+    @objective.master_id = nil if dependency == "slave"
+  
     respond_to do |format|
       if @objective.save
+        binding.pry
+        if direction == "previous" && next_id.to_i > 0
+          @objective.previous.push Objective.find(next_id)
+        end
+        if dependency == "slave" && master_id.to_i > 0
+          @objective.slaves.push Objective.find(master_id)
+        end
+
         format.html { redirect_to @objective, notice: 'Objective was successfully created.' }
         format.json { render :show, status: :created, location: @objective }
       else
@@ -89,6 +104,9 @@ class ObjectivesController < ApplicationController
         params[:objective][:strategy_id] = params[:objective][:strategy_id].to_i
       end
       # rubocop:enable Style/IfUnlessModifier
-      params.fetch(:objective, {}).permit(:name, :target_id, :action, :strategy_id)
+      params.fetch(:objective, {}).permit(:name, :target_id, :action,
+                                          :strategy_id, :min_ops, :max_ops,
+                                          :priority, :next_id, :delay,
+                                          :master_id)
     end
 end

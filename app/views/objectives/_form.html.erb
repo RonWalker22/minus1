@@ -13,20 +13,23 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name, class:"label" %><br />
+    <%= form.label :name, class:"label" %>
     <%= form.text_field :name, autofocus: true, required: true, class:"input" %>
   </div>
 
   <%= form.hidden_field :strategy_id, value: @strategy.id  %>
 
   <div class="field">
-    <%= form.label :action, class:"label" %><br />
-    <%= form.select :action, [ 'Attack', 'Defend', 'Capture'], { :include_blank => '-- Select One --' },
-    required: true, class:"input" %>
+    <%= form.label :action, class:"label" %>
+    <div class="select">
+      <%= form.select :action, [ 'Attack', 'Defend', 'Capture'], 
+                              { :include_blank => '-- Select One --' },
+                              required: true, class:"input" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :target, class:"label" %><br />
+    <%= form.label :target, class:"label" %>
     <div class="select">
       <%= form.collection_select :target_id, 
                                  @locations, 
@@ -37,38 +40,54 @@
     </div>
   </div>
 
-
   <div class="field">
-    <%= form.label :minimum_operators, for: :objective_min, class:"label" %>
-    <br />
-    <%= form.number_field :min, min:1, value: 1, max:1000, disabled: true, class:"input" %>
+    <%= form.label :minimum_operators, for: :min_ops, class:"label" %>
+    <%= form.number_field :min_ops, min:1, max:100, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :maximum_operators, for: :objective_max, class:"label" %>
-    <br />
-    <%= form.number_field :max, min:1, max:1000, disabled: true, class:"input" %>
+    <%= form.label :maximum_operators, for: :max_ops, class:"label" %>
+    <%= form.number_field :max_ops, min:1, max:100, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :operator_distribution_priority, for: :objective_priority, class:"label"  %>
-    <br />
-    <%= form.number_field :priority, value: 10, min:1, max:10, disabled: true, class:"input" %>
+    <%= form.label :priority_level, for: :priority, class:"label"  %>
+    <%= form.number_field :priority, min:1, max:10, class:"input" %>
   </div>
 
   <div class="field">
-    <%= form.label :next, class:"label" %><br />
-    <%= form.text_field :next, disabled: true, class:"input" %>
+    <%= form.label :link_objective, for: :next_id, class:"label" %>
+    <div class="select">
+      <%= form.collection_select :next_id, 
+                                 @strategy.objectives, 
+                                 :id, 
+                                 :name, 
+                                 { :include_blank => '-- Optional --' }%>
+    </div>
+    <%= form.label :direction, value: :previous  %>
+    <%= form.radio_button :direction, :previous, checked: true %>
+    <%= form.label :direction, value: :next %>
+    <%= form.radio_button :direction, :next%>
   </div>
 
   <div class="field">
-    <%= form.label :master, class:"label" %><br />
-    <%= form.text_field :master, disabled: true, class:"input" %>
+    <%= form.label :dependency, class:"label" %>
+    <div class="select">
+      <%= form.collection_select :master_id, 
+                                 @strategy.objectives, 
+                                 :id, 
+                                 :name, 
+                                 { :include_blank => '-- Optional --' }%>
+    </div>
+    <%= form.label :dependency, :value => "master"  %>
+    <%= form.radio_button :dependency, :master, checked: true %>
+    <%= form.label :dependency, :value => "slave" %>
+    <%= form.radio_button :dependency, :slave%>
   </div>
 
   <div class="field">
-    <%= form.label :dealy, class:"label" %><br />
-    <%= form.number_field :delay, value: 0, min:0, max:10_000, disabled: true, class:"input"%>
+    <%= form.label "Delay(seconds)", for: :delay, class:"label" %>
+    <%= form.number_field :delay, min:0, max:10_000, class:"input"%>
   </div>
 
   <div class="actions">
