@@ -78,3 +78,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "redis"
+
+gem 'sidekiq'
+
+
+# Required for Sidekiq::Web
+  gem 'sinatra', '>= 2.0.5'
+# Required for Sidekiq::Web

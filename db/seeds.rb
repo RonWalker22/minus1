@@ -980,6 +980,7 @@ def create_objectives
                        name: "Objective #{i + 1}",
                        priority: i + 1,
                        min_ops: i + 1,
+                       max_ops: i + 2,
                        target_id: 1,
                        action: 'attack'
     end
@@ -1003,3 +1004,6 @@ create_strategies
 create_objectives
 create_operators
 create_room
+
+
+@admin.add_role :admin

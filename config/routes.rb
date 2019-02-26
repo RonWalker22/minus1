@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+
+  mount ActionCable.server => '/cable'
+
+  authenticate :operator, lambda { |op| op.has_role?(:admin) } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  unauthenticated do
+    root to: 'static_pages#about'
+  end
+
+  authenticated do
+    root to: 'games#index'
+  end
+
   resources :locations
   resources :respawns
   resources :modes
@@ -14,14 +30,6 @@ Rails.application.routes.draw do
   resources :teams
   resources :objectives
   resources :strategies
-
-  unauthenticated do
-    root to: 'static_pages#about'
-  end
-
-  authenticated do
-    root to: 'static_pages#about'
-  end
 
   get '/about' => 'static_pages#about'
   get '/docs' => 'static_pages#docs'

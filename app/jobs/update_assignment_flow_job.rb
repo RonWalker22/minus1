@@ -2,7 +2,7 @@ class UpdateAssignmentFlowJob < ApplicationJob
   queue_as :default
 
   def perform(strategy)
-    objectives = strategy.objectives.order(:priority).pluck(:priority, :min_ops, :id)
+    objectives = strategy.objectives.order(:priority).pluck(:priority, :min_ops, :max_ops, :id)
     assignment_flow = []
     new_objs = []
 
@@ -18,11 +18,20 @@ class UpdateAssignmentFlowJob < ApplicationJob
         objs.each do |obj|
           next if i + 1 > obj[1]
 
-          assignment_flow << obj[2]
+          assignment_flow << obj[3]
         end
       end
     end
 
-    assignment_flow
+    max_max_ops = objectives.max_by { |obj| obj[2] }[2]
+    max_max_ops.times do |i|
+      objectives.each do |obj|
+        next if i + 1 + obj[1] > obj[2]
+
+        assignment_flow << obj[3]
+      end
+    end
+
+    strategy.update_attributes assignment_flow: assignment_flow
   end
 end

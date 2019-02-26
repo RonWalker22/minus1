@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
   create_table "operator_strategies", force: :cascade do |t|
     t.bigint "operator_id", null: false
     t.bigint "strategy_id", null: false
+    t.bigint "objective_id"
     t.bigint "primary_id"
     t.bigint "secondary_id"
     t.bigint "tertiary_id"
@@ -163,6 +164,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["default_id"], name: "index_operator_strategies_on_default_id"
+    t.index ["objective_id"], name: "index_operator_strategies_on_objective_id"
     t.index ["operator_id", "strategy_id"], name: "index_operator_strategies_on_operator_id_and_strategy_id", unique: true
     t.index ["operator_id"], name: "index_operator_strategies_on_operator_id"
     t.index ["primary_id"], name: "index_operator_strategies_on_primary_id"
