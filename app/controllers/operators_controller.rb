@@ -11,6 +11,15 @@ class OperatorsController < ApplicationController
   # GET /operators/1.json
   def show; end
 
+  def create_api_key
+    op_create_at = current_operator.created_at.strftime("%y%d%I%M%S")
+    key = SecureRandom.urlsafe_base64 + op_create_at
+
+    current_operator.update_attributes api_key: Digest::SHA2.hexdigest(key)
+
+    render html: "<p>Don't share your api key with anyone.</p> <div>#{key}</div>".html_safe
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.

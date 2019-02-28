@@ -7,6 +7,7 @@ class CreateOperators < ActiveRecord::Migration[5.2]
       t.references :room
       t.string :uid
       t.string :provider
+      t.string :api_key
       t.timestamps
     end
     add_index :operators, [:name], unique: true

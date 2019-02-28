@@ -36,4 +36,5 @@ Rails.application.routes.draw do
   patch '/games/:id/switch/' => 'games#switch', as: 'switch_game'
   put '/games/:id/favorite' => 'games#favorite', as: 'favorite_game'
   delete '/games/:id/favorite' => 'games#unfavorite'
+  put '/operators/api_key' => 'operators#create_api_key', as: 'api_key'
 end

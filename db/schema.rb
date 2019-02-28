@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.bigint "room_id"
     t.string "uid"
     t.string "provider"
+    t.string "api_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
