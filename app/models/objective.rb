@@ -35,5 +35,8 @@ class Objective < ApplicationRecord
            foreign_key: 'default_id',
            dependent: :nullify
   has_many :operator_strategies, dependent: :nullify
+  has_many :current_ops,
+           class_name: 'Operator',
+           foreign_key: 'current_objective_id'
   after_commit { UpdateAssignmentFlowJob.perform_later(strategy) }
 end

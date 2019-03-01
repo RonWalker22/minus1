@@ -18,6 +18,9 @@ class Operator < ApplicationRecord
            class_name: 'Strategy',
            foreign_key: 'commander_id'
   belongs_to :room, optional: true
+  belongs_to :current_objective,
+             class_name: 'Objective',
+             optional: true
   has_many :operator_strategies
   has_many :strategies, through: :operator_strategies
   has_many :operator_recipes

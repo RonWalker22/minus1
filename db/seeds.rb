@@ -985,10 +985,12 @@ def create_objectives
                        action: 'attack'
     end
   end
+  @admin.current_objective_id = 1
+  @admin.save
 end
 
 def create_room
-  Room.create commander_id: 1, name: 'happy'
+  Room.create commander_id: 1, name: 'happy', strategy_id: 1
 end
 
 def create_operators

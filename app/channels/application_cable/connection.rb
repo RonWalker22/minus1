@@ -11,7 +11,8 @@ module ApplicationCable
       def find_verified_operator
         key = request.params[:api_key]
         verified_operator = Operator.find_by(api_key: 
-                                                    Digest::SHA2.hexdigest(key))
+                                                    Digest::SHA2.hexdigest(key),
+                                             online: false)
         verified_operator || reject_unauthorized_connection
       end
   end

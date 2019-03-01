@@ -4,6 +4,7 @@ class CreateRooms < ActiveRecord::Migration[5.2]
       t.references :commander,
                    foreign_key: { to_table: :operators },
                    null: false
+      t.references :strategy
       t.string :name, null: false
       t.timestamps
       t.boolean :private, default: false, null: false

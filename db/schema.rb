@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_09_193005) do
+ActiveRecord::Schema.define(version: 2019_02_28_211340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
     t.datetime "remember_created_at"
     t.text "favoritor_score"
     t.text "favoritor_total"
+    t.bigint "current_objective_id"
+    t.index ["current_objective_id"], name: "index_operators_on_current_objective_id"
     t.index ["game_setting_id"], name: "index_operators_on_game_setting_id"
     t.index ["name"], name: "index_operators_on_name", unique: true
     t.index ["reset_password_token"], name: "index_operators_on_reset_password_token", unique: true
@@ -246,12 +248,14 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
 
   create_table "rooms", force: :cascade do |t|
     t.bigint "commander_id", null: false
+    t.bigint "strategy_id"
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "private", default: false, null: false
     t.boolean "override_preference", default: false, null: false
     t.index ["commander_id"], name: "index_rooms_on_commander_id"
+    t.index ["strategy_id"], name: "index_rooms_on_strategy_id"
   end
 
   create_table "strategies", force: :cascade do |t|
@@ -303,6 +307,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_193005) do
   add_foreign_key "operator_strategies", "objectives", column: "secondary_id"
   add_foreign_key "operator_strategies", "objectives", column: "tertiary_id"
   add_foreign_key "operators", "games", column: "game_setting_id"
+  add_foreign_key "operators", "objectives", column: "current_objective_id"
   add_foreign_key "recipes", "operators", column: "commander_id"
   add_foreign_key "respawns", "games"
   add_foreign_key "respawns", "operators"
