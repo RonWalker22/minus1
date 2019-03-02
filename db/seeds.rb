@@ -997,15 +997,16 @@ def create_operators
   100.times do |i|
     Operator.create name: "Op #{i}",
                     password: '123456',
-                    game_setting_id: @r6_game.id
+                    game_setting_id: @r6_game.id,
+                    room_id: 1
   end
+  @admin.update_attributes room_id:1
 end
 
 create_rainbow_six
 create_strategies
 create_objectives
-create_operators
 create_room
-
+create_operators
 
 @admin.add_role :admin
