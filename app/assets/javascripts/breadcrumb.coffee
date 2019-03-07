@@ -2,7 +2,7 @@ breadcrumb = (controller) ->
   strategy_li = document.querySelector '#breadcrumb-strategy'
   objective_li = document.querySelector '#breadcrumb-objective'
   recipe_li = document.querySelector '#breadcrumb-recipe'
-  ingredient_li = document.querySelector '#breadcrumb-ingredient'
+  direction_li = document.querySelector '#breadcrumb-direction'
   game_li = document.querySelector '#breadcrumb-game'
   switch controller
     when "strategies" 
@@ -13,8 +13,8 @@ breadcrumb = (controller) ->
       objective_li.classList.add 'is-active'
     when "recipes"
       recipe_li.classList.add 'is-active'
-    when "ingredients"
-      ingredient_li.classList.add 'is-active'
+    when "directions"
+      direction_li.classList.add 'is-active'
 
 document.addEventListener 'turbolinks:load', -> 
   body = document.querySelector('body')

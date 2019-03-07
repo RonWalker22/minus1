@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :operators, only: [:index, :show]
   resources :games
   resources :levels
-  resources :ingredients
+  resources :directions
   resources :recipes
   resources :rooms
   resources :teams

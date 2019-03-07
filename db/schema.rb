@@ -26,6 +26,18 @@ ActiveRecord::Schema.define(version: 2019_02_28_211340) do
     t.index ["operator_id"], name: "index_characters_on_operator_id"
   end
 
+  create_table "directions", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.string "name", null: false
+    t.integer "step", null: false
+    t.text "content", null: false
+    t.boolean "private", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id", "step"], name: "index_directions_on_recipe_id_and_step", unique: true
+    t.index ["recipe_id"], name: "index_directions_on_recipe_id"
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.string "favoritable_type", null: false
     t.bigint "favoritable_id", null: false
@@ -56,18 +68,6 @@ ActiveRecord::Schema.define(version: 2019_02_28_211340) do
     t.index ["igdb_id"], name: "index_games_on_igdb_id", unique: true
     t.index ["name"], name: "index_games_on_name", unique: true
     t.index ["website"], name: "index_games_on_website", unique: true
-  end
-
-  create_table "ingredients", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.string "name", null: false
-    t.integer "step", null: false
-    t.text "content", null: false
-    t.boolean "private", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recipe_id", "step"], name: "index_ingredients_on_recipe_id_and_step", unique: true
-    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
   create_table "level_locations", force: :cascade do |t|

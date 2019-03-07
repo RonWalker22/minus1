@@ -7,10 +7,10 @@
 one:
   recipe: one
   step: 1
-  name: 'ingredient1'
+  name: 'direction1'
   content: 'go to the back'
 two:
   recipe: two
   step: 1
-  name: 'ingredient2'
+  name: 'direction2'
   content: 'go to the front'

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class IngredientPolicyTest < ActiveSupport::TestCase
+class DirectionPolicyTest < ActiveSupport::TestCase
   def test_scope; end
 
   def test_show; end

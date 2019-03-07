@@ -1,11 +1,11 @@
 <%= render 'shared/form-box-start' %>
-<%= form_with(model: ingredient, local: true) do |form| %>
-  <% if ingredient.errors.any? %>
+<%= form_with(model: direction, local: true) do |form| %>
+  <% if direction.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(ingredient.errors.count, "error") %> prohibited this ingredient from being saved:</h2>
+      <h2><%= pluralize(direction.errors.count, "error") %> prohibited this direction from being saved:</h2>
 
       <ul>
-      <% ingredient.errors.full_messages.each do |message| %>
+      <% direction.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :Access, for: :ingredient_private, class:"label" %><br />
+    <%= form.label :Access, for: :direction_private, class:"label" %><br />
     <div class="select">
         <%= form.select :private, [['Open', false], 
                                   ['Private', true, disabled: true]],

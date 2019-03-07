@@ -12,9 +12,9 @@ class ObjectiveTest < ActiveSupport::TestCase
     assert_equal 'Recipe', recipe.class.name
   end
 
-  test 'has ingredients' do
-    ingredient = recipe.ingredients.first
-    assert_equal 'Ingredient', ingredient.class.name
+  test 'has directions' do
+    direction = recipe.directions.first
+    assert_equal 'Direction', direction.class.name
   end
 
   test 'has slaves' do

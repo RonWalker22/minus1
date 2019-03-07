@@ -5,21 +5,21 @@
 <div class="columns is-centered">
   <div class="column is-narrow">
     <div class="box">
-      <% if @previous_ingredient || @next_ingredient %>
+      <% if @previous_direction || @next_direction %>
         <div class="tabs is-fullwidth">
           <ul>
-            <% if @previous_ingredient %>
+            <% if @previous_direction %>
               <li>
-                <a href="<%=ingredient_path(@previous_ingredient)%>">
+                <a href="<%=direction_path(@previous_direction)%>">
                   <span class="icon"><i class="fas fa-angle-left" aria-hidden="true"></i></span>
-                  <span>Previous Ingredient</span>
+                  <span>Previous Direction</span>
                 </a>
               </li>
             <% end %>
-            <% if @next_ingredient %>
+            <% if @next_direction %>
               <li>
-                <a href="<%=ingredient_path(@next_ingredient)%>">
-                  <span>Next Ingredient</span>
+                <a href="<%=direction_path(@next_direction)%>">
+                  <span>Next Direction</span>
                   <span class="icon"><i class="fas fa-angle-right" aria-hidden="true"></i></span>
                 </a>
               </li>
@@ -27,16 +27,16 @@
           </ul>
         </div>
       <% end %>
-      <h1 class="title is-5 has-text-centered">Ingredient</h1>
+      <h1 class="title is-5 has-text-centered">Direction</h1>
       <table class="table is-striped">
         <caption>Attributes</caption>
-        <% @ingredient.attributes.each do |key, value| %>
+        <% @direction.attributes.each do |key, value| %>
           <% skip_list = %w(id recipe_id private) %>
           <% next if skip_list.include?(key) %>
           <tr>
             <th><%= key  %></th>
             <td>
-              <%= key == 'step' ? "#{value} of #{@ingredients.count}" : value %>
+              <%= key == 'step' ? "#{value} of #{@directions.count}" : value %>
             </td>
           </tr>
         <% end %>
@@ -54,7 +54,7 @@
         </tr>
       </table>
       <%= link_to 'Edit', 
-                  edit_ingredient_path(@ingredient), 
+                  edit_direction_path(@direction), 
                   class: "button is-rounded"%>
     </div>
   </div>

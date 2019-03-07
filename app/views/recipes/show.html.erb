@@ -42,11 +42,11 @@
   <div class="column is-narrow">
     <div class="box">
       <a class="button is-rounded is-small" 
-      href="<%= "#{new_ingredient_path}?recipe=#{@recipe.id}"%>">
+      href="<%= "#{new_direction_path}?recipe=#{@recipe.id}"%>">
         <i class="fas fa-plus" aria-hidden="true"></i> New
       </a>
       <table class="table is-bordered">
-        <caption class="title is-5">Ingredients</caption>
+        <caption class="title is-5">Directions</caption>
         <thead>
           <tr>
             <th>Name</th>
@@ -54,13 +54,13 @@
           </tr>
         </thead>
         <tbody>
-          <% @ingredients.each do |ingredient| %>
+          <% @directions.each do |direction| %>
             <tr>
               <td>
-                <%= link_to ingredient.name, ingredient_path(ingredient) %>
+                <%= link_to direction.name, direction_path(direction) %>
               </td>
               <td>
-                <%= ingredient.step %> 
+                <%= direction.step %> 
               </td>
             </tr>
           <% end %>
