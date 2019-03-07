@@ -35,7 +35,6 @@ class ObjectivesController < ApplicationController
   
     respond_to do |format|
       if @objective.save
-        binding.pry
         if direction == "previous" && next_id.to_i > 0
           @objective.previous.push Objective.find(next_id)
         end
