@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_28_211340) do
+ActiveRecord::Schema.define(version: 2019_03_07_163928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,16 @@ ActiveRecord::Schema.define(version: 2019_02_28_211340) do
     t.index ["igdb_id"], name: "index_games_on_igdb_id", unique: true
     t.index ["name"], name: "index_games_on_name", unique: true
     t.index ["website"], name: "index_games_on_website", unique: true
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "recipe_id", null: false
+    t.boolean "private", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id", "name"], name: "index_ingredients_on_recipe_id_and_name", unique: true
+    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
   create_table "level_locations", force: :cascade do |t|
@@ -290,6 +300,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_211340) do
 
   add_foreign_key "characters", "games"
   add_foreign_key "characters", "operators"
+  add_foreign_key "ingredients", "recipes"
   add_foreign_key "level_locations", "levels"
   add_foreign_key "level_locations", "locations"
   add_foreign_key "level_respawns", "levels"

@@ -1,0 +1,45 @@
+<%= render 'shared/form-box-start' %>
+<%= form_with(model: ingredient, local: true) do |form| %>
+  <% if ingredient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ingredient.errors.count, "error") %> prohibited this ingredient from being saved:</h2>
+
+      <ul>
+      <% ingredient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :recipe, class:"label" %><br>
+    <div  class="select">
+      <%= form.collection_select :recipe_id, 
+                        Recipe.all, 
+                        :id, 
+                        :name,
+                        required: true, selected: @recipe.id %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <%= form.label :name, class:"label" %><br />
+    <%= form.text_field :name, autofocus: true, required: true, class:"input" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Access, for: :direction_private, class:"label" %><br />
+    <div class="select">
+        <%= form.select :private, [['Open', false], 
+                                  ['Private', true, disabled: true]],
+        required: true %>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="actions">
+    <%= form.submit class:"button is-link" %>
+  </div>
+<% end %>
+<%= render 'shared/form-box-end' %>

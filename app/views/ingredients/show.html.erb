@@ -1,0 +1,19 @@
+<%= render 'shared/breadcrumb'%>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ingredient.name %>
+</p>
+
+<p>
+  <strong>Recipe:</strong>
+  <%= @ingredient.recipe %>
+</p>
+
+<p>
+  <strong>Private:</strong>
+  <%= @ingredient.private %>
+</p>
+
+<%= link_to 'Edit', edit_ingredient_path(@ingredient) %> |
+<%= link_to 'Back', ingredients_path %>

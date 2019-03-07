@@ -12,6 +12,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1.json
   def show
     @directions = @recipe.directions
+    @ingredients = @recipe.ingredients
   end
 
   # GET /recipes/new
