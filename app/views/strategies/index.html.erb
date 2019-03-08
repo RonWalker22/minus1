@@ -1,7 +1,9 @@
 
 
 <%= render 'shared/index-start', myclass: 'strategy-box' %>
-<%= link_to 'New Strategy', new_strategy_path, class: 'button' %>
+  <button class='button  new-strategy-btn'>
+    New Strategy
+  </button>
 
 <div class="tabs is-centered">
   <ul>
@@ -84,3 +86,18 @@
   </tbody>
 </table>
 <%= render 'shared/index-end' %>
+
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head" >
+      <p class="modal-card-title">New Stragey</p>
+      <button class="delete close-btn" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="strategy-form">
+        <%= render 'form', strategy: @strategy %>
+      </div>
+    </section>
+  </div>
+</div>

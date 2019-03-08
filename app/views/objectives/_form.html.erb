@@ -1,4 +1,3 @@
-<%= render 'shared/form-box-start' %>
 <%= form_with(model: objective, local: true) do |form| %>
   <% if objective.errors.any? %>
     <div id="error_explanation">
@@ -94,4 +93,3 @@
     <%= form.submit class:"button is-link" %>
   </div>
 <% end %>
-<%= render 'shared/form-box-end' %>

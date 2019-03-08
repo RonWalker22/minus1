@@ -13,6 +13,8 @@ class RecipesController < ApplicationController
   def show
     @directions = @recipe.directions
     @ingredients = @recipe.ingredients
+    @direction = Direction.new
+    @ingredient = Ingredient.new
   end
 
   # GET /recipes/new
@@ -30,8 +32,8 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
-        format.json { render :show, status: :created, location: @recipe }
+        format.html { redirect_to @recipe.objective, notice: 'Recipe was successfully created.' }
+        format.json { render :show, status: :created, location: @recipe.objective }
       else
         format.html { render :new }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }

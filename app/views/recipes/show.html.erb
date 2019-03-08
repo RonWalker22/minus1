@@ -41,26 +41,25 @@
   </div>
   <div class="column is-narrow">
     <div class="box">
-      <a class="button is-rounded is-small" 
-      href="<%= "#{new_direction_path}?recipe=#{@recipe.id}"%>">
-        <i class="fas fa-plus" aria-hidden="true"></i> New
-      </a>
+      <button class='button is-rounded is-small new-direction-btn'>
+        New Direction
+      </button>
       <h2 class="title is-5">Directions</h2>
       <table class="table is-bordered">
         <thead>
           <tr>
-            <th>Name</th>
             <th>Step</th>
+            <th>Name</th>
           </tr>
         </thead>
         <tbody>
           <% @directions.each do |direction| %>
             <tr>
               <td>
-                <%= link_to direction.name, direction_path(direction) %>
+                <%= direction.step %> 
               </td>
               <td>
-                <%= direction.step %> 
+                <%= link_to direction.name, direction_path(direction) %>
               </td>
             </tr>
           <% end %>
@@ -70,10 +69,9 @@
   </div>
   <div class="column is-narrow">
     <div class="box">
-      <a class="button is-rounded is-small" 
-      href="<%= "#{new_ingredient_path}?recipe=#{@recipe.id}"%>">
-        <i class="fas fa-plus" aria-hidden="true"></i> New
-      </a>
+      <button class='button is-rounded is-small new-ingredient-btn'>
+        New Ingredient
+      </button>
       <h2 class="title is-5">Ingredients</h2>
       <table class="table is-bordered">
         <thead>
@@ -92,5 +90,23 @@
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head" >
+      <p class="modal-card-title"></p>
+      <button class="delete close-btn" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="ingredient-form">
+        <%= render '/ingredients/form', ingredient: @ingredient %>
+      </div>
+      <div class="direction-form">
+        <%= render '/directions/form', direction: @direction %>
+      </div>
+    </section>
   </div>
 </div>

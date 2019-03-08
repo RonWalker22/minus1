@@ -82,10 +82,9 @@
   </div>
   <div class="column is-narrow">
     <div class="box">
-      <a class="button is-rounded is-small" 
-      href="<%= "#{new_recipe_path}?obj=#{@objective.id}"%>">
-        <i class="fas fa-plus" aria-hidden="true"></i> New
-      </a>
+      <button class='button new-recipe-btn is-rounded is-small'>
+        New Recipe
+      </button>
       <table class="table is-bordered">
         <caption class="title is-5">Recipes</caption>
         <thead>
@@ -109,5 +108,20 @@
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head" >
+      <p class="modal-card-title">New Mode</p>
+      <button class="delete close-btn" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="recipe-form">
+        <%= render '/recipes/form', recipe: @recipe %>
+      </div>
+    </section>
   </div>
 </div>

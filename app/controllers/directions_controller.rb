@@ -29,8 +29,8 @@ class DirectionsController < ApplicationController
 
     respond_to do |format|
       if @direction.save
-        format.html { redirect_to @direction, notice: 'Direction was successfully created.' }
-        format.json { render :show, status: :created, location: @direction }
+        format.html { redirect_to @direction.recipe, notice: 'Direction was successfully created.' }
+        format.json { render :show, status: :created, location: @direction.recipe }
       else
         format.html { render :new }
         format.json { render json: @direction.errors, status: :unprocessable_entity }

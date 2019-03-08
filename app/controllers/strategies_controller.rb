@@ -9,6 +9,7 @@ class StrategiesController < ApplicationController
     @levels = @game.levels
     @modes = @game.modes
     @strategies = @game.strategies
+    @strategy = Strategy.new
   end
 
   # GET /strategies/1
@@ -16,6 +17,8 @@ class StrategiesController < ApplicationController
   def show
     @game = @strategy.game
     @objectives = @strategy.objectives
+    @objective = Objective.new
+    @locations = @game.locations
     authorize @strategy
   end
 
@@ -38,8 +41,8 @@ class StrategiesController < ApplicationController
 
     respond_to do |format|
       if @strategy.save
-        format.html { redirect_to @strategy, notice: 'Strategy was successfully created.' }
-        format.json { render :show, status: :created, location: @strategy }
+        format.html { redirect_to strategies_path, notice: 'Strategy was successfully created.' }
+        format.json { render :show, status: :created, location: strategies_path }
       else
         format.html { render :new }
         format.json { render json: @strategy.errors, status: :unprocessable_entity }

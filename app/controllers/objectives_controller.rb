@@ -12,6 +12,7 @@ class ObjectivesController < ApplicationController
   # GET /objectives/1
   # GET /objectives/1.json
   def show
+    @recipe = Recipe.new
   end
 
   # GET /objectives/new
@@ -42,8 +43,8 @@ class ObjectivesController < ApplicationController
           @objective.slaves.push Objective.find(master_id)
         end
 
-        format.html { redirect_to @objective, notice: 'Objective was successfully created.' }
-        format.json { render :show, status: :created, location: @objective }
+        format.html { redirect_to @objective.strategy, notice: 'Objective was successfully created.' }
+        format.json { render :show, status: :created, location: @objective.strategy }
       else
         format.html { render :new }
         format.json { render json: @objective.errors, status: :unprocessable_entity }

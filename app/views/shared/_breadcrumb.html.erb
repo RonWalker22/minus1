@@ -1,10 +1,10 @@
 <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
   <ul>
     <%= render "shared/breadcrumbs/game" if @game%> 
-    <%= render "shared/breadcrumbs/strategy" if @strategy%> 
-    <%= render "shared/breadcrumbs/objective" if @objective%> 
-    <%= render "shared/breadcrumbs/recipe" if @recipe %>
-    <%= render "shared/breadcrumbs/direction" if @direction %>
-    <%= render "shared/breadcrumbs/ingredient" if @ingredient %>
+    <%= render "shared/breadcrumbs/strategy" if @strategy && @strategy.id%> 
+    <%= render "shared/breadcrumbs/objective" if @objective && @objective.id%> 
+    <%= render "shared/breadcrumbs/recipe" if @recipe && @recipe.id  %>
+    <%= render "shared/breadcrumbs/direction" if @direction && @direction.id %>
+    <%= render "shared/breadcrumbs/ingredient" if @ingredient && @ingredient.id %>
   </ul>
 </nav>

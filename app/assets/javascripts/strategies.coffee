@@ -36,3 +36,29 @@ document.addEventListener 'turbolinks:load', ->
   body = document.querySelector('body')
   if(body.className == "strategies index" ||  body.className == "rooms index")
     table_switch()
+    body = document.querySelector('body')
+  if(body.className == "strategies index")
+    modal = document.querySelector '.modal'
+    close_modal_btn = document.querySelector '.close-btn'
+    modal_background = document.querySelector '.modal-background'
+    new_strategy_btn = document.querySelector '.new-strategy-btn'
+
+    new_strategy_btn.addEventListener 'click', ->
+      modal.classList.add 'is-active'
+    modal_background.addEventListener 'click', ->
+      modal.classList.remove 'is-active'
+    close_modal_btn.addEventListener 'click', ->
+      modal.classList.remove 'is-active'
+   
+  if(body.className == "strategies show")
+    modal = document.querySelector '.modal'
+    close_modal_btn = document.querySelector '.close-btn'
+    modal_background = document.querySelector '.modal-background'
+    new_objective_btn = document.querySelector '.new-objective-btn'
+
+    new_objective_btn.addEventListener 'click', ->
+      modal.classList.add 'is-active'
+    modal_background.addEventListener 'click', ->
+      modal.classList.remove 'is-active'
+    close_modal_btn.addEventListener 'click', ->
+      modal.classList.remove 'is-active'
