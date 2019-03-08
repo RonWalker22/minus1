@@ -955,6 +955,8 @@ end
 
 def create_mode
   Mode.create! name: 'Bomb', game_id: @r6_game.id, operator_id: @admin.id
+  Mode.create! name: 'Hostage', game_id: @r6_game.id, operator_id: @admin.id
+  Mode.create! name: 'Secure Area', game_id: @r6_game.id, operator_id: @admin.id
 end
 
 def create_rainbow_six
