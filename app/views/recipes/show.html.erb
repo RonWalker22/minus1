@@ -76,12 +76,14 @@
       <table class="table is-bordered">
         <thead>
           <tr>
+            <th>Kind</th>
             <th>Name</th>
           </tr>
         </thead>
         <tbody>
           <% @ingredients.each do |ingredient| %>
             <tr>
+              <td><%= ingredient.kind %></td>
               <td>
                 <%= link_to ingredient.name, ingredient_path(ingredient) %>
               </td>

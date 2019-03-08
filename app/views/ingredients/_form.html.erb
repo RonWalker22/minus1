@@ -21,6 +21,15 @@
                         required: true, selected: @recipe.id %>
     </div>
   </div>
+
+  <div class="field">
+    <%= form.label :kind, class:"label" %>
+    <div class="select">
+      <%= form.select :kind, Ingredient::KIND_OPTIONS, 
+                              { :include_blank => '-- Select One --' },
+                              required: true, class:"input" %>
+    </div>
+  </div>
   
   <div class="field">
     <%= form.label :name, class:"label" %><br />

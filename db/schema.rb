@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_163928) do
   create_table "ingredients", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "recipe_id", null: false
+    t.string "kind", null: false
     t.boolean "private", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

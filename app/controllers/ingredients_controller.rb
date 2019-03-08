@@ -68,7 +68,7 @@ class IngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_params
-      params.require(:ingredient).permit(:name, :recipe_id, :private)
+      params.require(:ingredient).permit(:name, :recipe_id, :private, :kind)
     end
 
     def set_variables
