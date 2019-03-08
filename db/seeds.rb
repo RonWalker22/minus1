@@ -982,7 +982,7 @@ def create_objectives
                        min_ops: i + 1,
                        max_ops: i + 2,
                        target_id: 1,
-                       action: 'attack'
+                       action: Objective::ACTION_OPTIONS.sample
     end
   end
   @admin.current_objective_id = 1

@@ -1,4 +1,8 @@
 class Objective < ApplicationRecord
+  ACTION_OPTIONS = %w[Attack Defend Capture].freeze
+
+  validates_inclusion_of :action, in: ACTION_OPTIONS
+
   belongs_to :strategy
   belongs_to :target,
              class_name: 'Location',
