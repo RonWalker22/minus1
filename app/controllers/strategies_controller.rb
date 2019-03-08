@@ -1,5 +1,6 @@
 class StrategiesController < ApplicationController
-  before_action :set_strategy, only: [:show, :edit, :update, :destroy]
+  before_action :set_strategy, only: [:show, :edit, :update, :destroy,
+                                      :show_xml]
 
   # GET /strategies
   # GET /strategies.json
@@ -20,6 +21,10 @@ class StrategiesController < ApplicationController
     @objective = Objective.new
     @locations = @game.locations
     authorize @strategy
+  end
+
+  def show_xml
+    render 'show.xml'
   end
 
   # GET /strategies/new

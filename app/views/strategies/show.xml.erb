@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<root>
+  <strategy>
+    <name><%= @strategy.name %></name>
+    <version></version>
+  </strategy>
+  <objectives>
+    <% @strategy.objectives.each do |objective| %>
+      <objective>
+        <name><%= objective.name %></name>
+        <target><%= objective.target.name %></target>
+        <action><%= objective.action %></action>
+        <delay><%= objective.delay %></delay>
+        <min_ops><%= objective.min_ops %></min_ops>
+        <max_ops><%= objective.max_ops %></max_ops>
+        <priority><%= objective.priority %></priority>
+        <recipes>
+          <% objective.recipes.each do |recipe| %>
+              <recipe>
+                <name><%= recipe.name %></name>
+                <ingredients>
+                  <% recipe.ingredients.each do |ingredient| %>
+                    <ingredient>
+                      <name><%= ingredient.name %></name>
+                      <kind><%= ingredient.kind %></kind>
+                    </ingredient>
+                  <% end %>
+                </ingredients>
+                <directions>
+                <% recipe.directions.each do |direction| %>
+                  <direction>
+                    <step><%= direction.step %></step>
+                    <name><%= direction.name %></name>
+                    <content><%= direction.content %></content>
+                  </direction>
+                <% end %>
+                </directions>
+              </recipe>
+          <% end %>
+        </recipes>
+      </objective>
+    <% end %>
+  </objectives>
+</root>

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   get '/about' => 'static_pages#about'
   get '/docs' => 'static_pages#docs'
+  get '/strategies/:id/xml' => 'strategies#show_xml', as: 'strategy_xml'
   patch '/games/:id/switch/' => 'games#switch', as: 'switch_game'
   put '/games/:id/favorite' => 'games#favorite', as: 'favorite_game'
   delete '/games/:id/favorite' => 'games#unfavorite'
