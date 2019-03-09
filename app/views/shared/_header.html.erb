@@ -41,9 +41,9 @@
               <%= link_to switch_game_path(game.id), method: :patch,
                           class: "navbar-item" do %>
                 <% if game.id == current_operator.game_setting_id  %>
-                  <%= game.name %>
                   <i class="fas fa-check" title="Current Game"></i>
                   <span class="sr-only">Current Game:</span>
+                  <%= game.name %>
                 <% else %>
                   <%= game.name %>
                 <% end %>
