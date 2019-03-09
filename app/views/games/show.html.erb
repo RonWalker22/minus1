@@ -1,5 +1,9 @@
 <%= render 'shared/breadcrumb' %>
-
+  <% if current_operator && policy(Strategy).show? %>
+    <nav class="level">
+      <%= link_to "Enter Strategies", strategies_path, class: "button is-large is-fullwidth" %>
+    </nav>
+  <% end %>
 <div class="columns is-centered is-multiline">
   <div class="column is-narrow">
     <div class="box">
