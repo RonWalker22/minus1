@@ -7,9 +7,9 @@ breadcrumb = (controller) ->
   game_li = document.querySelector '#breadcrumb-game'
   switch controller
     when "strategies" 
-      objective_li.classList.add 'is-active'
-    when "game" 
-      objective_li.classList.add 'is-active'
+      strategy_li.classList.add 'is-active'
+    when "games" 
+      game_li.classList.add 'is-active'
     when "objectives"
       objective_li.classList.add 'is-active'
     when "recipes"
@@ -25,3 +25,6 @@ document.addEventListener 'turbolinks:load', ->
   if action == "show" || action == "new" || action == "edit"
     controller = body.className.split(" ")[0]
     breadcrumb(controller)
+  else if action == "index" && strategies = body.className.split(" ")[0]
+    strategies_li = document.querySelector '#breadcrumb-strategies'
+    strategies_li.classList.add 'is-active'
