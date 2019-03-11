@@ -7,4 +7,5 @@ class Level < ApplicationRecord
   has_many :respawns, through: :level_respawns
   has_many :level_locations, dependent: :delete_all
   has_many :locations, through: :level_locations
+  after_destroy :remove_points
 end

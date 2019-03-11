@@ -5,9 +5,16 @@ class CreateOperators < ActiveRecord::Migration[5.2]
       t.boolean :online, default: false, null: false
       t.references :game_setting, foreign_key: { to_table: :games }, default: 1
       t.references :room
+      
+      #for omniauth gems
       t.string :uid
       t.string :provider
       t.string :api_key
+
+      #for merit gem
+      t.integer :sash_id
+      t.integer :level, default: 0
+      
       t.timestamps
     end
     add_index :operators, [:name], unique: true

@@ -5,4 +5,5 @@ class Location < ApplicationRecord
   has_many :level_locations, dependent: :delete_all
   has_many :levels, through: :level_locations
   has_many :objectives
+  after_destroy :remove_points
 end
