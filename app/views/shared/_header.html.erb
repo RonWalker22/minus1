@@ -18,6 +18,9 @@
         <a class="navbar-item" href="/">
           Home
         </a>
+        <% if current_operator && policy(Strategy).show? %>
+          <%=  link_to "Strategies", strategies_path, class: 'navbar-item' %>
+        <% end %>
         <a class="navbar-item" href=" <%= teams_path %>">
           Teams
         </a>
