@@ -50,18 +50,32 @@
     <div class="box">
       <h2 class="title has-text-centered">
         <%= @op_prefix %> Teams</h2>
+      <table class="table is-fullwidth is-striped">
+        <thead>
+        <tr><th>Membership</th><th>Name</th><th>Commander</th></tr>
+        </thead>
+        <tbody>
+        <% @operator.teams.each do |team| %>
+          <tr>
+            <td>Operator</td>
+            <td><%= link_to team.name, strategy_path(team) %></td>
+            <td><%= link_to team.commander.name, operator_path(team.commander) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="column is-half">
     <div class="box">
       <h2 class="title has-text-centered">
         <%= @op_prefix %> Strats</h2>
-      <table class="table">
+      <table class="table is-fullwidth is-striped">
         <thead>
         <tr><th>Name</th><th>Game</th></tr>
         </thead>
         <tbody>
-        <% current_operator.commander_strategies.each do |strat| %>
+        <% @operator.commander_strategies.each do |strat| %>
           <tr>
             <td><%= link_to strat.name, strategy_path(strat) %></td>
             <td><%= link_to strat.game.name, game_path(strat.game) %></td>
