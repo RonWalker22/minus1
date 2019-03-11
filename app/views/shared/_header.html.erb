@@ -58,7 +58,7 @@
                 <%= current_operator.name %>
               </a>
               <div class="navbar-dropdown">
-                <%= link_to "Settings", operator_path(current_operator), class: "navbar-item" %> 
+                <%= link_to "Profile", operator_path(current_operator), class: "navbar-item" %> 
                 <hr class="navbar-divider">
                 <%= link_to "Log out", destroy_operator_session_path, method:
               :delete, class: "navbar-item" %>
