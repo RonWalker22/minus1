@@ -9,7 +9,9 @@ class OperatorsController < ApplicationController
 
   # GET /operators/1
   # GET /operators/1.json
-  def show; end
+  def show
+    @op_prefix = @operator == current_operator ? 'My' : @operator.name + "'s"
+  end
 
   def create_api_key
     op_create_at = current_operator.created_at.strftime("%y%d%I%M%S")

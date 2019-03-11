@@ -1,1 +1,74 @@
-<%= link_to 'Create New API Key', api_key_path, method: :put, :target => '_blank' %>
+<% if @op_prefix == "My" %>
+  <%= link_to 'Create New API Key', api_key_path, 
+                                    method: :put, :target => '_blank' %>
+<% end %>
+
+<div class="columns is-centered">
+  <div class="column is-two-thirds">
+    <div class="box">
+      <h2 class="title has-text-centered"><%= @op_prefix %> Contributions</h2>
+      <nav class="level">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Modes</p>
+            <p class="title">
+              <%= current_operator.points category: 'mode' %>
+            </p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Characters</p>
+            <p class="title">
+              <%= current_operator.points category: 'character' %>
+            </p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Levels</p>
+            <p class="title">
+              <%= current_operator.points category: 'level' %>
+            </p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Games</p>
+            <p class="title">
+              <%= current_operator.points category: 'game' %>
+            </p>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div class="columns is-centered">
+  <div class="column is-half">
+    <div class="box">
+      <h2 class="title has-text-centered">
+        <%= @op_prefix %> Teams</h2>
+    </div>
+  </div>
+  <div class="column is-half">
+    <div class="box">
+      <h2 class="title has-text-centered">
+        <%= @op_prefix %> Strats</h2>
+      <table class="table">
+        <thead>
+        <tr><th>Name</th><th>Game</th></tr>
+        </thead>
+        <tbody>
+        <% current_operator.commander_strategies.each do |strat| %>
+          <tr>
+            <td><%= link_to strat.name, strategy_path(strat) %></td>
+            <td><%= link_to strat.game.name, game_path(strat.game) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
