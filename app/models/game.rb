@@ -8,4 +8,5 @@ class Game < ApplicationRecord
   has_many :characters
   has_many :strategies
   has_many :operators
+  after_destroy :remove_points
 end

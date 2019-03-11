@@ -24,6 +24,7 @@ module Merit
       score 1, on: 'locations#create', category: 'location'
       score 1, on: 'levels#create', category: 'level'
       score 1, on: 'characters#create', category: 'character'
+      score 1, on: 'games#create', category: 'game'
     end
   end
 end
