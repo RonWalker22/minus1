@@ -39,4 +39,7 @@ Rails.application.routes.draw do
   put '/games/:id/favorite' => 'games#favorite', as: 'favorite_game'
   delete '/games/:id/favorite' => 'games#unfavorite'
   put '/operators/api_key' => 'operators#create_api_key', as: 'api_key'
+  put '/teams/:id/link/:game_id' => 'teams#link_game', as: 'game_link'
+  delete '/teams/:id/link/:game_id' => 'teams#unlink_game', as: 'game_unlink'
+  post 'teams/:id/join' => 'teams#join_team', as: 'join_team'
 end

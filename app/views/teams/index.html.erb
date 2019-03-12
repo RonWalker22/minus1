@@ -2,13 +2,15 @@
 <div class="columns is-centered">
   <div class="column is-two-thirds">
     <div class="box">
-      <%= link_to 'New Team', new_team_path %>
+      <button class="button new-team-btn">New Team</button>
+      <button class="button import-btn is-pulled-right">Import Team</button>
       <h1 class="title has-text-centered">Teams</h1>
       <table class="table is-fullwidth is-striped">
         <thead>
           <tr>
             <th><abbr title="Position">Pos</abbr></th>
             <th>Name</th>
+            <th>Contributions</th>
             <th>Commander</th>
             <th>Members</th>
           </tr>
@@ -19,6 +21,7 @@
             <tr>
               <td><%= i + 1 %>.</td>
               <td><%= link_to team.name, team %></td>
+              <td><%= team.points %></td>
               <td>
                 <%= link_to team.commander.name, operator_path(team.commander) %>
               </td>
@@ -28,5 +31,31 @@
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head" >
+      <p class="modal-card-title">New Team</p>
+      <button class="delete close-btn" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="team-form">
+        <%= render 'form', team: @team %>
+      </div>
+      <div class="team-import-form">
+        <ul class="list">
+        <% @linkable_teams.each do |team|  %>
+          <li class="list-item">
+            <%= link_to team.name, game_link_path(id: team.id,
+            game_id: @game.id), class: 'has-text-centered button is-large is-fullwidth',
+            method: 'put' %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </section>
   </div>
 </div>

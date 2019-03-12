@@ -8,5 +8,7 @@ class Game < ApplicationRecord
   has_many :characters
   has_many :strategies
   has_many :operators
+  has_many :game_teams
+  has_many :teams, through: :game_teams
   after_destroy :remove_points
 end

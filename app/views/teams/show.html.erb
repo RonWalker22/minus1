@@ -1,4 +1,127 @@
 
+<div class="columns is-centered is-multiline">
+  <div class="column is-two-thirds">
+    <div class="box">
+      <% unless current_operator.teams.include?(@team) %>
+        <button class="join-team-btn is-pulled-left button is-small is-rounded">Join</button>
+      <% end %>
+      <%= link_to 'Edit', edit_team_path(@team), 
+                          class:"is-pulled-right button is-small is-rounded" %>
+      <h1 class="title has-text-centered"> 
+        <%= @team.name %> 
+      </h1>
+    </div>
+  </div>
+  <div class="column is-full">
+    <div class="box">
+      <h2 class="title is-4 has-text-centered"><%= @op_prefix %>Contributions</h2>
+      <nav class="level">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Games</p>
+            <p class="title">
+              <%= @team.points category: 'game' %>
+            </p>
+            <p class="heading">Translations</p>
+            <p class="title">
+              <%= @team.points category: 'translation'%>
+            </p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Characters</p>
+            <p class="title">
+              <%= @team.points category: 'character' %>
+            </p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Levels</p>
+            <p class="title">
+              <%= @team.points category: 'level' %>
+            </p>
+            <p class="heading">Modes</p>
+            <p class="title">
+              <%= @team.points category: 'mode'%>
+            </p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Locations</p>
+            <p class="title">
+              <%= @team.points category: 'location'%>
+            </p>
+            <p class="heading">Respawns</p>
+            <p class="title">
+              <%= @team.points category: 'respawn' %>
+            </p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Cash</p>
+            <p class="title">
+              <%= @team.points category: 'cash' %>
+            </p>
+            <p class="heading">Tutorials</p>
+            <p class="title">
+              <%= @team.points category: 'tutorial' %>
+            </p>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="column is-two-thirds">
+    <div class="box">
+      <table class="table is-striped is-fullwidth">
+        <caption class="title is-4">Members</caption>
+        <thead>
+          <tr>
+            <th><abbr title="Position">Pos</abbr></th>
+            <th>Name</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @team.operators.each_with_index do |operator, i| %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><%= link_to operator.name, operator_path(operator) %></td>
+              <td>Operator</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head" >
+      <p class="modal-card-title">Join Team</p>
+      <button class="delete close-btn" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="team-form">
+        <%= form_with url: join_team_path(@team), local: true, class: 'form' do |form| %>
+        
+        <% unless @team.password.nil? %>
+          <div class="field">
+          <%= form.label :password, class: 'label' %>
+          <%= form.password_field :password, class: "input" %>
+          </div>
+        <% end %>
+          <div class="actions">
+            <%= form.submit "Join Team", class:"button is-link is-pulled-left" %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</div>

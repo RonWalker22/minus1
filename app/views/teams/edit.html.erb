@@ -1,4 +1,12 @@
+<%= render 'shared/form-box-start' %>
+      <%= link_to "Delete this team", team_path(@team), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete #{@team.name}?" 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
 <%= render 'form', team: @team %>
 
-<%= link_to 'Show', @team %> |
-<%= link_to 'Back', teams_path %>
+<%= link_to 'Cancel', team_path(@team), class:"is-pulled-right button is-black" %>
+<%= render 'shared/form-box-end' %>

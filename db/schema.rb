@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_181621) do
+ActiveRecord::Schema.define(version: 2019_03_11_154936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 2019_03_10_181621) do
     t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
     t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor_type_and_favoritor_id"
     t.index ["scope"], name: "index_favorites_on_scope"
+  end
+
+  create_table "game_teams", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_teams_on_game_id"
+    t.index ["team_id", "game_id"], name: "index_game_teams_on_team_id_and_game_id", unique: true
+    t.index ["team_id"], name: "index_game_teams_on_team_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -345,6 +355,9 @@ ActiveRecord::Schema.define(version: 2019_03_10_181621) do
   create_table "teams", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "commander_id", null: false
+    t.string "password"
+    t.integer "sash_id"
+    t.integer "level", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commander_id"], name: "index_teams_on_commander_id"

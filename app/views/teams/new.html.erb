@@ -1,3 +1,4 @@
+<%= render 'shared/form-box-start' %>
 <%= render 'form', team: @team %>
-
-<%= link_to 'Back', teams_path %>
+<%= link_to 'Cancel', teams_path, class:"is-pulled-right button is-black" %>
+<%= render 'shared/form-box-end' %>

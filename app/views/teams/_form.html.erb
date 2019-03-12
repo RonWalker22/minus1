@@ -1,4 +1,3 @@
-<%= render 'shared/form-box-start' %>
 <%= form_with(model: team, local: true) do |form| %>
   <% if team.errors.any? %>
     <div id="error_explanation">
@@ -17,8 +16,12 @@
     <%= form.text_field :name, autofocus: true, required: true, class:"input" %>
   </div>
 
+  <div class="field">
+    <%= form.label :password, class:"label" %><br />
+    <%= form.password_field :password, class:"input" %>
+  </div>
+
   <div class="actions">
-    <%= form.submit class:"button is-link" %>
+    <%= form.submit class:"button is-link is-pulled-left" %>
   </div>
 <% end %>
-<%= render 'shared/form-box-end' %>

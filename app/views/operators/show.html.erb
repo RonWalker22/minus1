@@ -1,4 +1,4 @@
-<% if @op_prefix == "My" %>
+<% if @operator == current_operator %>
   <%= link_to 'Create New API Key', api_key_path, 
                                     method: :put, :target => '_blank' %>
 <% end %>
@@ -6,7 +6,7 @@
 <div class="columns is-centered">
   <div class="column is-two-thirds">
     <div class="box">
-      <h2 class="title has-text-centered"><%= @op_prefix %> Contributions</h2>
+      <h2 class="title has-text-centered">Contributions</h2>
       <nav class="level">
         <div class="level-item has-text-centered">
           <div>
@@ -48,8 +48,7 @@
 <div class="columns is-centered">
   <div class="column is-half">
     <div class="box">
-      <h2 class="title has-text-centered">
-        <%= @op_prefix %> Teams</h2>
+      <h2 class="title has-text-centered">Teams</h2>
       <table class="table is-fullwidth is-striped">
         <thead>
         <tr><th>Membership</th><th>Name</th><th>Commander</th></tr>
@@ -68,8 +67,7 @@
   </div>
   <div class="column is-half">
     <div class="box">
-      <h2 class="title has-text-centered">
-        <%= @op_prefix %> Strats</h2>
+      <h2 class="title has-text-centered">Strats</h2>
       <table class="table is-fullwidth is-striped">
         <thead>
         <tr><th>Name</th><th>Game</th></tr>
