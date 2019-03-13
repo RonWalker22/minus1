@@ -10,7 +10,6 @@
           <tr>
             <th><abbr title="Position">Pos</abbr></th>
             <th>Name</th>
-            <th>Contributions</th>
             <th>Commander</th>
             <th>Members</th>
           </tr>
@@ -21,7 +20,6 @@
             <tr>
               <td><%= i + 1 %>.</td>
               <td><%= link_to team.name, team %></td>
-              <td><%= team.points %></td>
               <td>
                 <%= link_to team.commander.name, operator_path(team.commander) %>
               </td>

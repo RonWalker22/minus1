@@ -12,69 +12,6 @@
       </h1>
     </div>
   </div>
-  <div class="column is-full">
-    <div class="box">
-      <h2 class="title is-4 has-text-centered"><%= @op_prefix %>Contributions</h2>
-      <nav class="level">
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Games</p>
-            <p class="title">
-              <%= @team.points category: 'game' %>
-            </p>
-            <p class="heading">Translations</p>
-            <p class="title">
-              <%= @team.points category: 'translation'%>
-            </p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Characters</p>
-            <p class="title">
-              <%= @team.points category: 'character' %>
-            </p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Levels</p>
-            <p class="title">
-              <%= @team.points category: 'level' %>
-            </p>
-            <p class="heading">Modes</p>
-            <p class="title">
-              <%= @team.points category: 'mode'%>
-            </p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Locations</p>
-            <p class="title">
-              <%= @team.points category: 'location'%>
-            </p>
-            <p class="heading">Respawns</p>
-            <p class="title">
-              <%= @team.points category: 'respawn' %>
-            </p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Cash</p>
-            <p class="title">
-              <%= @team.points category: 'cash' %>
-            </p>
-            <p class="heading">Tutorials</p>
-            <p class="title">
-              <%= @team.points category: 'tutorial' %>
-            </p>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </div>
   <div class="column is-two-thirds">
     <div class="box">
       <table class="table is-striped is-fullwidth">

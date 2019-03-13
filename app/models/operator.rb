@@ -1,7 +1,5 @@
 # users
 class Operator < ApplicationRecord
-  has_merit
-
   rolify
   acts_as_favoritor
   devise :database_authenticatable, :registerable,
