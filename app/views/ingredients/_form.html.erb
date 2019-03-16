@@ -1,4 +1,4 @@
-<%= form_with(model: ingredient, local: true) do |form| %>
+<%= form_with(model: ingredient, local: true, id: 'ingredient-form ') do |form| %>
   <% if ingredient.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(ingredient.errors.count, "error") %> prohibited this ingredient from being saved:</h2>
@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :recipe, class:"label" %><br>
+    <%= form.label :recipe, class:"label" %>
     <div  class="select">
       <%= form.collection_select :recipe_id, 
                         Recipe.all, 
@@ -23,29 +23,120 @@
   </div>
 
   <div class="field">
-    <%= form.label :kind, class:"label" %>
+    <%= form.label :ingredient_kind, for: 'piece_type', class:"label" %>
     <div class="select">
-      <%= form.select :kind, Ingredient::KIND_OPTIONS, 
+      <%= form.select :piece_type, Ingredient::KIND_OPTIONS, 
                               { :include_blank => '-- Select One --' },
-                              required: true, class:"input" %>
+                              required: true, 
+                              class:"input ingredient-options-select",
+                              id: "ingredient-options-select" %>
+    </div>
+  </div>
+
+  <div id="character-options-select" class="field hide">
+    <%= form.label :character, class:"label" %>
+    <div  class="select">
+      <%= form.collection_select :character_id, 
+                        @game.characters,
+                        :id, 
+                        :name, include_blank: '-- Select One --' %>
+    </div>
+  </div>
+
+  <div id="respawn-options-select" class="field hide">
+    <%= form.label :respawn, class:"label" %>
+    <div  class="select">
+      <%= form.collection_select :respawn_id, 
+                        @game.respawns,
+                        :id, 
+                        :name, include_blank: '-- Select One --' %>
     </div>
   </div>
   
-  <div class="field">
-    <%= form.label :name, class:"label" %><br />
-    <%= form.text_field :name, autofocus: true, required: true, class:"input" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :Access, for: :direction_private, class:"label" %><br />
+  <div class="field hide">
+    <%= form.label :loadout_kind, class:"label" %>
     <div class="select">
-        <%= form.select :private, [['Open', false], 
-                                  ['Private', true, disabled: true]],
-        required: true %>
+      <%= form.select :loadout_kind, Loadout::KIND_OPTIONS, 
+                              { :include_blank => '-- Select One --' },
+                              class:"input",
+                              id: "loadout-options-select" %>
     </div>
   </div>
-  <br>
-  <br>
+  
+  <div id="primary-options-select"  class="field hide">
+    <%= form.label :primary, class:"label" %>
+    <div  class="select">
+      <%= form.collection_select :primary_id, 
+                        @primaries,
+                        :id, 
+                        :name, include_blank: '-- Select One --' %>
+    </div>
+  </div>
+
+  <div id="secondary-options-select"  class="field hide">
+    <%= form.label :secondary, class:"label" %>
+    <div  class="select">
+      <%= form.collection_select :secondary_id, 
+                        @secondaries, 
+                        :id, 
+                        :name, include_blank: '-- Select One --'  %>
+    </div>
+  </div>
+
+  <div id="sight-options-select"  class="field hide">
+    <%= form.label :sight, class:"label" %>
+    <div  class="select">
+      <%= form.collection_select :sight_id, 
+                        @sights, 
+                        :id, 
+                        :name, include_blank: '-- Select One --'  %>
+    </div>
+  </div>
+
+  <div id="grip-options-select"  class="field hide">
+    <%= form.label :grip, class:"label" %>
+    <div  class="select">
+      <%= form.collection_select :grip_id, 
+                        @grips, 
+                        :id, 
+                        :name, include_blank: '-- Select One --'  %>
+    </div>
+  </div>
+
+  <div id="attachment-options-select"  class="field hide">
+    <%= form.label :attachment, class:"label" %>
+    <div  class="select">
+      <%= form.collection_select :attachment_id, 
+                        @attachments, 
+                        :id, 
+                        :name, include_blank: '-- Select One --'  %>
+    </div>
+  </div>
+
+  <div id="utility-options-select"  class="field hide">
+    <%= form.label :utility, class:"label" %>
+    <div  class="select">
+      <%= form.collection_select :utility_id, 
+                                  @utilities, 
+                                  :id, 
+                                  :name, include_blank: '-- Select One --'  %>
+    </div>
+  </div>
+
+  <div id="parent-options-select" class="field hide">
+    <%= form.label :parent_id, for: 'parent_id', class:"label" %>
+    <div  class="select">
+      <select name="parent_id">
+        <option disabled selected value>-- Select One --</option>
+        <% @parents.each do |ingredient| %>
+          <option value="<%= ingredient.id %>">
+            <%= ingredient.piece.name %>
+          </option>
+        <% end  %>
+      </select>
+    </div>
+  </div>
+
   <div class="actions">
     <%= form.submit class:"button is-link" %>
   </div>

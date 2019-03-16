@@ -2,6 +2,8 @@
 <root>
   <strategy>
     <name><%= @strategy.name %></name>
+    <game><%= @strategy.game.name %></game>
+    <level><%= @strategy.level.name %></level>
     <version></version>
   </strategy>
   <objectives>
@@ -19,11 +21,23 @@
               <recipe>
                 <name><%= recipe.name %></name>
                 <ingredients>
-                  <% recipe.ingredients.each do |ingredient| %>
-                    <ingredient>
-                      <name><%= ingredient.name %></name>
-                      <kind><%= ingredient.kind %></kind>
-                    </ingredient>
+                  <% Ingredient::KIND_OPTIONS.each do |kind| %>
+                    <% next unless kind == 'Loadout'%>
+                    <<%=kind.downcase.pluralize%>>
+                      <% Ingredient.where(piece_type: kind).each do |ingred| %>
+                        <% next if ingred.parent %>
+                        <<%=ingred.piece.kind%>>
+                          <%= ingred.piece.name %>
+                          <children>
+                            <% ingred.children.each do |child|%>
+                              <<%=child.piece.kind%>>
+                              <%= child.piece.name %>
+                              </<%=child.piece.kind%>>
+                            <% end %>
+                          </children>
+                        </<%=ingred.piece.kind%>>
+                      <% end %>
+                    </<%=kind.downcase.pluralize%>>
                   <% end %>
                 </ingredients>
                 <directions>

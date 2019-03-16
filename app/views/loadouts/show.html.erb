@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @loadout.name %>
+</p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @loadout.game %>
+</p>
+
+<p>
+  <strong>Operator:</strong>
+  <%= @loadout.operator %>
+</p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @loadout.kind %>
+</p>
+
+<%= link_to 'Edit', edit_loadout_path(@loadout) %> |
+<%= link_to 'Back', loadouts_path %>

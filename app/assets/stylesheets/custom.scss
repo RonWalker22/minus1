@@ -8,12 +8,6 @@ body {
 
 .inner-body {
   min-height: 76.9vh;
-  background: repeating-linear-gradient(
-    -45deg,
-    #22463c,
-    #22463c 10px,
-    #ce53105e 11px
-  );
 }
 
 input {
@@ -96,7 +90,7 @@ nav {
 
 .tag {
   .is-link {
-    color: white;
+    color: black;
   }
   .is-link:hover {
     color: $link-color;
@@ -112,6 +106,11 @@ nav {
 tfoot th {
   color: #52c234 !important;
 }
+
+.ingredient-form {
+  min-height: 35em;
+}
+
 /* Mobile Landscape Screen Sizes */
 @media only screen and (min-width: 400px) {
   .menu {

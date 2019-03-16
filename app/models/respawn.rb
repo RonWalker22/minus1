@@ -4,4 +4,5 @@ class Respawn < ApplicationRecord
   belongs_to :author, class_name: 'Operator', foreign_key: 'operator_id'
   has_many :level_respawns, dependent: :delete_all
   has_many :level, through: :level_respawns
+  has_many :ingredients, as: :piece
 end

@@ -5,7 +5,7 @@ class CreateDirections < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.integer :step, null: false
       t.text :content, null: false
-      t.boolean :private, default: false, null: false
+
       t.timestamps
     end
     add_index :directions, [:recipe_id, :step], unique: true

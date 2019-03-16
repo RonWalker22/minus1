@@ -23,17 +23,23 @@ class IngredientsController < ApplicationController
   # POST /ingredients
   # POST /ingredients.json
   def create
-    @ingredient = Ingredient.new(ingredient_params)
-
-    respond_to do |format|
-      if @ingredient.save
-        format.html { redirect_to @ingredient.recipe, notice: 'Ingredient was successfully created.' }
-        format.json { render :show, status: :created, location: @ingredient.recipe }
-      else
-        format.html { render :new }
-        format.json { render json: @ingredient.errors, status: :unprocessable_entity }
-      end
-    end
+    recipe_id = ingredient_params[:recipe_id]
+    parent_id = params[:parent_id]
+    piece_type = params[:ingredient][:piece_type]
+    piece_id = case piece_type
+               when 'Loadout'
+                 loadout_kind = params[:ingredient][:loadout_kind]
+                 params[:ingredient][loadout_kind.downcase + '_id']
+               when 'Character'
+                 params[:ingredient][:character_id]
+               when 'Respawn'
+                 params[:ingredient][:respawn_id]
+               end
+    ingredient = Ingredient.create(recipe_id: recipe_id,
+                                    piece_id: piece_id,
+                                    piece_type: piece_type,
+                                    parent_id: parent_id)
+    redirect_back fallback_location: root_path
   end
 
   # PATCH/PUT /ingredients/1
@@ -61,6 +67,7 @@ class IngredientsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_ingredient
       @ingredient = Ingredient.find(params[:id])
@@ -68,7 +75,7 @@ class IngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_params
-      params.require(:ingredient).permit(:name, :recipe_id, :private, :kind)
+      params.require(:ingredient).permit(:recipe_id, :piece_kind, :parent_id)
     end
 
     def set_variables

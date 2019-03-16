@@ -32,16 +32,6 @@
     <%= form.text_area :content, required: true, class:"textarea"%>
   </div>
 
-  <div class="field">
-    <%= form.label :Access, for: :direction_private, class:"label" %>
-    <div class="select">
-        <%= form.select :private, [['Open', false], 
-                                  ['Private', true, disabled: true]],
-        required: true %>
-    </div>
-  </div>
-  <br>
-  <br>
   <div class="actions">
     <%= form.submit class:"button is-link" %>
   </div>

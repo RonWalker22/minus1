@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_154936) do
+ActiveRecord::Schema.define(version: 2019_03_13_231350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2019_03_11_154936) do
     t.string "name", null: false
     t.integer "step", null: false
     t.text "content", null: false
-    t.boolean "private", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id", "step"], name: "index_directions_on_recipe_id_and_step", unique: true
@@ -81,13 +80,15 @@ ActiveRecord::Schema.define(version: 2019_03_11_154936) do
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "recipe_id", null: false
-    t.string "kind", null: false
-    t.boolean "private", default: false, null: false
+    t.string "piece_type"
+    t.integer "piece_id"
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipe_id", "name"], name: "index_ingredients_on_recipe_id_and_name", unique: true
+    t.index ["parent_id"], name: "index_ingredients_on_parent_id"
+    t.index ["piece_type", "piece_id", "recipe_id"], name: "index_ingredients_on_piece_type_and_piece_id_and_recipe_id", unique: true
+    t.index ["piece_type", "piece_id"], name: "index_ingredients_on_piece_type_and_piece_id"
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
@@ -120,6 +121,18 @@ ActiveRecord::Schema.define(version: 2019_03_11_154936) do
     t.index ["game_id"], name: "index_levels_on_game_id"
     t.index ["name", "game_id"], name: "index_levels_on_name_and_game_id", unique: true
     t.index ["operator_id"], name: "index_levels_on_operator_id"
+  end
+
+  create_table "loadouts", force: :cascade do |t|
+    t.string "name"
+    t.bigint "game_id"
+    t.bigint "operator_id"
+    t.string "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_loadouts_on_game_id"
+    t.index ["name", "game_id"], name: "index_loadouts_on_name_and_game_id", unique: true
+    t.index ["operator_id"], name: "index_loadouts_on_operator_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -312,6 +325,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_154936) do
 
   add_foreign_key "characters", "games"
   add_foreign_key "characters", "operators"
+  add_foreign_key "ingredients", "ingredients", column: "parent_id"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "level_locations", "levels"
   add_foreign_key "level_locations", "locations"
@@ -319,6 +333,8 @@ ActiveRecord::Schema.define(version: 2019_03_11_154936) do
   add_foreign_key "level_respawns", "respawns"
   add_foreign_key "levels", "games"
   add_foreign_key "levels", "operators"
+  add_foreign_key "loadouts", "games"
+  add_foreign_key "loadouts", "operators"
   add_foreign_key "locations", "games"
   add_foreign_key "locations", "operators"
   add_foreign_key "modes", "operators"

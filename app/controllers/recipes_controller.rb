@@ -15,6 +15,17 @@ class RecipesController < ApplicationController
     @ingredients = @recipe.ingredients
     @direction = Direction.new
     @ingredient = Ingredient.new
+    @primaries = set_loadout('Primary')
+    @secondaries = set_loadout('Secondary')
+    @sights = set_loadout('Sight')
+    @grips = set_loadout('Grip')
+    @attachments = set_loadout('Attachment')
+    @utilities = set_loadout('Utility')
+    loadouts = @recipe.ingredients.where(piece_type: 'Loadout')
+
+    @parents = loadouts.select do |ingredient|
+      ingredient.piece.kind == 'Secondary' || ingredient.piece.kind == 'Primary'
+    end
   end
 
   # GET /recipes/new
@@ -83,5 +94,13 @@ class RecipesController < ApplicationController
       @objective = params_obj ? Objective.find(params_obj) : @recipe.objective
       @strategy = @objective.strategy
       @game = @strategy.game
+    end
+
+    def set_loadout(kind)
+      @game.loadouts.where(kind: kind).reject do |target|
+        ids = @recipe.ingredients.where(piece_type: 'Loadout').pluck(:piece_id)
+
+        ids.include?(target.id)
+      end 
     end
 end

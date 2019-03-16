@@ -78,14 +78,18 @@
           <tr>
             <th>Kind</th>
             <th>Name</th>
+            <th>Parent</th>
           </tr>
         </thead>
         <tbody>
           <% @ingredients.each do |ingredient| %>
             <tr>
-              <td><%= ingredient.kind %></td>
+              <td><%= ingredient.piece_type %></td>
               <td>
-                <%= link_to ingredient.name, ingredient_path(ingredient) %>
+                <%= link_to ingredient.piece.name, ingredient_path(ingredient) %>
+              </td>
+              <td>
+                <%= ingredient.parent ? ingredient.parent.piece.name : '----' %>
               </td>
             </tr>
           <% end %>

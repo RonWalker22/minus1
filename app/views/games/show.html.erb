@@ -1,9 +1,4 @@
 <%= render 'shared/breadcrumb' %>
-  <% if current_operator && policy(Strategy).show? %>
-    <nav class="level">
-      <%= link_to "Enter Strategies", strategies_path, class: "button is-large is-fullwidth" %>
-    </nav>
-  <% end %>
 <div class="columns is-centered is-multiline">
   <div class="column is-narrow">
     <div class="box">
@@ -69,7 +64,7 @@
       <div class="column">
         <div class="box">
         <% if @game.status == 'proposal' %>
-          <button class='button new-character-btn is-small is-rounded'>
+          <button class='button new-character-btn'>
             New Character 
           </button>
         <% end %>
@@ -97,7 +92,7 @@
       <div class="column">
         <div class="box">
           <% if @game.status == 'proposal' %>
-            <button class='button new-mode-btn is-small is-rounded'>
+            <button class='button new-mode-btn'>
               New Mode 
             </button>
           <% end %>
@@ -154,7 +149,7 @@
                 <div class="tags has-addons">
                   <div class="tag is-black">#<%= i + 1 %></div>
                   <div class="tag">
-                      <% if @game.status == 'proposal' && policy(level).edit? %>
+                    <% if @game.status == 'proposal' && policy(level).edit? %>
                     <%= link_to level.name, 
                           edit_level_path(level), class: 'is-link'  %>
                     <% else %>
@@ -220,6 +215,38 @@
     </table>
   </div>
 </div>
+
+<div class="colum">
+  <div class="box">
+    <% if @game.status == 'proposal' %>
+      <button class="button new-loadout-btn">New Loadout</button>
+    <% end %>
+    <h2 class="title is-5 has-text-centered">Loadouts</h2>
+    <div class="field is-grouped is-grouped-multiline">
+      <% @game.loadouts.each_with_index do |loadout, i| %>
+          <div class="control">
+            <div class="tags has-addons">
+              <span class="tag is-black">#<%= i + 1 %></span>
+                <span class="tag">
+                <% if @game.status == 'proposal' && policy(loadout).edit?%>
+                  <%= link_to loadout.name, 
+                  edit_loadout_path(loadout), 
+                  class: 'is-link' %>
+                <% else %>
+                  <%= loadout.name %>
+                <% end %>
+                </span>
+                <span class="tag is-info">
+                <%= loadout.kind %>
+                </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
  <% if @game.status != 'supported' %>
   <div class="columns is-centered">
     <div class="column is-three-quarters is-centered">
@@ -261,6 +288,9 @@
       </div>
       <div class="location-form">
         <%= render '/locations/form', location: @location %>
+      </div>
+      <div class="loadout-form">
+        <%= render '/loadouts/form', loadout: @loadout %>
       </div>
     </section>
   </div>

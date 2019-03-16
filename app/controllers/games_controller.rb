@@ -22,6 +22,7 @@ class GamesController < ApplicationController
     @mode = Mode.new
     @respawn = Respawn.new
     @character = Character.new
+    @loadout = Loadout.new
   end
 
   # GET /games/new
