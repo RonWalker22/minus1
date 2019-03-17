@@ -34,11 +34,9 @@ class CharactersController < ApplicationController
   # PATCH/PUT /characters/1.json
   def update
     authorize @character
-    flash[:notice] = if @character.update(character_params)
-                       'Character was successfully created.'
-                     else
-                       'Character was not created.'
-                     end
+    unless @character.update(character_params)
+      flash[:notice] = 'Character was not created.'
+    end
     redirect_to game_path(@character.game)
   end
 
@@ -46,9 +44,7 @@ class CharactersController < ApplicationController
   # DELETE /characters/1.json
   def destroy
     authorize @character
-    if @character.destroy
-      flash[:notice] = 'Character was successfully destroyed.'
-    else
+    unless @character.destroy
       flash[:alert] = 'Character was not destroyed.'
     end
     redirect_to game_path(@character.game)

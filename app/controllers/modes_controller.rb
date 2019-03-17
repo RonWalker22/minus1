@@ -35,11 +35,9 @@ class ModesController < ApplicationController
   def update
     authorize @mode
 
-    flash[:notice] = if @mode.update(mode_params)
-                       'Mode was successfully updated.'
-                     else
-                       'Mode was not updated.'
-                     end
+    unless @mode.update(mode_params)
+      'Mode was not updated.'
+    end
     redirect_to game_path(@mode.game)
   end
 
@@ -47,9 +45,7 @@ class ModesController < ApplicationController
   # DELETE /modes/1.json
   def destroy
     authorize @mode
-    if @mode.destroy
-      flash[:notice] = 'Mode was successfully destroyed.'
-    else
+    unless @mode.destroy
       flash[:alert] = 'Mode was not destroyed.'
     end
     redirect_to game_path(@mode.game)

@@ -35,7 +35,6 @@ class RespawnsController < ApplicationController
         LevelRespawn.create! level_id: level_id, respawn_id: @respawn.id
       end
       add_contributor(@respawn.game)
-      flash[:notice] = 'Respawn was successfully created.'
     else
       flash[:alter] = 'Respawn was not created.'
     end
@@ -56,7 +55,6 @@ class RespawnsController < ApplicationController
 
         LevelRespawn.create! level_id: level_id, respawn_id: @respawn.id
       end
-      flash[:notice] = 'Respawn was successfully created.'
     else
       flash[:notice] = 'Respawn was not created.'
     end
@@ -67,9 +65,7 @@ class RespawnsController < ApplicationController
   # DELETE /respawns/1.json
   def destroy
     authorize @respawn
-    if @respawn.destroy
-      flash[:notice] = 'Respawn was successfully destroyed.'
-    else
+    unless @respawn.destroy
       flash[:alter] = 'Respawn was not destroyed.'
     end
     redirect_to game_path(@respawn.game)

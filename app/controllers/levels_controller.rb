@@ -26,7 +26,6 @@ class LevelsController < ApplicationController
   def create
     @level = Level.new(level_params)
     if @level.save
-      flash[:notice] = 'Level was successfully created.'
       add_contributor(@level.game)
     else
       flash[:alter] = 'Level was not created.'
@@ -38,11 +37,9 @@ class LevelsController < ApplicationController
   # PATCH/PUT /levels/1.json
   def update
     authorize @level
-    flash[:notice] = if @level.update(level_params)
-                       'Level was successfully created.'
-                     else
-                       'Level was not created.'
-                     end
+    unless @level.update(level_params)
+      flash[:notice] = 'Level was not created.'
+    end
 
     redirect_to game_path(@level.game)
   end
@@ -51,9 +48,7 @@ class LevelsController < ApplicationController
   # DELETE /levels/1.json
   def destroy
     authorize @level
-    if @level.destroy
-      flash[:notice] = 'Level was successfully destroyed.'
-    else
+    unless @level.destroy
       flash[:alter] = 'Level was not destroyed.'
     end
     redirect_to game_path(@level.game)

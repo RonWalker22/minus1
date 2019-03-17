@@ -34,7 +34,6 @@ class LocationsController < ApplicationController
         LevelLocation.create! level_id: level_id, location_id: @location.id
       end
       add_contributor(@location.game)
-      flash[:notice] = 'Location was successfully created.'
     else
       flash[:alter] = 'Location was not created.'
     end
@@ -45,11 +44,9 @@ class LocationsController < ApplicationController
   # PATCH/PUT /locations/1.json
   def update
     authorize @location
-    flash[:notice] = if @location.update(location_params)
-                       'Location was successfully updated.'
-                     else
-                       'Location was not updated.'
-                     end
+    unless @location.update(location_params)
+      flash[:notice] = 'Location was not updated.'
+    end
     redirect_to game_path(@location.game)
   end
 
@@ -57,9 +54,7 @@ class LocationsController < ApplicationController
   # DELETE /locations/1.json
   def destroy
     authorize @location
-    if @location.destroy
-      flash[:notice] = 'Location was successfully destroyed.'
-    else
+    unless @location.destroy
       flash[:alert] = 'Location was not destroyed.'
     end
     redirect_to game_path(@location.game)

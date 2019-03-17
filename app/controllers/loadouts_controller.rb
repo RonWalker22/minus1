@@ -35,11 +35,9 @@ class LoadoutsController < ApplicationController
   def update
     authorize @loadout
 
-    flash[:notice] = if @loadout.update(loadout_params)
-                       'Loadout was successfully updated.'
-                     else
-                       'Loadout was not updated.'
-                     end
+    unless @loadout.update(loadout_params)
+      flash[:notice] = 'Loadout was not updated.'
+    end
     redirect_to game_path(@loadout.game)
   end
 
@@ -47,9 +45,7 @@ class LoadoutsController < ApplicationController
   # DELETE /loadouts/1.json
   def destroy
     authorize @loadout
-    if @loadout.destroy
-      flash[:notice] = 'Loadout was successfully destroyed.'
-    else
+    unless @loadout.destroy 
       flash[:alert] = 'Loadout was not destroyed.'
     end
     redirect_to game_path(@loadout.game)
