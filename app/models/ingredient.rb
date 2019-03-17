@@ -9,5 +9,5 @@ class Ingredient < ApplicationRecord
              optional: true
   has_many :children,
            class_name: 'Ingredient',
-           foreign_key: 'parent_id', dependent: :nullify
+           foreign_key: 'parent_id', dependent: :delete_all
 end

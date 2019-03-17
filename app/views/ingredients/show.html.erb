@@ -1,10 +1,40 @@
 <%= render 'shared/breadcrumb'%>
-
-<p>
-  <strong>Recipe:</strong>
-  <%= @ingredient.recipe %>
-</p>
-
-
-<%= link_to 'Edit', edit_ingredient_path(@ingredient) %> |
-<%= link_to 'Back', ingredients_path %>
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <div class="box">
+      <%= link_to "Delete this ingredient", ingredient_path(@ingredient), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete this ingredient?
+                          Every child will also be deleted." 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
+      <table class="table is-fullwidth">
+        <tbody>
+          <tr>
+            <th>Recipe</th><td><%= @ingredient.recipe.name%></td>
+          </tr>
+          <tr>
+            <th>Type</th><td><%= @ingredient.piece_type%></td>
+          </tr>
+          <tr>
+            <th>Name</th><td><%= @ingredient.piece.name%></td>
+          </tr>
+          <tr>
+            <th>Children</th>
+            <td>
+              <% if @ingredient.children.size > 0  %>
+                <%= @ingredient.children.map do  |child| %>
+                    <% child.piece.name %>
+                <% end %>
+              <% else %>
+                <%= "-----" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
