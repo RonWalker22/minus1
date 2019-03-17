@@ -4,7 +4,8 @@
     <name><%= @strategy.name %></name>
     <game><%= @strategy.game.name %></game>
     <level><%= @strategy.level.name %></level>
-    <version></version>
+    <uuid><%= @strategy.uuid %></uuid>
+    <version><%= @strategy.version %></version>
   </strategy>
   <objectives>
     <% @strategy.objectives.each do |objective| %>
@@ -16,28 +17,39 @@
         <min_ops><%= objective.min_ops %></min_ops>
         <max_ops><%= objective.max_ops %></max_ops>
         <priority><%= objective.priority %></priority>
+        <uuid><%= objective.uuid %></uuid>
         <recipes>
           <% objective.recipes.each do |recipe| %>
               <recipe>
                 <name><%= recipe.name %></name>
+                <uuid><%= recipe.uuid %></uuid>
                 <ingredients>
                   <% Ingredient::KIND_OPTIONS.each do |kind| %>
-                    <% next unless kind == 'Loadout'%>
-                    <<%=kind.downcase.pluralize%>>
-                      <% Ingredient.where(piece_type: kind).each do |ingred| %>
-                        <% next if ingred.parent %>
-                        <<%=ingred.piece.kind%>>
-                          <%= ingred.piece.name %>
-                          <children>
-                            <% ingred.children.each do |child|%>
-                              <<%=child.piece.kind%>>
-                              <%= child.piece.name %>
-                              </<%=child.piece.kind%>>
-                            <% end %>
-                          </children>
-                        </<%=ingred.piece.kind%>>
-                      <% end %>
-                    </<%=kind.downcase.pluralize%>>
+                    <% if kind == 'Loadout'%>
+                      <<%=kind.downcase.pluralize%>>
+                        <% Ingredient.where(piece_type: kind).each do |ingred|%>
+                          <% next if ingred.parent %>
+                          <<%=ingred.piece.kind%>>
+                            <%= ingred.piece.name %>
+                            <children>
+                              <% ingred.children.each do |child|%>
+                                <<%=child.piece.kind%>>
+                                <%= child.piece.name %>
+                                </<%=child.piece.kind%>>
+                              <% end %>
+                            </children>
+                          </<%=ingred.piece.kind%>>
+                        <% end %>
+                      </<%=kind.downcase.pluralize%>>
+                    <%else%>
+                       <<%=kind.downcase.pluralize%>>
+                        <% Ingredient.where(piece_type: kind).each do |ingred|%>
+                          <<%=kind.downcase%>>
+                            <%= ingred.piece.name %>
+                          </<%=kind.downcase%>>
+                        <% end %>
+                       </<%=kind.downcase.pluralize%>>
+                    <%end%>
                   <% end %>
                 </ingredients>
                 <directions>

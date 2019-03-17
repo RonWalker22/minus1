@@ -42,6 +42,7 @@ class StrategiesController < ApplicationController
   # POST /strategies.json
   def create
     @strategy = Strategy.new(strategy_params)
+    @strategy.uuid = SecureRandom.uuid
     authorize @strategy
 
     respond_to do |format|

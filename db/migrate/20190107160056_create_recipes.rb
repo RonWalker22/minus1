@@ -6,6 +6,7 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
       t.references :commander,
                    foreign_key: { to_table: :operators },
                    null: false
+      t.uuid :uuid
       t.timestamps
     end
   end

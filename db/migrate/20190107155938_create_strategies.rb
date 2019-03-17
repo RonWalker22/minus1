@@ -12,6 +12,8 @@ class CreateStrategies < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.boolean :private, default: false, null: false
       t.boolean :natural_flow, default: true, null: false
+      t.uuid :uuid
+      t.string :version, default: '0z', null:false
       t.timestamps
     end
   end

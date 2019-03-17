@@ -40,7 +40,7 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
-
+    @recipe.uuid = SecureRandom.uuid
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe.objective, notice: 'Recipe was successfully created.' }

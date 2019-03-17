@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_231350) do
     t.integer "min_ops", default: 1, null: false
     t.integer "max_ops", default: 1, null: false
     t.integer "priority", default: 10, null: false
+    t.uuid "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["master_id"], name: "index_objectives_on_master_id"
@@ -253,6 +254,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_231350) do
     t.string "name", null: false
     t.bigint "objective_id"
     t.bigint "commander_id", null: false
+    t.uuid "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commander_id"], name: "index_recipes_on_commander_id"
@@ -302,6 +304,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_231350) do
     t.string "name", null: false
     t.boolean "private", default: false, null: false
     t.boolean "natural_flow", default: true, null: false
+    t.uuid "uuid"
+    t.string "version", default: "0z", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "favoritable_score"

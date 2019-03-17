@@ -972,7 +972,8 @@ def create_strategies
                   mode_id: 1,
                   level_id: 1,
                   game_id: 1,
-                  name: 'Rush'
+                  name: 'Rush',
+                  uuid: SecureRandom.uuid
 end
 
 def create_objectives
@@ -984,7 +985,8 @@ def create_objectives
                        min_ops: i + 1,
                        max_ops: i + 2,
                        target_id: 1,
-                       action: Objective::ACTION_OPTIONS.sample
+                       action: Objective::ACTION_OPTIONS.sample,
+                       uuid: SecureRandom.uuid
     end
   end
   @admin.current_objective_id = 1

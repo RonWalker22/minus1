@@ -27,6 +27,7 @@ class ObjectivesController < ApplicationController
   # POST /objectives.json
   def create
     @objective = Objective.new(objective_params)
+    @objective.uuid = SecureRandom.uuid
     direction = params[:objective][:direction]
     dependency = params[:objective][:dependency]
     next_id = params[:objective][:next_id]
