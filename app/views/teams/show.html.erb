@@ -24,11 +24,16 @@
           </tr>
         </thead>
         <tbody>
-          <% @team.operators.each_with_index do |operator, i| %>
+          <% @members.each_with_index do |member, i| %>
             <tr>
               <td><%= i + 1 %></td>
-              <td><%= link_to operator.name, operator_path(operator) %></td>
-              <td>Operator</td>
+              <td>
+                <%= link_to member.operator.name, 
+                            operator_path(member.operator) %>
+              </td>
+              <td>
+                <%= member.title %>
+              </td>
             </tr>
           <% end %>
         </tbody>

@@ -12,7 +12,9 @@ class TeamsController < ApplicationController
 
   # GET /teams/1
   # GET /teams/1.json
-  def show; end
+  def show
+    @members = OperatorTeam.includes(:operator).where(team_id: @team.id)
+  end
 
   # GET /teams/new
   def new
