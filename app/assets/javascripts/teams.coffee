@@ -26,11 +26,22 @@ document.addEventListener 'turbolinks:load', ->
       team_form.classList.remove'hide'
       team_import_form.classList.add 'hide'
     import_btn.addEventListener 'click', ->
-      team_form.classList.add 'hide'
+      team_form.classList.remove 'hide'
       modal.classList.add 'is-active'
       team_import_form.classList.remove 'hide'
       modal_title.innerHTML = 'Select a Team to Import'
   else if(body.className == "teams show")
     join_team_btn = document.querySelector '.join-team-btn'
-    join_team_btn.addEventListener 'click', ->
+    rank_manager_btn = document.querySelector '.rank_manager_btn'
+    change_title_form = document.querySelector '.change-title-form'
+    join_team_form  = document.querySelector '.join-team-form'
+    
+    rank_manager_btn.addEventListener 'click', ->
       modal.classList.add 'is-active'
+      change_title_form.classList.remove 'hide'
+      join_team_form.classList.add 'hide'
+    if join_team_btn
+      join_team_btn.addEventListener 'click', ->
+        modal.classList.add 'is-active'
+        join_team_form.classList.remove 'hide'
+        change_title_form.classList.add 'hide'

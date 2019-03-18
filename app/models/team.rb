@@ -1,4 +1,7 @@
 class Team < ApplicationRecord
+  TITLE_OPTIONS = ['Operator', 'Lead Operator', 'Commander'].freeze
+
+  validates_inclusion_of :title, in: TITLE_OPTIONS
   has_many :game_teams
   has_many :games, through: :game_teams
   belongs_to :commander, class_name: 'Operator'

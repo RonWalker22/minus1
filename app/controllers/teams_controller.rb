@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :join_team]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :join_team,
+                                  :change_member_title]
 
   # GET /teams
   # GET /teams.json
@@ -80,6 +81,16 @@ class TeamsController < ApplicationController
       unless @team.operators << current_operator
         flash.notice = 'You are not able to join this team.'
       end
+    end
+    redirect_to team_path(@team)
+  end
+
+  def change_member_title
+    members = OperatorTeam.find(params[:member_ids])
+
+    members.each do |member|
+      member.title = params[:title]
+      member.save
     end
     redirect_to team_path(@team)
   end

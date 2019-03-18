@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  authenticate :operator, lambda { |op| op.has_role?(:admin) } do
+  authenticate :operator, ->(op) { op.has_role?(:admin) } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
@@ -43,4 +43,6 @@ Rails.application.routes.draw do
   put '/teams/:id/link/:game_id' => 'teams#link_game', as: 'game_link'
   delete '/teams/:id/link/:game_id' => 'teams#unlink_game', as: 'game_unlink'
   post 'teams/:id/join' => 'teams#join_team', as: 'join_team'
+  post 'teams/:id/change_title' => 'teams#change_member_title',
+       as: 'change_member_title'
 end

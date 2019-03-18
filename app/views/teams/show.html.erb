@@ -14,13 +14,16 @@
   </div>
   <div class="column is-two-thirds">
     <div class="box">
+      <button class="button rank_manager_btn">
+        Rank Manager
+      </button>
       <table class="table is-striped is-fullwidth">
         <caption class="title is-4">Members</caption>
         <thead>
           <tr>
             <th><abbr title="Position">Pos</abbr></th>
             <th>Name</th>
-            <th>Title</th>
+            <th>Rank</th>
           </tr>
         </thead>
         <tbody>
@@ -50,7 +53,7 @@
       <button class="delete close-btn" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
-      <div class="team-form">
+      <div class="join-team-form hide">
         <%= form_with url: join_team_path(@team), local: true, class: 'form' do |form| %>
         
         <% unless @team.password.nil? %>
@@ -61,6 +64,58 @@
         <% end %>
           <div class="actions">
             <%= form.submit "Join Team", class:"button is-link is-pulled-left" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="change-title-form hide">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Rank Type</th>
+              <th>Access</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Operator</td>
+              <td>Add recipes</td>
+            </tr>
+            <tr>
+              <td>Lead Operator</td>
+              <td>Total Strategy Management</td>
+            </tr>
+            <tr>
+              <td>Commander</td>
+              <td>Total Strategy & Team Management</td>
+            </tr>
+          </tbody>
+        </table>
+        <%= form_with url: change_member_title_path(@team), 
+                      local: true, class: 'form' do |form| %>
+        
+          <div class="field">
+            <%= form.label :title, class:"label" %>
+            <div class="select">
+              <%= form.select :title, Team::TITLE_OPTIONS, 
+                                      { :include_blank => '-- Select One --' },
+                                      required: true, 
+                                      class:"input",
+                                      id: "title-options-select" %>
+            </div>
+          </div>
+          
+          <div class="field">
+            <%= form.label :member, for: 'member_ids', class:"label" %>
+            <div  class="select is-multiple">
+            <%= form.select(:member_ids, 
+                            @members.all.collect {|p| [ p.operator.name, p.id ] },
+                            {include_blank: false, include_hidden: false},
+                             { required: true, multiple: true, :size => 5 }) %>
+            </div>
+          </div>
+          
+          <div class="actions">
+            <%= form.submit "Update Member Ranks", class:"button is-link is-pulled-left" %>
           </div>
         <% end %>
       </div>
