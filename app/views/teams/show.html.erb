@@ -1,5 +1,5 @@
 
-<div class="columns is-centered is-multiline">
+<div class="columns is-centered">
   <div class="column is-two-thirds">
     <div class="box">
       <% unless current_operator.teams.include?(@team) %>
@@ -12,24 +12,27 @@
       </h1>
     </div>
   </div>
-  <div class="column is-two-thirds">
+</div>
+
+<div class="columns is-centered">
+  <div class="column is-two-fifths">
     <div class="box">
-      <button class="button rank_manager_btn">
-        Rank Manager
-      </button>
+      <% if policy(@team).change_member_title? %>
+        <button class="button rank_manager_btn">
+          Rank Manager
+        </button>
+      <% end %>
       <table class="table is-striped is-fullwidth">
         <caption class="title is-4">Members</caption>
         <thead>
           <tr>
-            <th><abbr title="Position">Pos</abbr></th>
             <th>Name</th>
             <th>Rank</th>
           </tr>
         </thead>
         <tbody>
-          <% @members.each_with_index do |member, i| %>
+          <% @members.each do |member| %>
             <tr>
-              <td><%= i + 1 %></td>
               <td>
                 <%= link_to member.operator.name, 
                             operator_path(member.operator) %>

@@ -86,6 +86,7 @@ class TeamsController < ApplicationController
   end
 
   def change_member_title
+    authorize @team
     members = OperatorTeam.find(params[:member_ids])
 
     members.each do |member|
