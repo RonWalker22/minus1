@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_231350) do
   create_table "operator_teams", force: :cascade do |t|
     t.bigint "operator_id", null: false
     t.bigint "team_id", null: false
+    t.string "title", default: "Operator", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operator_id", "team_id"], name: "index_operator_teams_on_operator_id_and_team_id", unique: true
