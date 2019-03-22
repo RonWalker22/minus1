@@ -1,18 +1,24 @@
 class Team < ApplicationRecord
-  TITLE_OPTIONS = ['Operator', 'Lead Operator', 'Commander'].freeze
-
-  validates_inclusion_of :title, in: TITLE_OPTIONS
   has_many :game_teams
   has_many :games, through: :game_teams
   belongs_to :commander, class_name: 'Operator'
   has_many :operator_teams
   has_many :operators, through: :operator_teams
-  after_create :add_commander_to_memebers, :link_game
+  has_many :strategy_teams
+  has_many :strategies, through: :strategy_teams
+  after_create :add_commander_to_memebers, :update_commander_rank, :link_game
 
   private
 
     def add_commander_to_memebers
-      self.operators << commander
+      self.operators << self.commander
+
+    end
+
+    def update_commander_rank
+      member = self.operator_teams.first
+      member.title = 'Commander'
+      member.save
     end
 
     def link_game

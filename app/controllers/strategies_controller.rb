@@ -47,6 +47,8 @@ class StrategiesController < ApplicationController
 
     respond_to do |format|
       if @strategy.save
+        team_ids = params[:strategy][:team_ids]
+        create_strategy_team(team_ids) if team_ids
         format.html { redirect_to strategies_path, notice: 'Strategy was successfully created.' }
         format.json { render :show, status: :created, location: strategies_path }
       else
@@ -91,5 +93,11 @@ class StrategiesController < ApplicationController
     def strategy_params
       params[:strategy][:commander_id] = current_operator.id
       params.fetch(:strategy, {}).permit(:mode_id, :name, :commander_id, :level_id, :game_id)
+    end
+
+    def create_strategy_team(team_ids)
+      team_ids.each do |team_id|
+        StrategyTeam.create strategy_id: @strategy.id, team_id: team_id
+      end
     end
 end

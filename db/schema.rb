@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_231350) do
+ActiveRecord::Schema.define(version: 2019_03_18_233026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -318,6 +318,16 @@ ActiveRecord::Schema.define(version: 2019_03_13_231350) do
     t.index ["mode_id"], name: "index_strategies_on_mode_id"
   end
 
+  create_table "strategy_teams", force: :cascade do |t|
+    t.bigint "strategy_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["strategy_id"], name: "index_strategy_teams_on_strategy_id"
+    t.index ["team_id", "strategy_id"], name: "index_strategy_teams_on_team_id_and_strategy_id", unique: true
+    t.index ["team_id"], name: "index_strategy_teams_on_team_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "commander_id", null: false
@@ -358,5 +368,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_231350) do
   add_foreign_key "rooms", "operators", column: "commander_id"
   add_foreign_key "strategies", "operators", column: "commander_id"
   add_foreign_key "strategies", "strategies", column: "inspiration_id"
+  add_foreign_key "strategy_teams", "strategies"
+  add_foreign_key "strategy_teams", "teams"
   add_foreign_key "teams", "operators", column: "commander_id"
 end

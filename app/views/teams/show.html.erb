@@ -46,6 +46,33 @@
       </table>
     </div>
   </div>
+  <div class="column is-two-fifths">
+    <div class="box">
+      <table class="table is-striped is-fullwidth">
+        <caption class="title is-4">Strategies</caption>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @team.strategies.each do |strat| %>
+            <tr>
+              <td>
+                <%= link_to strat.name, 
+                            strategy_path(strat) %>
+              </td>
+              <td>
+                <%= link_to strat.commander.name, 
+                            operator_path(strat.commander) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <div class="modal">
@@ -99,7 +126,7 @@
           <div class="field">
             <%= form.label :title, class:"label" %>
             <div class="select">
-              <%= form.select :title, Team::TITLE_OPTIONS, 
+              <%= form.select :title, OperatorTeam::TITLE_OPTIONS, 
                                       { :include_blank => '-- Select One --' },
                                       required: true, 
                                       class:"input",

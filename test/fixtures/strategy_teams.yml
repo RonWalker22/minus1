@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  strategy: one
+  team: one
+
+two:
+  strategy: two
+  team: two

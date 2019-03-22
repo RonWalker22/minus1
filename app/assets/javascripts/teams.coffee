@@ -23,10 +23,10 @@ document.addEventListener 'turbolinks:load', ->
     new_team_btn.addEventListener 'click', ->
       modal.classList.add 'is-active'
       modal_title.innerHTML = 'New Team'
-      team_form.classList.remove'hide'
+      team_form.classList.remove 'hide'
       team_import_form.classList.add 'hide'
     import_btn.addEventListener 'click', ->
-      team_form.classList.remove 'hide'
+      team_form.classList.add 'hide'
       modal.classList.add 'is-active'
       team_import_form.classList.remove 'hide'
       modal_title.innerHTML = 'Select a Team to Import'

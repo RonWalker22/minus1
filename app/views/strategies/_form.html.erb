@@ -40,6 +40,15 @@
     </div>
   </div>
 
+  <div class="field">
+    <%= form.label "team(optional)", for: 'team_ids', class:"label" %>
+    <div  class="select is-multiple">
+    <%= form.select(:team_ids, 
+                    current_operator.teams.collect {|t| [ t.name, t.id ] },
+                    {include_blank: false, include_hidden: false},
+                      { multiple: true, :size => 5 }) %>
+    </div>
+  </div>
 
   <div class="actions">
     <%= form.submit class:"button is-link" %>
