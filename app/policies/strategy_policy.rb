@@ -30,4 +30,8 @@ class StrategyPolicy < ApplicationPolicy
     end
     false
   end
+
+  def update_objective?
+    create_objective?
+  end
 end

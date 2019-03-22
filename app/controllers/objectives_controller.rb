@@ -57,6 +57,7 @@ class ObjectivesController < ApplicationController
   # PATCH/PUT /objectives/1
   # PATCH/PUT /objectives/1.json
   def update
+    authorize @objective.strategy, :update_objective?
     respond_to do |format|
       if @objective.update(objective_params)
         format.html { redirect_to @objective, notice: 'Objective was successfully updated.' }
