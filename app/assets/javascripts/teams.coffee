@@ -35,11 +35,12 @@ document.addEventListener 'turbolinks:load', ->
     rank_manager_btn = document.querySelector '.rank_manager_btn'
     change_title_form = document.querySelector '.change-title-form'
     join_team_form  = document.querySelector '.join-team-form'
-    
-    rank_manager_btn.addEventListener 'click', ->
-      modal.classList.add 'is-active'
-      change_title_form.classList.remove 'hide'
-      join_team_form.classList.add 'hide'
+
+    if rank_manager_btn
+      rank_manager_btn.addEventListener 'click', ->
+        modal.classList.add 'is-active'
+        change_title_form.classList.remove 'hide'
+        join_team_form.classList.add 'hide'
     if join_team_btn
       join_team_btn.addEventListener 'click', ->
         modal.classList.add 'is-active'
