@@ -42,22 +42,23 @@
     <tr>
       <th>Strategy</th>
       <th>Created By</th>
-      <th>Inspired By</th>
-      <th>Inspirations</th>
+      <th>Team</th>
       <th>Rating</th>
+      <th>Inspirations</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @strategies.each do |strat| %>
-      <% next unless strat.commander.id == current_operator.id %>
-      <tr>
-        <td><%= link_to strat.name, strat%></td>
-        <td><%= link_to strat.commander.name, strat.commander %></td>
-        <td>----</td>
-        <td><%= strat.inspirations.count %></td>
-        <td>----</td>
-      </tr>
+    <% current_operator.teams.each do |team| %>
+      <% team.strategies.each do |strat| %>
+        <tr>
+          <td><%= link_to strat.name, strat%></td>
+          <td><%= link_to strat.commander.name, strat.commander %></td>
+          <td><%= link_to team.name, team %></td>
+          <td>----</td>
+          <td><%= strat.inspirations.count %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
@@ -65,10 +66,9 @@
   <thead>
     <tr>
       <th>Strategy</th>
-      <th>Created By</th>
+      <th>Rating</th>
       <th>Inspired By</th>
       <th>Inspirations</th>
-      <th>Rating</th>
     </tr>
   </thead>
 
@@ -77,10 +77,9 @@
       <% next unless strat.commander.id == current_operator.id %>
       <tr>
         <td><%= link_to strat.name, strat%></td>
-        <td><%= link_to strat.commander.name, strat.commander %></td>
+        <td>----</td>
         <td>----</td>
         <td><%= strat.inspirations.count %></td>
-        <td>----</td>
       </tr>
     <% end %>
   </tbody>
