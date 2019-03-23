@@ -1,4 +1,20 @@
 <%= render 'shared/breadcrumb' %>
-<%= render 'form', recipe: @recipe %>
-<%= link_to 'Show', @recipe %> |
-<%= link_to 'Back', recipes_path %>
+
+<div class="columns is-centered">
+  <div class="column is-one-third">
+    <% if policy(@recipe).destroy? %>	
+      <%= link_to "Delete recipe", recipe_path(@recipe), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete #{@recipe.name}?" 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
+    <% end %>
+
+    <h1 class="title is-5">Editing Recipe</h1>
+
+    <%= render 'form', recipe: @recipe %>
+    <%= link_to 'Cancel', recipe_path(@recipe), class:"is-pulled-right button is-black" %>
+  </div>
+</div>
