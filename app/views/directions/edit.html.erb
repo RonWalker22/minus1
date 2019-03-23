@@ -1,5 +1,20 @@
 <%= render 'shared/breadcrumb' %>
-<%= render 'form', direction: @direction %>
 
-<%= link_to 'Show', @direction %> |
-<%= link_to 'Back', directions_path %>
+<div class="columns is-centered">
+  <div class="column is-one-third">
+    <% if policy(@direction.recipe).destroy? %>	
+      <%= link_to "Delete direction", direction_path(@direction), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete #{@direction.name}?" 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
+    <% end %>
+
+    <h1 class="title is-5">Editing Direction</h1>
+
+    <%= render 'form', direction: @direction %>
+    <%= link_to 'Cancel', direction_path(@direction), class:"is-pulled-right button is-black" %>
+  </div>
+</div>
