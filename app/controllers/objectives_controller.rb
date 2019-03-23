@@ -72,6 +72,7 @@ class ObjectivesController < ApplicationController
   # DELETE /objectives/1
   # DELETE /objectives/1.json
   def destroy
+    authorize @objective.strategy
     @objective.destroy
     respond_to do |format|
       format.html { redirect_to objectives_url, notice: 'Objective was successfully destroyed.' }
