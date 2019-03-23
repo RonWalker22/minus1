@@ -87,3 +87,5 @@ gem 'sidekiq'
 # Required for Sidekiq::Web
   gem 'sinatra', '>= 2.0.5'
 # Required for Sidekiq::Web
+
+gem 'sassc', '>= 2.0.1'
