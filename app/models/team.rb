@@ -4,7 +4,7 @@ class Team < ApplicationRecord
   belongs_to :commander, class_name: 'Operator'
   has_many :operator_teams
   has_many :operators, through: :operator_teams
-  has_many :strategy_teams
+  has_many :strategy_teams, dependent: :delete_all
   has_many :strategies, through: :strategy_teams
   after_create :add_commander_to_memebers, :update_commander_rank, :link_game
 

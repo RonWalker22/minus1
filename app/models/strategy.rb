@@ -13,6 +13,6 @@ class Strategy < ApplicationRecord
   has_many :operator_strategies
   has_many :operators, through: :operator_strategies
   has_many :objectives
-  has_many :strategy_teams
+  has_many :strategy_teams, dependent: :delete_all
   has_many :teams, through: :strategy_teams
 end
