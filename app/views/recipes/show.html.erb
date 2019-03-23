@@ -4,6 +4,10 @@
 <div class="columns is-centered">
   <div class="column is-narrow">
     <div class="box">
+      <% if policy(@recipe).update? %>
+        <%= link_to "Edit", edit_recipe_path(@recipe), 
+                          class: 'button is-small is-rounded is-pulled-left'%>
+      <% end %>
       <h1 class="title is-5 has-text-centered">
         <%= "#{controller_name.capitalize.singularize}" %>
       </h1>
@@ -35,8 +39,6 @@
           <td><%= @recipe.updated_at %></td>
         </tr>
       </table>
-      <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-      <%= link_to 'Back', recipes_path %>
     </div>
   </div>
   <div class="column is-narrow">
