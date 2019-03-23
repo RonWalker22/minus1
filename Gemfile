@@ -40,7 +40,7 @@ gem "devise", ">= 4.6.1"
 
 gem 'bulma-rails', '~> 0.7.2'
 
-gem 'font-awesome-sass', '~> 5.6.1'
+gem 'font-awesome-sass', '>= 5.8.1'
 
 gem 'acts_as_favoritor'
 
