@@ -41,9 +41,11 @@
   </div>
   <div class="column is-narrow">
     <div class="box">
-      <button class='button is-rounded is-small new-direction-btn'>
-        New Direction
-      </button>
+      <% if policy(@recipe).update? %>
+        <button class='button is-rounded is-small new-direction-btn'>
+          New Direction
+        </button>
+      <% end %>
       <h2 class="title is-5">Directions</h2>
       <table class="table is-bordered">
         <thead>
@@ -69,9 +71,11 @@
   </div>
   <div class="column is-narrow">
     <div class="box">
-      <button class='button is-rounded is-small new-ingredient-btn'>
-        New Ingredient
-      </button>
+      <% if policy(@recipe).update? %>
+        <button class='button is-rounded is-small new-ingredient-btn'>
+          New Ingredient
+        </button>
+      <% end %>
       <h2 class="title is-5">Ingredients</h2>
       <table class="table is-bordered">
         <thead>

@@ -26,7 +26,7 @@ class DirectionsController < ApplicationController
   # POST /directions.json
   def create
     @direction = Direction.new(direction_params)
-
+    authorize @direction.recipe, :update?
     respond_to do |format|
       if @direction.save
         format.html { redirect_to @direction.recipe, notice: 'Direction was successfully created.' }
@@ -41,6 +41,7 @@ class DirectionsController < ApplicationController
   # PATCH/PUT /directions/1
   # PATCH/PUT /directions/1.json
   def update
+    authorize @direction.recipe
     respond_to do |format|
       if @direction.update(direction_params)
         format.html { redirect_to @direction, notice: 'Direction was successfully updated.' }

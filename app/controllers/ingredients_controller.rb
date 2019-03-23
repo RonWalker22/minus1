@@ -24,6 +24,7 @@ class IngredientsController < ApplicationController
   # POST /ingredients.json
   def create
     recipe_id = ingredient_params[:recipe_id]
+    authorize Recipe.find(recipe_id), :update?
     parent_id = params[:parent_id]
     piece_type = params[:ingredient][:piece_type]
     piece_id = case piece_type
@@ -45,6 +46,7 @@ class IngredientsController < ApplicationController
   # PATCH/PUT /ingredients/1
   # PATCH/PUT /ingredients/1.json
   def update
+    authorize @ingredient.recipe
     respond_to do |format|
       if @ingredient.update(ingredient_params)
         format.html { redirect_to @ingredient, notice: 'Ingredient was successfully updated.' }
