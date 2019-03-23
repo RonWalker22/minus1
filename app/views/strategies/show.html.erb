@@ -1,10 +1,14 @@
 <%= render 'shared/breadcrumb' %>
 
 <%= render 'shared/show-start' %>
-    <a class="button is-success is-rounded is-small is-pulled-left"
-          title="Disabled button" disabled>Rate</a>
-    <a class="button is-success is-rounded is-small is-pulled-right"
-          title="Disabled button" disabled>Clone</a>
+  <a class="button is-success is-rounded is-small is-pulled-right"
+        title="Disabled button" disabled>Rate</a>
+  <a class="button is-success is-rounded is-small is-pulled-right"
+        title="Disabled button" disabled>Clone</a>
+  <% if policy(@strategy).update? %>
+    <%= link_to "Edit", edit_strategy_path(@strategy), 
+                       class: 'button is-small is-rounded'%>
+  <% end %>
   <h1 class="title is-5 has-text-centered">
     <%= "#{@strategy.name} #{controller_name.capitalize.singularize}" %>
   </h1>

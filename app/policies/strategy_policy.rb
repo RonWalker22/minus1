@@ -38,4 +38,16 @@ class StrategyPolicy < ApplicationPolicy
   def destroy?
     record.commander == user
   end
+
+  def edit?
+    return true if record.commander.id == user.id
+
+    record.teams.includes(:operators).each do |team|
+      if team.operators.include?(user)
+        member = OperatorTeam.find_by(team_id: team.id, operator_id: user.id)
+        return true unless member.title == 'Operator'
+      end
+    end
+    false
+  end
 end
