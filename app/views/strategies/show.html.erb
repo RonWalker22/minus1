@@ -1,9 +1,9 @@
 <%= render 'shared/breadcrumb' %>
 
 <%= render 'shared/show-start' %>
-  <a class="button is-success is-rounded is-small is-pulled-right"
+  <a class="button is-rounded is-small is-pulled-right is-black"
         title="Disabled button" disabled>Rate</a>
-  <a class="button is-success is-rounded is-small is-pulled-right"
+  <a class="button is-rounded is-small is-pulled-right is-black"
         title="Disabled button" disabled>Clone</a>
   <% if policy(@strategy).update? %>
     <%= link_to "Edit", edit_strategy_path(@strategy), 
