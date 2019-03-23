@@ -61,6 +61,7 @@ class IngredientsController < ApplicationController
   # DELETE /ingredients/1
   # DELETE /ingredients/1.json
   def destroy
+    authorize @ingredient.recipe
     @ingredient.destroy
     respond_to do |format|
       format.html { redirect_to @ingredient.recipe, notice: 'Ingredient was successfully destroyed.' }
