@@ -277,7 +277,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
-  devise (>= 4.6.1)
+  devise (>= 4.6.0)
   font-awesome-sass (>= 5.8.1)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
