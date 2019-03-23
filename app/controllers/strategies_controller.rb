@@ -75,6 +75,7 @@ class StrategiesController < ApplicationController
   # DELETE /strategies/1
   # DELETE /strategies/1.json
   def destroy
+    authorize @strategy
     @strategy.destroy
     respond_to do |format|
       format.html { redirect_to strategies_url, notice: 'Strategy was successfully destroyed.' }

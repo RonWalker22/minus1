@@ -1,6 +1,21 @@
 <%= render 'shared/breadcrumb' %>
 
-<%= render 'form', strategy: @strategy %>
 
-<%= link_to 'Show', @strategy %> |
-<%= link_to 'Back', strategies_path %>
+<div class="columns is-centered">
+  <div class="column is-one-third">
+    <% if policy(@strategy).destroy? %>	
+      <%= link_to "Delete Strategy", strategy_path(@strategy), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete #{@strategy.name}?" 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
+    <% end %>
+
+    <h1 class="title is-5">Editing Strategy</h1>
+
+    <%= render 'form', strategy: @strategy %>
+    <%= link_to 'Cancel', strategy_path(@strategy), class:"is-pulled-right button is-black" %>
+  </div>
+</div>

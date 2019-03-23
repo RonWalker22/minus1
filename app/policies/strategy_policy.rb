@@ -34,4 +34,8 @@ class StrategyPolicy < ApplicationPolicy
   def update_objective?
     create_objective?
   end
+
+  def destroy?
+    record.commander == user
+  end
 end
