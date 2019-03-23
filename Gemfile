@@ -36,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-gem "devise", "4.6.0"
+gem "devise", "4.6.1"
 
 gem 'bulma-rails', '~> 0.7.2'
 
@@ -87,5 +87,3 @@ gem 'sidekiq'
 # Required for Sidekiq::Web
   gem 'sinatra', '>= 2.0.5'
 # Required for Sidekiq::Web
-
-gem 'sassc', '>= 2.0.1'

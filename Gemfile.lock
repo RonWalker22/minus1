@@ -81,7 +81,7 @@ GEM
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
-    devise (4.6.0)
+    devise (4.6.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -277,7 +277,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
-  devise (= 4.6.0)
+  devise (= 4.6.1)
   font-awesome-sass (>= 5.8.1)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
@@ -292,7 +292,6 @@ DEPENDENCIES
   redis
   rolify
   sass-rails (~> 5.0)
-  sassc (>= 2.0.1)
   selenium-webdriver
   sidekiq
   sinatra (>= 2.0.5)
