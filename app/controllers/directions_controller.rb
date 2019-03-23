@@ -56,6 +56,7 @@ class DirectionsController < ApplicationController
   # DELETE /directions/1
   # DELETE /directions/1.json
   def destroy
+    authorize @direction.recipe
     @direction.destroy
     respond_to do |format|
       format.html { redirect_to directions_url, notice: 'Direction was successfully destroyed.' }
