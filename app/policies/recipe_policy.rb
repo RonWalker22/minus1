@@ -19,4 +19,8 @@ class RecipePolicy < ApplicationPolicy
     end
     false
   end
+
+  def destroy?
+    record.commander == user
+  end
 end
