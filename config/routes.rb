@@ -9,13 +9,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  unauthenticated do
-    root to: 'static_pages#about'
-  end
-
-  authenticated do
-    root to: 'games#index'
-  end
+  root to: 'static_pages#about'
 
   resources :locations
   resources :respawns
