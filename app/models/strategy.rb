@@ -1,5 +1,4 @@
 class Strategy < ApplicationRecord
-  acts_as_favoritable
   belongs_to :commander, class_name: 'Operator'
   belongs_to :mode
   belongs_to :game

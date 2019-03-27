@@ -1,7 +1,6 @@
 # users
 class Operator < ApplicationRecord
   rolify
-  acts_as_favoritor
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,
          omniauth_providers: [:steam, :discord]

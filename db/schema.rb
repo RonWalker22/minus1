@@ -37,23 +37,6 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
     t.index ["recipe_id"], name: "index_directions_on_recipe_id"
   end
 
-  create_table "favorites", force: :cascade do |t|
-    t.string "favoritable_type", null: false
-    t.bigint "favoritable_id", null: false
-    t.string "favoritor_type", null: false
-    t.bigint "favoritor_id", null: false
-    t.string "scope", default: "favorite", null: false
-    t.boolean "blocked", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["blocked"], name: "index_favorites_on_blocked"
-    t.index ["favoritable_id", "favoritable_type"], name: "fk_favoritables"
-    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id"
-    t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
-    t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor_type_and_favoritor_id"
-    t.index ["scope"], name: "index_favorites_on_scope"
-  end
-
   create_table "game_teams", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.bigint "team_id", null: false
@@ -72,8 +55,6 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
     t.string "status", default: "proposal", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "favoritable_score"
-    t.text "favoritable_total"
     t.index ["igdb_id"], name: "index_games_on_igdb_id", unique: true
     t.index ["name"], name: "index_games_on_name", unique: true
     t.index ["website"], name: "index_games_on_website", unique: true
@@ -233,8 +214,6 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.text "favoritor_score"
-    t.text "favoritor_total"
     t.bigint "current_objective_id"
     t.index ["current_objective_id"], name: "index_operators_on_current_objective_id"
     t.index ["game_setting_id"], name: "index_operators_on_game_setting_id"
@@ -309,8 +288,6 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
     t.string "version", default: "0z", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "favoritable_score"
-    t.text "favoritable_total"
     t.index ["commander_id"], name: "index_strategies_on_commander_id"
     t.index ["game_id"], name: "index_strategies_on_game_id"
     t.index ["inspiration_id"], name: "index_strategies_on_inspiration_id"
