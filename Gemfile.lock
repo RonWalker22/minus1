@@ -306,6 +306,7 @@ DEPENDENCIES
   redis
   rolify
   sass-rails (~> 5.0)
+  sassc (>= 2.0.1)
   selenium-webdriver
   sidekiq
   sinatra (>= 2.0.5)
