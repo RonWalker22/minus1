@@ -312,7 +312,6 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commander_id"], name: "index_teams_on_commander_id"
-    t.index ["name"], name: "index_teams_on_name", unique: true
   end
 
   add_foreign_key "characters", "games"
