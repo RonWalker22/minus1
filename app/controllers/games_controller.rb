@@ -106,7 +106,7 @@ class GamesController < ApplicationController
       game_like = "search='#{params[:search]}'&"
       params = "category=0&fields='name','cover.image_id'&limit=24&filter[version_parent][not_exists]=1"
       uri = URI("#{base}#{game_like}#{params}")
-      user_key = Rails.application.credentials.igdb[:user_key]
+      user_key = Rails.application.credentials[:igdb][:user_key]
       request = Net::HTTP::Get.new(uri, 'user-key' => user_key)
       JSON.parse(http.request(request).body)
     end
