@@ -40,7 +40,7 @@
       <% if operator_signed_in? %>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            <%= @game ? @game.name : "Switch Games"%>
+            <%= @game ? @game.name : current_operator.game_setting.name%>
           </a>
           <div class="navbar-dropdown">
             <%= link_to "All Games", games_path, class: 'navbar-item'%>
