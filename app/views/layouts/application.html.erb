@@ -13,14 +13,14 @@
 
   <body class="<%=controller_name + " " + action_name%>">
     <%= render 'shared/header' %>
-    <% if notice %>
-      <p class="notice notification is-success">
-        <button class="delete"></button>
-        <%= notice %>
-      </p>
-    <% end %>
-    <p class="alert"><%= alert %></p>
     <div class="inner-body">
+      <% if notice %>
+        <p class="notice notification is-success">
+          <button class="delete"></button>
+          <%= notice %>
+        </p>
+      <% end %>
+      <p class="alert"><%= alert %></p>
       <%= yield%>
     </div>
     <%= render 'shared/footer' %>
