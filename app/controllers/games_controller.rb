@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 
 class GamesController < ApplicationController
-  before_action :set_game, only: [:edit, :update, :destroy, :switch, :favorite, :unfavorite]
+  before_action :set_game, only: [:edit, :update, :destroy, :switch]
   before_action :set_game_eager, only: [:show]
 
   # GET /games
@@ -43,7 +43,6 @@ class GamesController < ApplicationController
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
         current_operator.update_attributes game_setting_id: @game.id
-        current_operator.favorite(@game)
         current_operator.add_role :contributor, @game
       else
         format.html { render :new }
@@ -82,16 +81,6 @@ class GamesController < ApplicationController
       current_operator.save
     end
     redirect_to @game
-  end
-
-  def favorite
-    current_operator.favorite(@game) if @game
-    redirect_back(fallback_location: root_path)
-  end
-
-  def unfavorite
-    current_operator.remove_favorite(@game) if @game
-    redirect_back(fallback_location: root_path)
   end
 
   private

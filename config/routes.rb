@@ -31,8 +31,6 @@ Rails.application.routes.draw do
   get '/docs' => 'static_pages#docs'
   get '/strategies/:id/xml' => 'strategies#show_xml', as: 'strategy_xml'
   patch '/games/:id/switch/' => 'games#switch', as: 'switch_game'
-  put '/games/:id/favorite' => 'games#favorite', as: 'favorite_game'
-  delete '/games/:id/favorite' => 'games#unfavorite'
   put '/operators/api_key' => 'operators#create_api_key', as: 'api_key'
   put '/teams/:id/link/:game_id' => 'teams#link_game', as: 'game_link'
   delete '/teams/:id/link/:game_id' => 'teams#unlink_game', as: 'game_unlink'

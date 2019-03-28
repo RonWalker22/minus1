@@ -28,17 +28,6 @@
   <div id="igdb-container" class="columns is-multiline">
     <% Game.all.sort.each do |game| %>
       <div class="column idgb-game is-one-quarter-tablet">
-        <% if game.favorited_by?(current_operator) %>
-            <%= link_to favorite_game_path(game.id), method: :delete  do %>
-              <span class="sr-only">Favorite:</span>
-              <i class="fas fa-heart fa-2x is-pulled-right" aria-hidden="true" title="UnFavorite"></i>
-            <% end %>
-        <% else %>
-            <%= link_to favorite_game_path(game.id), method: :put do %>
-                <span class="sr-only">Not Favorite:</span>
-                <i class="far fa-heart fa-2x is-pulled-right" aria-hidden="true" title="Favorite"></i>
-            <% end %>
-        <% end %>
           <div><%= game.name %></div>
           <% if game.image_id %>
             <%= image_tag  "https://images.igdb.com/igdb/image/upload/t_thumb/#{game.image_id}.jpg"%>

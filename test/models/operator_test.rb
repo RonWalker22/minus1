@@ -53,14 +53,4 @@ class OperatorTest < ActiveSupport::TestCase
     game_setting = @operator.game_setting_id
     assert game_setting.is_a?(Integer) && !game_setting.zero?
   end
-
-  test 'has favorite strategy' do
-    @operator.favorite(@strategy)
-    assert_equal 'Strategy', @operator.favorited_strategies.first.class.name
-  end
-
-  test 'has favorite game' do
-    @operator.favorite(@game)
-    assert_equal 'Game', @operator.favorited_games.first.class.name
-  end
 end
