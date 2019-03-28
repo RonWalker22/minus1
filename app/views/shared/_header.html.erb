@@ -34,16 +34,13 @@
             <%= link_to "Docs", docs_path, class: 'navbar-item'%>
           </div>
         </div>
-        <div class="navbar-item">
-            <%= @game.name if @game%>
-        </div>
       </div>
 
       <div class="navbar-end">
       <% if operator_signed_in? %>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            Switch Games
+            <%= @game ? @game.name : "Switch Games"%>
           </a>
           <div class="navbar-dropdown">
             <%= link_to "All Games", games_path, class: 'navbar-item'%>
