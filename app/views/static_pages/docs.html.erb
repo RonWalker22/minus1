@@ -1,1 +1,117 @@
-<p>testing</p>
+<div class="columns is-multiline is-centered">
+  <div class="column is-full">
+    <div class="box">
+      <h1 class="title is-3 has-text-centered">M1 Documentation</h1>
+    </div>
+  </div>
+  <div class="column is-half">
+    <div id="strategy-composition" name="strategy-composition" class="box">
+      <h2 class="title is-4 has-text-centered">Strategy Composition</h2>
+      <dl>
+        <dt class="title is-5">Strategy</dt>
+        <dd class="content">The overall tactical plan at a commander level. A strategy will contain one or more objectives. Strategies can be simple, extremely complex, or anything in between.  </dd>
+
+        <dt class="title is-5">Objective</dt>
+        <dd class="content">The tactical plan at an operator level. Each operator will be assigned to a maximum of a single objective. Each objective may have as many operators as it requires.</dd>
+
+        <dt class="title is-5">Stacked Objective</dt>
+        <dd class="content">An Objective that is linked to one or more other objectives. Stacked objectives have an order, and each objective must be completed separately.</dd>
+
+        <dt class="title is-5">Recipe</dt>
+        <dd class="content">Outlines how an objective should be completed. Recipes are optional. An Objective without a mandatory recipe, allows the operator to complete the objective on his own terms. A Recipe may contains ingredients and or directions.
+        </dd>
+
+        <dt class="title is-5">Ingredient</dt>
+        <dd class="content">A list pregame selections that are required for a recipe. This can include loadouts, respawns, and or characters.</dd>
+
+        <dt class="title is-5">Direction</dt>
+        <dd class="content">A single step of a recipe. Directions must be completed in order.</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="column is-half">
+    <div class="box is-narrow">
+        <div class="mermaid">
+          graph TD
+              Strategy[fa:fa-chess Strategy]-->Objective[fa:fa-trophy Objective-A]
+              Strategy[fa:fa-chess Strategy]-->Objective2[fa:fa-trophy Objective-B]
+              Strategy[fa:fa-chess Strategy]-->Objective3[fa:fa-trophy Objective-C]
+              Objective2-->Recipe[fa:fa-utensils RecipeA]
+              Objective2-->Recipe2[fa:fa-utensils RecipeB]
+              Objective2-->Recipe3[fa:fa-utensils RecipeC]
+              Recipe2-->Directions[fa:fa-directions Directions]
+              Recipe2-->Ingredients[fa:fa-cookie-bite Ingredients]
+        </div>
+    <script src="https://unpkg.com/mermaid@8.0.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'forest'});</script>
+    </div>
+  </div>
+</div>
+<div class="columns is-centered">
+  <div class="column is-half">
+    <div name="objective-form-terms" id="objective-form-terms"  class="box">
+      <h2 class="title is-4 has-text-centered">Objective Form Terms</h2>
+      <dl>
+        <dt class="title is-5">Minimum operators</dt>
+        <dd class="content">When the app assigns objectives for each operator(at random), this value determines the minimum number of operators that will receive this objective.</dd>
+
+        <dt class="title is-5">Maximum operators</dt>
+        <dd class="content">When the app assigns objectives for each operator(at random), this value determines the maximum number of operators that will receive this objective.</dd>
+
+        <dt class="title is-5">Priority level</dt>
+        <dd class="content">When the app assigns objectives to each operator, this value helps reduce the randomness. Higher priority objectives will receive operators before lower priority ones. 10 is the lowest priority level, 1 is the highest priority level. This is especially useful when the total number of operators is less than the minimum number of operators required for the entire strategy.</dd>
+
+        <dt class="title is-5">Stack objective</dt>
+        <dd class="content">Stack up objectives one after the other. This allow operators to be assigned multiple objectives, but each objective must be complete separately.</dd>
+
+        <dt class="title is-5">Dependency</dt>
+        <dd class="content">Ensure the parent objective is completed before the children objectives can be started.</dd>
+
+        <dt class="title is-5">Delay</dt>
+        <dd class="content">Delay the start of an objective</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+<div class="columns">
+  <div class="column is-two-thirds">
+    <div name="team-composition" id="team-composition" class="box">
+      <h2 class="title is-4 has-text-centered">Team Composition</h2>
+      <dl>
+        <dt class="title is-5">Operator</dt>
+        <dd class="content">A team member</dd>
+
+        <dt class="title is-5">Lead Operator</dt>
+        <dd class="content">An operator who has full strategy management.</dd>
+
+        <dt class="title is-5">Commander</dt>
+        <dd class="content">An operator with full strategy & team
+        management.</dd>
+        
+        <dt class="title is-5">Freelancer</dt>
+        <dd class="content">An operator that has either not been assigned an
+        objective or has already completed all of its assigned objectives. </dd>
+      </dl>
+    </div>
+  </div>
+  <div class="column is-narrow">
+    <div class="box">
+      <div class="mermaid">
+        graph TD
+            Commander-->LeadOp(Lead Operator)
+            LeadOp-->Operator
+      </div>
+      <script src="https://unpkg.com/mermaid@8.0.0/dist/mermaid.min.js">
+        var config = {
+            startOnLoad:true,
+            flowchart:{
+                useMaxWidth:true,
+                htmlLabels:true
+            },
+            theme: 'forest'
+        };
+        mermaid.initialize(config);
+      </script>
+    </div>
+  </div>
+</div>
