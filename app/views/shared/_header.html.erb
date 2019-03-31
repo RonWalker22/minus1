@@ -21,9 +21,11 @@
         <% if current_operator && policy(Strategy).show? %>
           <%=  link_to "Strategies", strategies_path, class: 'navbar-item' %>
         <% end %>
-        <a class="navbar-item" href=" <%= teams_path %>">
-          Teams
-        </a>
+        <% if operator_signed_in? %>
+          <a class="navbar-item" href=" <%= teams_path %>">
+            Teams
+          </a>
+        <% end %>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             More
