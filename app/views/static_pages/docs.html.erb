@@ -31,19 +31,17 @@
   </div>
   <div class="column is-half">
     <div class="box is-narrow">
-        <div class="mermaid">
-          graph TD
-              Strategy[fa:fa-chess Strategy]-->Objective[fa:fa-trophy Objective-A]
-              Strategy[fa:fa-chess Strategy]-->Objective2[fa:fa-trophy Objective-B]
-              Strategy[fa:fa-chess Strategy]-->Objective3[fa:fa-trophy Objective-C]
-              Objective2-->Recipe[fa:fa-utensils RecipeA]
-              Objective2-->Recipe2[fa:fa-utensils RecipeB]
-              Objective2-->Recipe3[fa:fa-utensils RecipeC]
-              Recipe2-->Directions[fa:fa-directions Directions]
-              Recipe2-->Ingredients[fa:fa-cookie-bite Ingredients]
-        </div>
-    <script src="https://unpkg.com/mermaid@8.0.0/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'forest'});</script>
+      <div class="mermaid">
+        graph TD
+            Strategy[fa:fa-chess Strategy]-->Objective[fa:fa-trophy Objective-A]
+            Strategy[fa:fa-chess Strategy]-->Objective2[fa:fa-trophy Objective-B]
+            Strategy[fa:fa-chess Strategy]-->Objective3[fa:fa-trophy Objective-C]
+            Objective2-->Recipe[fa:fa-utensils RecipeA]
+            Objective2-->Recipe2[fa:fa-utensils RecipeB]
+            Objective2-->Recipe3[fa:fa-utensils RecipeC]
+            Recipe2-->Directions[fa:fa-directions Directions]
+            Recipe2-->Ingredients[fa:fa-cookie-bite Ingredients]
+      </div>
     </div>
   </div>
 </div>
@@ -101,17 +99,6 @@
             Commander-->LeadOp(Lead Operator)
             LeadOp-->Operator
       </div>
-      <script src="https://unpkg.com/mermaid@8.0.0/dist/mermaid.min.js">
-        var config = {
-            startOnLoad:true,
-            flowchart:{
-                useMaxWidth:true,
-                htmlLabels:true
-            },
-            theme: 'forest'
-        };
-        mermaid.initialize(config);
-      </script>
     </div>
   </div>
 </div>
