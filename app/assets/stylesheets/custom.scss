@@ -56,7 +56,7 @@ caption {
 
 nav {
   ul {
-    background: white;
+    background: $secondary-bg;
   }
 }
 
@@ -74,14 +74,18 @@ nav {
 }
 
 .idgb-game:nth-child(3n) {
-  background: #5a3f37;
+  background: #00000070;
 }
 .idgb-game:nth-child(1) {
-  background: #373b44;
+  background: #215f0047;
 }
 
 .idgb-game:nth-child(3n + 4) {
-  background: #373b44;
+  background: #215f0047;
+}
+
+.content {
+  color: $secondary-bg;
 }
 
 .hide {
