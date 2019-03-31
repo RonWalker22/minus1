@@ -1,11 +1,13 @@
-<div class="columns is-multiline is-centered">
-  <div class="column is-full">
+<div class="columns is-centered">
+  <div class="column is-half">
     <div class="box">
       <h1 class="title is-3 has-text-centered">M1 Documentation</h1>
     </div>
   </div>
-  <div class="column is-half">
-    <div id="strategy-composition" name="strategy-composition" class="box">
+</div>
+<div class="box" id="strategy-composition" name="strategy-composition">
+  <div class="columns is-multiline is-centered">
+    <div class="column is-half">
       <h2 class="title is-4 has-text-centered">Strategy Composition</h2>
       <dl>
         <dt class="title is-5">Strategy</dt>
@@ -28,9 +30,7 @@
         <dd class="content">A single step of a recipe. Directions must be completed in order.</dd>
       </dl>
     </div>
-  </div>
-  <div class="column is-half">
-    <div class="box is-narrow">
+    <div class="column is-half">
       <div class="mermaid">
         graph TD
             Strategy[fa:fa-chess Strategy]-->Objective[fa:fa-trophy Objective-A]
@@ -71,34 +71,33 @@
     </div>
   </div>
 </div>
-<div class="columns">
-  <div class="column is-two-thirds">
-    <div name="team-composition" id="team-composition" class="box">
-      <h2 class="title is-4 has-text-centered">Team Composition</h2>
-      <dl>
-        <dt class="title is-5">Operator</dt>
-        <dd class="content">A team member</dd>
+<div class="box" name="team-composition" id="team-composition">
+  <div class="columns is-centered">
+      <div class="column is-one-third">
+        <h2 class="title is-4 has-text-centered">Team Composition</h2>
+        <dl>
+          <dt class="title is-5">Operator</dt>
+          <dd class="content">A team member</dd>
 
-        <dt class="title is-5">Lead Operator</dt>
-        <dd class="content">An operator who has full strategy management.</dd>
+          <dt class="title is-5">Lead Operator</dt>
+          <dd class="content">An operator who has full strategy management.</dd>
 
-        <dt class="title is-5">Commander</dt>
-        <dd class="content">An operator with full strategy & team
-        management.</dd>
-        
-        <dt class="title is-5">Freelancer</dt>
-        <dd class="content">An operator that has either not been assigned an
-        objective or has already completed all of its assigned objectives. </dd>
-      </dl>
-    </div>
-  </div>
-  <div class="column is-narrow">
-    <div class="box">
-      <div class="mermaid">
-        graph TD
-            Commander-->LeadOp(Lead Operator)
-            LeadOp-->Operator
+          <dt class="title is-5">Commander</dt>
+          <dd class="content">An operator with full strategy & team
+          management.</dd>
+          
+          <dt class="title is-5">Freelancer</dt>
+          <dd class="content">An operator that has either not been assigned an
+          objective or has already completed all of its assigned objectives. </dd>
+        </dl>
       </div>
-    </div>
+      <div class="column is-narrow">
+        <div class="mermaid">
+          graph TD
+              Commander-->LeadOp(Lead Operator)
+              LeadOp-->Operator
+        </div>
+      </div>
+
   </div>
 </div>
