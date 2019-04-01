@@ -16,12 +16,16 @@
     <%= render 'shared/header' %>
     <div class="inner-body">
       <% if notice %>
-        <p class="notice notification is-success">
+        <p class="notice has-text-centered">
           <button class="delete"></button>
           <%= notice %>
         </p>
+      <% elsif alert %>
+        <p class="alert has-text-centered">
+          <button class="delete"></button>
+          <%= alert %>
+        </p>
       <% end %>
-      <p class="alert"><%= alert %></p>
       <%= yield%>
     </div>
     <%= render 'shared/footer' %>
