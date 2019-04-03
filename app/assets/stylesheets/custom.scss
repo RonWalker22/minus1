@@ -7,7 +7,7 @@ body {
 }
 
 .inner-body {
-  min-height: 76.9vh;
+  min-height: 76vh;
 }
 
 input {
@@ -51,7 +51,7 @@ table {
 }
 
 caption {
-  color: $text;
+  color: $text-color;
 }
 
 nav {
@@ -127,7 +127,7 @@ tfoot th {
 }
 
 /* Mobile Landscape Screen Sizes */
-@media only screen and (min-width: 400px) {
+@media only screen and (min-width: 100px) {
   .menu {
     // max-width: 30vh;
     text-align: center;
