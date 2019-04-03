@@ -29,7 +29,7 @@ class DirectionsController < ApplicationController
     authorize @direction.recipe, :update?
     respond_to do |format|
       if @direction.save
-        format.html { redirect_to @direction.recipe, notice: 'Direction was successfully created.' }
+        format.html { redirect_to @direction.recipe }
         format.json { render :show, status: :created, location: @direction.recipe }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class DirectionsController < ApplicationController
     authorize @direction.recipe
     respond_to do |format|
       if @direction.update(direction_params)
-        format.html { redirect_to @direction, notice: 'Direction was successfully updated.' }
+        format.html { redirect_to @direction }
         format.json { render :show, status: :ok, location: @direction }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class DirectionsController < ApplicationController
     authorize @direction.recipe
     @direction.destroy
     respond_to do |format|
-      format.html { redirect_to directions_url, notice: 'Direction was successfully destroyed.' }
+      format.html { redirect_to directions_url }
       format.json { head :no_content }
     end
   end

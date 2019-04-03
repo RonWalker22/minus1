@@ -43,7 +43,7 @@ class RecipesController < ApplicationController
     @recipe.uuid = SecureRandom.uuid
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe.objective, notice: 'Recipe was successfully created.' }
+        format.html { redirect_to @recipe.objective}
         format.json { render :show, status: :created, location: @recipe.objective }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class RecipesController < ApplicationController
     authorize @recipe
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
+        format.html { redirect_to @recipe }
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }
@@ -73,7 +73,7 @@ class RecipesController < ApplicationController
     authorize @recipe
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
+      format.html { redirect_to recipes_url}
       format.json { head :no_content }
     end
   end

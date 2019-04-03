@@ -45,7 +45,7 @@ class ObjectivesController < ApplicationController
           @objective.slaves.push Objective.find(master_id)
         end
 
-        format.html { redirect_to @objective.strategy, notice: 'Objective was successfully created.' }
+        format.html { redirect_to @objective.strategy }
         format.json { render :show, status: :created, location: @objective.strategy }
       else
         format.html { render :new }
@@ -60,7 +60,7 @@ class ObjectivesController < ApplicationController
     authorize @objective.strategy, :update_objective?
     respond_to do |format|
       if @objective.update(objective_params)
-        format.html { redirect_to @objective, notice: 'Objective was successfully updated.' }
+        format.html { redirect_to @objective}
         format.json { render :show, status: :ok, location: @objective }
       else
         format.html { render :edit }
@@ -75,7 +75,7 @@ class ObjectivesController < ApplicationController
     authorize @objective.strategy
     @objective.destroy
     respond_to do |format|
-      format.html { redirect_to objectives_url, notice: 'Objective was successfully destroyed.' }
+      format.html { redirect_to objectives_url }
       format.json { head :no_content }
     end
   end

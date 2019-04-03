@@ -49,7 +49,7 @@ class StrategiesController < ApplicationController
       if @strategy.save
         team_ids = params[:strategy][:team_ids]
         create_strategy_team(team_ids) if team_ids
-        format.html { redirect_to strategies_path, notice: 'Strategy was successfully created.' }
+        format.html { redirect_to strategies_path}
         format.json { render :show, status: :created, location: strategies_path }
       else
         format.html { render :new }
@@ -63,7 +63,7 @@ class StrategiesController < ApplicationController
   def update
     respond_to do |format|
       if @strategy.update(strategy_params)
-        format.html { redirect_to @strategy, notice: 'Strategy was successfully updated.' }
+        format.html { redirect_to @strategy }
         format.json { render :show, status: :ok, location: @strategy }
       else
         format.html { render :edit }
@@ -78,7 +78,7 @@ class StrategiesController < ApplicationController
     authorize @strategy
     @strategy.destroy
     respond_to do |format|
-      format.html { redirect_to strategies_url, notice: 'Strategy was successfully destroyed.' }
+      format.html { redirect_to strategies_url}
       format.json { head :no_content }
     end
   end

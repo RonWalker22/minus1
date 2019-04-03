@@ -49,7 +49,7 @@ class IngredientsController < ApplicationController
     authorize @ingredient.recipe
     respond_to do |format|
       if @ingredient.update(ingredient_params)
-        format.html { redirect_to @ingredient, notice: 'Ingredient was successfully updated.' }
+        format.html { redirect_to @ingredient}
         format.json { render :show, status: :ok, location: @ingredient }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class IngredientsController < ApplicationController
     authorize @ingredient.recipe
     @ingredient.destroy
     respond_to do |format|
-      format.html { redirect_to @ingredient.recipe, notice: 'Ingredient was successfully destroyed.' }
+      format.html { redirect_to @ingredient.recipe }
       format.json { head :no_content }
     end
   end
