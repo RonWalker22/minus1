@@ -2,7 +2,7 @@
   <div id="igdb-container" class="columns is-multiline">
     <% @igdb_games.each do |game| %>
       <div class="column idgb-game is-one-quarter-tablet">
-          <div><%= game['name']%></div>
+          <div class="content"><%= game['name']%></div>
           <% if game['cover'] %>
             <%= image_tag(
               "https://images.igdb.com/igdb/image/upload/t_thumb/#{game['cover']['image_id']}.jpg")%>
@@ -28,7 +28,7 @@
   <div id="igdb-container" class="columns is-multiline">
     <% Game.all.sort.each do |game| %>
       <div class="column idgb-game is-one-quarter-tablet">
-          <div><%= game.name %></div>
+          <div class="content"><%= game.name %></div>
           <% if game.image_id %>
             <%= image_tag  "https://images.igdb.com/igdb/image/upload/t_thumb/#{game.image_id}.jpg"%>
           <% end %>
