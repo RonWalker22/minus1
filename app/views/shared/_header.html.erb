@@ -42,6 +42,21 @@
 
       <div class="navbar-end">
       <% if operator_signed_in? %>
+        <% if controller_name == 'games' && action_name == 'index' %>
+          <div class="navbar-item">
+            <%= form_tag(games_path, :method => "get", id: "search-form") do %>
+              <div class="field has-addons">
+                <div class="control">
+                  <%= text_field_tag :search, params[:search], required: true,
+                  placeholder: "Add New Game", class: 'input' %>
+                </div>
+                <div class="control">
+                  <%= submit_tag "Search", :name => nil, class: 'button' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             <%= @game ? @game.name : current_operator.game_setting.name%>
@@ -50,17 +65,17 @@
             <%= link_to "All Games", games_path, class: 'navbar-item'%>
           </div>
         </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                <%= current_operator.name %>
-              </a>
-              <div class="navbar-dropdown">
-                <%= link_to "Profile", operator_path(current_operator), class: "navbar-item" %> 
-                <hr class="navbar-divider">
-                <%= link_to "Log out", destroy_operator_session_path, method:
-              :delete, class: "navbar-item" %>
-              </div>
-            </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <%= current_operator.name %>
+          </a>
+          <div class="navbar-dropdown">
+            <%= link_to "Profile", operator_path(current_operator), class: "navbar-item" %> 
+            <hr class="navbar-divider">
+            <%= link_to "Log out", destroy_operator_session_path, method:
+          :delete, class: "navbar-item" %>
+          </div>
+        </div>
         <% end %>
         <div class="navbar-item">
           <div class="buttons">

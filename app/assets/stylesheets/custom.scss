@@ -70,7 +70,11 @@ nav {
 }
 
 .columns:last-child {
-  margin-bottom: 0rem;
+  margin-bottom: 0rem !important;
+}
+
+.columns {
+  margin: 0rem !important;
 }
 
 .idgb-game:nth-child(3n) {

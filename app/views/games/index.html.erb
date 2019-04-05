@@ -33,16 +33,4 @@
       </div>
     <% end %>
   </div>
-    <%= form_tag(games_path, :method => "get", id: "search-form") do %>
-  <br>
-  <div class="field has-addons">
-    <div class="control">
-      <%= text_field_tag :search, params[:search], required: true, placeholder: "Add Game to M1", class: 'input' %>
-    </div>
-    <div class="control">
-      <%= submit_tag "Add", :name => nil, class: 'button' %>
-    </div>
-  </div>
-  <% end %>
 <% end %>
-<br>
