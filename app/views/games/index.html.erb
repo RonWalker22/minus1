@@ -1,26 +1,18 @@
 <% if @igdb_games %>
   <div id="igdb-container" class="columns is-multiline">
     <% @igdb_games.each do |game| %>
+      <% next unless game['cover'] %>
       <div class="column idgb-game is-one-quarter-tablet">
-          <div class="content"><%= game['name']%></div>
-          <% if game['cover'] %>
-            <%= image_tag(
-              "https://images.igdb.com/igdb/image/upload/t_thumb/#{game['cover']['image_id']}.jpg")%>
-              <%= link_to "Add to M1", 
-              games_path({game: {image_id: game['cover']['image_id'],
-                                      name: game['name'], 
-                                      igdb_id: game['id'] }
-                          }), 
-              method: :post, name: game[:name],
-              class: "button enter-btn" %>
-          <% else %>
-         <%= link_to "Add to M1", 
-                     games_path({game: {name: game['name'], 
-                                        igdb_id: game['id'] }
-                                  }), 
-                     method: :post, name: game[:name],
-                     class: "button enter-btn" %>
-          <% end %> 
+        <div class="content"><%= game['name']%></div>
+        <%= image_tag(
+          "https://images.igdb.com/igdb/image/upload/t_thumb/#{game['cover']['image_id']}.jpg")%>
+          <%= link_to "Add to M1", 
+          games_path({game: {image_id: game['cover']['image_id'],
+                                  name: game['name'], 
+                                  igdb_id: game['id'] }
+                      }), 
+          method: :post, name: game[:name],
+          class: "button enter-btn" %>
       </div>
     <% end %>
   </div>
