@@ -8,6 +8,12 @@ body {
 
 .inner-body {
   min-height: 76vh;
+  background: repeating-linear-gradient(
+    -45deg,
+    #22463c,
+    #22463c 10px,
+    #ce53105e 11px
+  );
 }
 
 input {
@@ -128,6 +134,15 @@ tfoot th {
 
 .fa-links {
   color: $primary-bg;
+}
+
+.box {
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10%,
+    #a7a7a730 95%
+  );
 }
 
 /* Mobile Landscape Screen Sizes */
