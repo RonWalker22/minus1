@@ -8,12 +8,6 @@ body {
 
 .inner-body {
   min-height: 76vh;
-  background: repeating-linear-gradient(
-    -45deg,
-    #22463c,
-    #22463c 10px,
-    #ce53105e 11px
-  );
 }
 
 input {
@@ -62,7 +56,7 @@ caption {
 
 nav {
   ul {
-    background: $secondary-bg;
+    background: transparent;
   }
 }
 
@@ -82,16 +76,38 @@ nav {
 .columns {
   margin: 0rem !important;
 }
-
+.idgb-game {
+  background: repeating-linear-gradient(
+    -45deg,
+    darkred 34%,
+    black 35%,
+    black 33%
+  );
+}
 .idgb-game:nth-child(3n) {
-  background: #00000070;
+  background: repeating-linear-gradient(
+    -45deg,
+    black 34%,
+    #272727 35%,
+    #272727 33%
+  );
 }
 .idgb-game:nth-child(1) {
-  background: #215f0047;
+  background: repeating-linear-gradient(
+    -45deg,
+    #8e0e00 34%,
+    #1f1c18 35%,
+    #1f1c18 33%
+  );
 }
 
 .idgb-game:nth-child(3n + 4) {
-  background: #215f0047;
+  background: repeating-linear-gradient(
+    -45deg,
+    #8e0e00 34%,
+    #1f1c18 35%,
+    #1f1c18 33%
+  );
 }
 
 .content {
@@ -133,7 +149,7 @@ tfoot th {
 }
 
 .fa-links {
-  color: $primary-bg;
+  color: darkred;
 }
 
 .box {

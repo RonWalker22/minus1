@@ -5,6 +5,6 @@ document.addEventListener 'turbolinks:load', ->
   body = document.querySelector('body')
   if(body.className == "static_pages docs")
     config = {
-      theme: 'forest'
+      theme: 'neutral'
     }
     mermaid.initialize(config)
