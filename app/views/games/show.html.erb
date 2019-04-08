@@ -72,18 +72,14 @@
         <div class="field is-grouped is-grouped-multiline">
             <% @game.characters.each_with_index do |character, i| %>
               <div class="control">
-                <div class="tags has-addons">
-                  <span class="tag is-black">#<%= i + 1 %></span>
-                  <span class="tag">
-                    <% if @game.status == 'proposal' && policy(character).edit? %>
-                        <%= link_to character.name, 
-                                    edit_character_path(character), 
-                                    class: 'is-link'  %>
-                    <% else %>
-                      <%= character.name %>
-                    <% end %>
-                  </span>
-                </div>
+                <%= link_to edit_character_path(character) do  %>
+                    <div class="tags has-addons">
+                      <span class="tag is-black">#<%= i + 1 %></span>
+                      <span class="tag">
+                        <%= character.name %>
+                      </span>
+                    </div>
+                <% end %>
               </div>
             <% end %>
           </div>
@@ -100,17 +96,14 @@
         <div class="field is-grouped is-grouped-multiline">
             <% @game.modes.each_with_index do |mode, i| %>
               <div class="control">
-                <div class="tags has-addons">
-                  <span class="tag is-black">#<%= i + 1 %></span>
-                  <span class="tag">
-                    <% if @game.status == 'proposal' && policy(mode).edit? %>
-                    <%= link_to mode.name, 
-                                edit_mode_path(mode), class: 'is-link'%>
-                    <% else %>
-                    <%= mode.name %>
-                    <% end %>
-                  </span>
-                </div>
+                <%= link_to edit_mode_path(mode) do%>
+                  <div class="tags has-addons">
+                    <span class="tag is-black">#<%= i + 1 %></span>
+                    <span class="tag">
+                      <%= mode.name %>
+                    </span>
+                  </div>
+                <% end %>
               </div>
             <% end %>
           </div>
@@ -146,36 +139,27 @@
         <% @game.levels.each_with_index do |level, i|%>
             <tr>
               <td>
-                <div class="tags has-addons">
-                  <div class="tag is-black">#<%= i + 1 %></div>
-                  <div class="tag">
-                    <% if @game.status == 'proposal' && policy(level).edit? %>
-                    <%= link_to level.name, 
-                          edit_level_path(level), class: 'is-link'  %>
-                    <% else %>
-                    <%= level.name %>
-                    <% end %>
+                <%= link_to edit_level_path(level) do %>
+                  <div class="tags has-addons">
+                    <div class="tag is-black">#<%= i + 1 %></div>
+                    <div class="tag">
+                      <%= level.name %>
+                    </div>
                   </div>
-                </div>
+                <% end %>
               </td>
               <td>
                 <div class="field is-grouped is-grouped-multiline">
                   <% level.locations.each_with_index do |location, i| %>
                     <div class="control">
-                      <div class="tags has-addons">
-                        <span class="tag is-black">#<%= i + 1 %></span>
-                        <% if @game.status == 'proposal' && policy(location).edit? %>
+                      <%= link_to edit_location_path(location) do%>
+                        <div class="tags has-addons">
+                          <span class="tag is-black">#<%= i + 1 %></span>
                           <span class="tag">
-                            <%= link_to location.name, 
-                            edit_location_path(location), 
-                            class: 'is-link'%>
+                            <%= location.name%>
                           </span>
-                        <% else %>
-                          <span class="tag">
-                            <%= location.name %>
-                          </span>
-                        <% end %>
-                      </div>
+                        </div>
+                      <% end %>
                     </div>
                   <% end %>
                 </div>
@@ -184,20 +168,14 @@
                 <div class="field is-grouped is-grouped-multiline">
                   <% level.respawns.each_with_index do |respawn, i| %>
                     <div class="control">
-                      <div class="tags has-addons">
-                        <span class="tag is-black">#<%= i + 1 %></span>
-                        <% if @game.status == 'proposal' && policy(respawn).edit?%>
+                      <%= link_to edit_respawn_path(respawn) do%>
+                        <div class="tags has-addons">
+                          <span class="tag is-black">#<%= i + 1 %></span>
                           <span class="tag">
-                            <%= link_to respawn.name, 
-                            edit_respawn_path(respawn), 
-                            class: 'is-link' %>
+                            <%= respawn.name%>
                           </span>
-                        <% else %>
-                          <span class="tag">
-                            <%= respawn.name %>
-                          </span>
-                        <% end %>
-                      </div>
+                        </div>
+                      <% end %>
                     </div>
                   <% end %>
                 </div>
@@ -218,21 +196,17 @@
     <div class="field is-grouped is-grouped-multiline">
       <% @game.loadouts.each_with_index do |loadout, i| %>
           <div class="control">
+            <%= link_to edit_loadout_path(loadout) do%>
             <div class="tags has-addons">
               <span class="tag is-black">#<%= i + 1 %></span>
                 <span class="tag">
-                <% if @game.status == 'proposal' && policy(loadout).edit?%>
-                  <%= link_to loadout.name, 
-                  edit_loadout_path(loadout), 
-                  class: 'is-link' %>
-                <% else %>
-                  <%= loadout.name %>
-                <% end %>
+                  <%= loadout.name%>
                 </span>
                 <span class="tag is-black">
                 <%= loadout.kind %>
                 </span>
-          </div>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
