@@ -1,6 +1,20 @@
-<h1>Editing Loadout</h1>
+<%= render 'shared/breadcrumb' %>
 
-<%= render 'form', loadout: @loadout %>
+<div class="columns is-centered">
+  <div class="column is-one-third">
+    <% if policy(@loadout).destroy? %>	
+      <%= link_to "Delete loadout", loadout_path(@loadout), 	
+                        method: :delete,	
+                        data: { 	
+                          confirm: 	
+                          "Are you sure you want to delete #{@loadout.name}?" 	
+                        }, 	
+                        class: "button is-black is-pulled-right is-small is-rounded" %>	
+    <% end %>
 
-<%= link_to 'Show', @loadout %> |
-<%= link_to 'Back', loadouts_path %>
+    <h1 class="title is-5">Editing loadout</h1>
+
+    <%= render 'form', loadout: @loadout %>
+    <%= link_to 'Cancel', game_path(@loadout.game), class:"is-pulled-right button is-black" %>
+  </div>
+</div>
