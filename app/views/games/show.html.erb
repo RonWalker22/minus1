@@ -259,7 +259,7 @@
       <% elsif @game.status == 'proposal' %>
         <%= link_to "Submit Proposal", 
                     game_path(@game, game: {status:'reviewing'}), method: :patch,
-                    class:'button is-fullwidth is-rounded is-success is-medium' 
+                    class:'button is-fullwidth is-rounded is-medium' 
         %>
       <% end %>
       </div>
