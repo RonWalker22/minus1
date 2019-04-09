@@ -18,7 +18,13 @@ class LevelsController < ApplicationController
 
   # GET /levels/1/edit
   def edit
-    @game = @level.game
+    begin
+      authorize @level
+      @game = @level.game
+    rescue Pundit::NotAuthorizedError
+      flash[:alert] = "You are not authorized to edit this resource."
+      redirect_to(request.referrer || root_path)
+    end
   end
 
   # POST /levels

@@ -18,7 +18,13 @@ class LoadoutsController < ApplicationController
 
   # GET /loadouts/1/edit
   def edit
-    @game = @loadout.game
+    begin
+      authorize @loadout
+      @game = @loadout.game
+    rescue Pundit::NotAuthorizedError
+      flash[:alert] = "You are not authorized to edit this resource."
+      redirect_to(request.referrer || root_path)
+    end
   end
 
   # POST /loadouts

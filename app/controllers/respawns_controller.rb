@@ -18,7 +18,13 @@ class RespawnsController < ApplicationController
 
   # GET /respawns/1/edit
   def edit
-    @game = @respawn.game
+    begin
+      authorize @respawn
+      @game = @respawn.game
+    rescue Pundit::NotAuthorizedError
+      flash[:alert] = "You are not authorized to edit this resource."
+      redirect_to(request.referrer || root_path)
+    end
   end
 
   # POST /respawns

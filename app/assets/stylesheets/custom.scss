@@ -123,8 +123,8 @@ tfoot th {
 
 .notice,
 .alert {
-  background: #5a3f37;
-  background: linear-gradient(to left, #2c7744, #5a3f37);
+  background: darkred;
+  background: linear-gradient(to right, transparent, darkred, transparent);
   color: white;
 }
 

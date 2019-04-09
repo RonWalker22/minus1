@@ -18,7 +18,13 @@ class CharactersController < ApplicationController
 
   # GET /characters/1/edit
   def edit
-    @game = @character.game
+    begin
+      authorize @character
+      @game = @character.game
+    rescue Pundit::NotAuthorizedError
+      flash[:alert] = "You are not authorized to edit this resource."
+      redirect_to(request.referrer || root_path)
+    end
   end
 
   # POST /characters

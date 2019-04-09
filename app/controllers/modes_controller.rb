@@ -18,7 +18,13 @@ class ModesController < ApplicationController
 
   # GET /modes/1/edit
   def edit
-    @game = @mode.game
+    begin
+      authorize @mode
+      @game = @mode.game
+    rescue Pundit::NotAuthorizedError
+      flash[:alert] = "You are not authorized to edit this resource."
+      redirect_to(request.referrer || root_path)
+    end
   end
 
   # POST /modes

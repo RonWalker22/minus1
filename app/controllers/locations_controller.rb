@@ -18,7 +18,13 @@ class LocationsController < ApplicationController
 
   # GET /locations/1/edit
   def edit
-    @game = @location.game
+    begin
+      authorize @location
+      @game = @location.game
+    rescue Pundit::NotAuthorizedError
+      flash[:alert] = "You are not authorized to edit this resource."
+      redirect_to(request.referrer || root_path)
+    end
   end
 
   # POST /locations
