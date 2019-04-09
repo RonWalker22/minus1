@@ -5,8 +5,8 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  operator: one
+  user: one
   team: one
 two:
-  operator: two
+  user: two
   team: two

@@ -25,12 +25,12 @@
           <td><%= @objective.target.name %></td>
         </tr>
         <tr>
-          <th>Minimum Operators</th>
+          <th>Minimum Users</th>
           <td><%= @objective.min_ops %></td>
         </tr>
         <% if @objective.max_ops %>
           <tr>
-            <th>Maximum Operators</th>
+            <th>Maximum Users</th>
             <td><%= @objective.max_ops %></td>
           </tr>
         <% end %>
@@ -102,7 +102,7 @@
               </td>
               <td>
                 <%= link_to recipe.commander.name, 
-                            operator_path(recipe.commander) %> 
+                            user_path(recipe.commander) %> 
               </td>
             </tr>
           <% end %>

@@ -1,13 +1,13 @@
 require 'test_helper'
 
-class OperatorTeamTest < ActiveSupport::TestCase
+class UserTeamTest < ActiveSupport::TestCase
   setup do
-    @operator = operators(:one)
+    @user = users(:one)
     @team = teams(:one)
   end
-  test 'disallows duplicate OperatorTeams' do
+  test 'disallows duplicate UserTeams' do
     begin
-      OperatorTeam.create!(operator_id: @operator.id,
+      UserTeam.create!(user_id: @user.id,
                            team_id: @team.id)
     rescue ActiveRecord::RecordNotUnique => invalid
     end

@@ -4,7 +4,7 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.references :objective
       t.references :commander,
-                   foreign_key: { to_table: :operators },
+                   foreign_key: { to_table: :users },
                    null: false
       t.uuid :uuid
       t.timestamps

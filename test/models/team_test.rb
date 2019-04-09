@@ -2,11 +2,11 @@ require 'test_helper'
 
 class TeamTest < ActiveSupport::TestCase
   team = Team.all[random_index]
-  test 'has operators' do
-    assert_equal 'Operator', team.operators.first.class.name
+  test 'has users' do
+    assert_equal 'User', team.users.first.class.name
   end
 
   test 'has a commander' do
-    assert_equal 'Operator', team.commander.class.name
+    assert_equal 'User', team.commander.class.name
   end
 end

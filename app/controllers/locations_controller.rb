@@ -75,7 +75,7 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params[:location][:operator_id] = current_operator.id
-      params.require(:location).permit(:name, :game_id, :operator_id)
+      params[:location][:user_id] = current_user.id
+      params.require(:location).permit(:name, :game_id, :user_id)
     end
 end

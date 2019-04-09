@@ -6,7 +6,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def change_member_title?
-    member = OperatorTeam.find_by(operator_id: user.id, team_id: record.id)
+    member = UserTeam.find_by(user_id: user.id, team_id: record.id)
     member && member.title == 'Commander'
   end
 end

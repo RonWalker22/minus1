@@ -66,7 +66,7 @@ class ModesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mode_params
-      params[:mode][:operator_id] = current_operator.id
-      params.require(:mode).permit(:name, :game_id, :operator_id)
+      params[:mode][:user_id] = current_user.id
+      params.require(:mode).permit(:name, :game_id, :user_id)
     end
 end

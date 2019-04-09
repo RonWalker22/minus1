@@ -15,8 +15,8 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
-    @maintainers = Operator.with_role(:maintainer, @game)
-    @contributors = Operator.with_role(:contributor, @game)
+    @maintainers = User.with_role(:maintainer, @game)
+    @contributors = User.with_role(:contributor, @game)
     @location = Location.new
     @level = Level.new
     @mode = Mode.new
@@ -42,8 +42,8 @@ class GamesController < ApplicationController
       if @game.save
         format.html { redirect_to @game}
         format.json { render :show, status: :created, location: @game }
-        current_operator.update_attributes game_setting_id: @game.id
-        current_operator.add_role :contributor, @game
+        current_user.update_attributes game_setting_id: @game.id
+        current_user.add_role :contributor, @game
       else
         format.html { render :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -77,8 +77,8 @@ class GamesController < ApplicationController
 
   def switch
     if @game
-      current_operator.game_setting_id = @game.id
-      current_operator.save
+      current_user.game_setting_id = @game.id
+      current_user.save
     end
     redirect_to @game
   end

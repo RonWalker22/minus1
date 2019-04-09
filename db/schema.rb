@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_233026) do
+ActiveRecord::Schema.define(version: 2019_04_09_212915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
   create_table "characters", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.string "name", null: false
-    t.bigint "operator_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_characters_on_game_id"
     t.index ["name", "game_id"], name: "index_characters_on_name_and_game_id", unique: true
-    t.index ["operator_id"], name: "index_characters_on_operator_id"
+    t.index ["user_id"], name: "index_characters_on_user_id"
   end
 
   create_table "directions", force: :cascade do |t|
@@ -95,47 +95,47 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
 
   create_table "levels", force: :cascade do |t|
     t.bigint "game_id", null: false
-    t.bigint "operator_id"
+    t.bigint "user_id"
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_levels_on_game_id"
     t.index ["name", "game_id"], name: "index_levels_on_name_and_game_id", unique: true
-    t.index ["operator_id"], name: "index_levels_on_operator_id"
+    t.index ["user_id"], name: "index_levels_on_user_id"
   end
 
   create_table "loadouts", force: :cascade do |t|
     t.string "name"
     t.bigint "game_id"
-    t.bigint "operator_id"
+    t.bigint "user_id"
     t.string "kind"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_loadouts_on_game_id"
     t.index ["name", "game_id"], name: "index_loadouts_on_name_and_game_id", unique: true
-    t.index ["operator_id"], name: "index_loadouts_on_operator_id"
+    t.index ["user_id"], name: "index_loadouts_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.bigint "game_id", null: false
-    t.bigint "operator_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_locations_on_game_id"
     t.index ["name", "game_id"], name: "index_locations_on_name_and_game_id", unique: true
-    t.index ["operator_id"], name: "index_locations_on_operator_id"
+    t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
   create_table "modes", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.string "name", null: false
-    t.bigint "operator_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_modes_on_game_id"
     t.index ["name", "game_id"], name: "index_modes_on_name_and_game_id", unique: true
-    t.index ["operator_id"], name: "index_modes_on_operator_id"
+    t.index ["user_id"], name: "index_modes_on_user_id"
   end
 
   create_table "objectives", force: :cascade do |t|
@@ -158,83 +158,6 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
     t.index ["target_id"], name: "index_objectives_on_target_id"
   end
 
-  create_table "operator_recipes", force: :cascade do |t|
-    t.bigint "operator_id", null: false
-    t.bigint "recipe_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["operator_id", "recipe_id"], name: "index_operator_recipes_on_operator_id_and_recipe_id", unique: true
-    t.index ["operator_id"], name: "index_operator_recipes_on_operator_id"
-    t.index ["recipe_id"], name: "index_operator_recipes_on_recipe_id"
-  end
-
-  create_table "operator_strategies", force: :cascade do |t|
-    t.bigint "operator_id", null: false
-    t.bigint "strategy_id", null: false
-    t.bigint "objective_id"
-    t.bigint "primary_id"
-    t.bigint "secondary_id"
-    t.bigint "tertiary_id"
-    t.bigint "default_id"
-    t.boolean "private", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["default_id"], name: "index_operator_strategies_on_default_id"
-    t.index ["objective_id"], name: "index_operator_strategies_on_objective_id"
-    t.index ["operator_id", "strategy_id"], name: "index_operator_strategies_on_operator_id_and_strategy_id", unique: true
-    t.index ["operator_id"], name: "index_operator_strategies_on_operator_id"
-    t.index ["primary_id"], name: "index_operator_strategies_on_primary_id"
-    t.index ["secondary_id"], name: "index_operator_strategies_on_secondary_id"
-    t.index ["strategy_id"], name: "index_operator_strategies_on_strategy_id"
-    t.index ["tertiary_id"], name: "index_operator_strategies_on_tertiary_id"
-  end
-
-  create_table "operator_teams", force: :cascade do |t|
-    t.bigint "operator_id", null: false
-    t.bigint "team_id", null: false
-    t.string "title", default: "Operator", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["operator_id", "team_id"], name: "index_operator_teams_on_operator_id_and_team_id", unique: true
-    t.index ["operator_id"], name: "index_operator_teams_on_operator_id"
-    t.index ["team_id"], name: "index_operator_teams_on_team_id"
-  end
-
-  create_table "operators", force: :cascade do |t|
-    t.string "name", null: false
-    t.boolean "online", default: false, null: false
-    t.bigint "game_setting_id", default: 1
-    t.bigint "room_id"
-    t.string "uid"
-    t.string "provider"
-    t.string "api_key"
-    t.string "encrypted_email"
-    t.string "encrypted_email_iv"
-    t.string "encrypted_email_bidx"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.bigint "current_objective_id"
-    t.index ["current_objective_id"], name: "index_operators_on_current_objective_id"
-    t.index ["encrypted_email_bidx"], name: "index_operators_on_encrypted_email_bidx", unique: true
-    t.index ["encrypted_email_iv"], name: "index_operators_on_encrypted_email_iv", unique: true
-    t.index ["game_setting_id"], name: "index_operators_on_game_setting_id"
-    t.index ["name"], name: "index_operators_on_name", unique: true
-    t.index ["reset_password_token"], name: "index_operators_on_reset_password_token", unique: true
-    t.index ["room_id"], name: "index_operators_on_room_id"
-  end
-
-  create_table "operators_roles", id: false, force: :cascade do |t|
-    t.bigint "operator_id"
-    t.bigint "role_id"
-    t.index ["operator_id", "role_id"], name: "index_operators_roles_on_operator_id_and_role_id"
-    t.index ["operator_id"], name: "index_operators_roles_on_operator_id"
-    t.index ["role_id"], name: "index_operators_roles_on_role_id"
-  end
-
   create_table "recipes", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "objective_id"
@@ -249,12 +172,12 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
   create_table "respawns", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.string "name", null: false
-    t.bigint "operator_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_respawns_on_game_id"
     t.index ["name", "game_id"], name: "index_respawns_on_name_and_game_id", unique: true
-    t.index ["operator_id"], name: "index_respawns_on_operator_id"
+    t.index ["user_id"], name: "index_respawns_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -319,8 +242,84 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
     t.index ["commander_id"], name: "index_teams_on_commander_id"
   end
 
+  create_table "user_recipes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "recipe_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_user_recipes_on_recipe_id"
+    t.index ["user_id", "recipe_id"], name: "index_user_recipes_on_user_id_and_recipe_id", unique: true
+    t.index ["user_id"], name: "index_user_recipes_on_user_id"
+  end
+
+  create_table "user_strategies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "strategy_id", null: false
+    t.bigint "objective_id"
+    t.bigint "primary_id"
+    t.bigint "secondary_id"
+    t.bigint "tertiary_id"
+    t.bigint "default_id"
+    t.boolean "private", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["default_id"], name: "index_user_strategies_on_default_id"
+    t.index ["objective_id"], name: "index_user_strategies_on_objective_id"
+    t.index ["primary_id"], name: "index_user_strategies_on_primary_id"
+    t.index ["secondary_id"], name: "index_user_strategies_on_secondary_id"
+    t.index ["strategy_id"], name: "index_user_strategies_on_strategy_id"
+    t.index ["tertiary_id"], name: "index_user_strategies_on_tertiary_id"
+    t.index ["user_id", "strategy_id"], name: "index_user_strategies_on_user_id_and_strategy_id", unique: true
+    t.index ["user_id"], name: "index_user_strategies_on_user_id"
+  end
+
+  create_table "user_teams", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.string "title", default: "User", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_user_teams_on_team_id"
+    t.index ["user_id", "team_id"], name: "index_user_teams_on_user_id_and_team_id", unique: true
+    t.index ["user_id"], name: "index_user_teams_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "online", default: false, null: false
+    t.bigint "game_setting_id", default: 1
+    t.bigint "room_id"
+    t.string "uid"
+    t.string "provider"
+    t.string "api_key"
+    t.string "encrypted_email"
+    t.string "encrypted_email_iv"
+    t.string "encrypted_email_bidx"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "current_objective_id"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["current_objective_id"], name: "index_users_on_current_objective_id"
+    t.index ["encrypted_email_bidx"], name: "index_users_on_encrypted_email_bidx", unique: true
+    t.index ["encrypted_email_iv"], name: "index_users_on_encrypted_email_iv", unique: true
+    t.index ["game_setting_id"], name: "index_users_on_game_setting_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["room_id"], name: "index_users_on_room_id"
+  end
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
   add_foreign_key "characters", "games"
-  add_foreign_key "characters", "operators"
+  add_foreign_key "characters", "users"
   add_foreign_key "ingredients", "ingredients", column: "parent_id"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "level_locations", "levels"
@@ -328,28 +327,28 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
   add_foreign_key "level_respawns", "levels"
   add_foreign_key "level_respawns", "respawns"
   add_foreign_key "levels", "games"
-  add_foreign_key "levels", "operators"
+  add_foreign_key "levels", "users"
   add_foreign_key "loadouts", "games"
-  add_foreign_key "loadouts", "operators"
+  add_foreign_key "loadouts", "users"
   add_foreign_key "locations", "games"
-  add_foreign_key "locations", "operators"
-  add_foreign_key "modes", "operators"
+  add_foreign_key "locations", "users"
+  add_foreign_key "modes", "users"
   add_foreign_key "objectives", "locations", column: "target_id"
   add_foreign_key "objectives", "objectives", column: "master_id"
   add_foreign_key "objectives", "objectives", column: "next_id"
-  add_foreign_key "operator_strategies", "objectives", column: "default_id"
-  add_foreign_key "operator_strategies", "objectives", column: "primary_id"
-  add_foreign_key "operator_strategies", "objectives", column: "secondary_id"
-  add_foreign_key "operator_strategies", "objectives", column: "tertiary_id"
-  add_foreign_key "operators", "games", column: "game_setting_id"
-  add_foreign_key "operators", "objectives", column: "current_objective_id"
-  add_foreign_key "recipes", "operators", column: "commander_id"
+  add_foreign_key "recipes", "users", column: "commander_id"
   add_foreign_key "respawns", "games"
-  add_foreign_key "respawns", "operators"
-  add_foreign_key "rooms", "operators", column: "commander_id"
-  add_foreign_key "strategies", "operators", column: "commander_id"
+  add_foreign_key "respawns", "users"
+  add_foreign_key "rooms", "users", column: "commander_id"
   add_foreign_key "strategies", "strategies", column: "inspiration_id"
+  add_foreign_key "strategies", "users", column: "commander_id"
   add_foreign_key "strategy_teams", "strategies"
   add_foreign_key "strategy_teams", "teams"
-  add_foreign_key "teams", "operators", column: "commander_id"
+  add_foreign_key "teams", "users", column: "commander_id"
+  add_foreign_key "user_strategies", "objectives", column: "default_id"
+  add_foreign_key "user_strategies", "objectives", column: "primary_id"
+  add_foreign_key "user_strategies", "objectives", column: "secondary_id"
+  add_foreign_key "user_strategies", "objectives", column: "tertiary_id"
+  add_foreign_key "users", "games", column: "game_setting_id"
+  add_foreign_key "users", "objectives", column: "current_objective_id"
 end

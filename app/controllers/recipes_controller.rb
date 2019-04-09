@@ -87,7 +87,7 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params[:recipe][:commander_id] = current_operator.id
+      params[:recipe][:commander_id] = current_user.id
       params.fetch(:recipe, {}).permit(:name, :objective_id, :commander_id)
     end
 

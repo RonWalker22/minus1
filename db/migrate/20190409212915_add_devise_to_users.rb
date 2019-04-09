@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class AddDeviseToOperators < ActiveRecord::Migration[5.2]
+class AddDeviseToUsers < ActiveRecord::Migration[6.0]
   def self.up
-    change_table :operators do |t|
+    change_table :users do |t|
       ## Database authenticatable
       t.string :encrypted_password, null: false, default: ""
 
@@ -36,9 +36,9 @@ class AddDeviseToOperators < ActiveRecord::Migration[5.2]
       # t.timestamps null: false
     end
 
-    add_index :operators, :reset_password_token, unique: true
-    # add_index :operators, :confirmation_token,   unique: true
-    # add_index :operators, :unlock_token,         unique: true
+    add_index :users, :reset_password_token, unique: true
+    # add_index :users, :confirmation_token,   unique: true
+    # add_index :users, :unlock_token,         unique: true
   end
 
   def self.down

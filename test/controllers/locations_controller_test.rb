@@ -7,8 +7,8 @@ class LocationsControllerTest < ActionDispatch::IntegrationTest
     @location_two = @record = locations(:two)
     @game = games(:one)
     @game_two = games(:two)
-    @operator = operators(:one)
-    sign_in @operator
+    @user = users(:one)
+    sign_in @user
   end
 
   test 'should create location' do

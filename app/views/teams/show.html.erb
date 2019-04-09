@@ -2,7 +2,7 @@
 <div class="columns is-centered">
   <div class="column is-two-thirds">
     <div class="box">
-      <% unless current_operator.teams.include?(@team) %>
+      <% unless current_user.teams.include?(@team) %>
         <button class="join-team-btn is-pulled-left button is-small is-rounded">Join</button>
       <% end %>
       <%= link_to 'Edit', edit_team_path(@team), 
@@ -34,8 +34,8 @@
           <% @members.each do |member| %>
             <tr>
               <td>
-                <%= link_to member.operator.name, 
-                            operator_path(member.operator) %>
+                <%= link_to member.user.name, 
+                            user_path(member.user) %>
               </td>
               <td>
                 <%= member.title %>
@@ -65,7 +65,7 @@
               </td>
               <td>
                 <%= link_to strat.commander.name, 
-                            operator_path(strat.commander) %>
+                            user_path(strat.commander) %>
               </td>
             </tr>
           <% end %>
@@ -107,11 +107,11 @@
           </thead>
           <tbody>
             <tr>
-              <td>Operator</td>
+              <td>User</td>
               <td>Add recipes</td>
             </tr>
             <tr>
-              <td>Lead Operator</td>
+              <td>Lead User</td>
               <td>Total Strategy Management</td>
             </tr>
             <tr>
@@ -126,7 +126,7 @@
           <div class="field">
             <%= form.label :title, class:"label" %>
             <div class="select">
-              <%= form.select :title, OperatorTeam::TITLE_OPTIONS, 
+              <%= form.select :title, UserTeam::TITLE_OPTIONS, 
                                       { :include_blank => '-- Select One --' },
                                       required: true, 
                                       class:"input",
@@ -138,7 +138,7 @@
             <%= form.label :member, for: 'member_ids', class:"label" %>
             <div  class="select is-multiple">
             <%= form.select(:member_ids, 
-                            @members.all.collect {|p| [ p.operator.name, p.id ] },
+                            @members.all.collect {|p| [ p.user.name, p.id ] },
                             {include_blank: false, include_hidden: false},
                              { required: true, multiple: true, :size => 5 }) %>
             </div>

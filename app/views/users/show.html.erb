@@ -1,4 +1,4 @@
-<% if @operator == current_operator %>
+<% if @user == current_user %>
   <%= link_to 'Create New API Key', api_key_path, 
                                     method: :put, :target => '_blank' %>
 <% end %>
@@ -6,7 +6,7 @@
 <div class="columns is-centered is-multiline">
   <div class="column is-narrow">
     <div class="box">
-      <h2 class="title has-text-centered">Operator <%=@operator.name%></h2>
+      <h2 class="title has-text-centered">User <%=@user.name%></h2>
     </div>
   </div>
 </div>
@@ -20,11 +20,11 @@
         <tr><th>Membership</th><th>Name</th><th>Commander</th></tr>
         </thead>
         <tbody>
-        <% @operator.teams.each do |team| %>
+        <% @user.teams.each do |team| %>
           <tr>
-            <td>Operator</td>
+            <td>User</td>
             <td><%= link_to team.name, strategy_path(team) %></td>
-            <td><%= link_to team.commander.name, operator_path(team.commander) %></td>
+            <td><%= link_to team.commander.name, user_path(team.commander) %></td>
           </tr>
         <% end %>
         </tbody>
@@ -39,7 +39,7 @@
         <tr><th>Name</th><th>Game</th></tr>
         </thead>
         <tbody>
-        <% @operator.commander_strategies.each do |strat| %>
+        <% @user.commander_strategies.each do |strat| %>
           <tr>
             <td><%= link_to strat.name, strategy_path(strat) %></td>
             <td><%= link_to strat.game.name, game_path(strat.game) %></td>

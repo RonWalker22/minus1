@@ -86,7 +86,7 @@ class RespawnsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def respawn_params
-      params[:respawn][:operator_id] = current_operator.id
-      params.require(:respawn).permit(:game_id, :name, :operator_id)
+      params[:respawn][:user_id] = current_user.id
+      params.require(:respawn).permit(:game_id, :name, :user_id)
     end
 end

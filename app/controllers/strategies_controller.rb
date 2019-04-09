@@ -5,7 +5,7 @@ class StrategiesController < ApplicationController
   # GET /strategies
   # GET /strategies.json
   def index
-    @game = Game.find(current_operator.game_setting_id || 1)
+    @game = Game.find(current_user.game_setting_id || 1)
     authorize @game
     @levels = @game.levels
     @modes = @game.modes
@@ -29,7 +29,7 @@ class StrategiesController < ApplicationController
 
   # GET /strategies/new
   def new
-    @game = Game.find(current_operator.game_setting_id)
+    @game = Game.find(current_user.game_setting_id)
     @strategy = Strategy.new
   end
 
@@ -92,7 +92,7 @@ class StrategiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def strategy_params
-      params[:strategy][:commander_id] = current_operator.id
+      params[:strategy][:commander_id] = current_user.id
       params.fetch(:strategy, {}).permit(:mode_id, :name, :commander_id, :level_id, :game_id)
     end
 

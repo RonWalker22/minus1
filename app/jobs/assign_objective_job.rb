@@ -1,12 +1,12 @@
 class AssignObjectiveJob < ApplicationJob
   queue_as :default
 
-  def perform(room, operator)
+  def perform(room, user)
     strategy = room.strategy
-    op_num = room.operators.where(online: true).count + 1
-    operator.current_objective_id = strategy.assignment_flow[op_num]
-    operator.save
-    objective = operator.current_objective.action + ' ' + operator.current_objective.target.name
-    OperatorChannel.broadcast_to operator, objective: objective
+    op_num = room.users.where(online: true).count + 1
+    user.current_objective_id = strategy.assignment_flow[op_num]
+    user.save
+    objective = user.current_objective.action + ' ' + user.current_objective.target.name
+    UserChannel.broadcast_to user, objective: objective
   end
 end

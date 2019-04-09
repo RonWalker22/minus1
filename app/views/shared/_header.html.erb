@@ -18,10 +18,10 @@
         <a class="navbar-item" href="/">
           Home
         </a>
-        <% if current_operator && policy(Strategy).show? %>
+        <% if current_user && policy(Strategy).show? %>
           <%=  link_to "Strategies", strategies_path, class: 'navbar-item' %>
         <% end %>
-        <% if operator_signed_in? %>
+        <% if user_signed_in? %>
           <a class="navbar-item" href=" <%= teams_path %>">
             Teams
           </a>
@@ -41,10 +41,10 @@
       </div>
 
       <div class="navbar-end">
-      <% if operator_signed_in? %>
+      <% if user_signed_in? %>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            <%= @game ? @game.name : current_operator.game_setting.name%>
+            <%= @game ? @game.name : current_user.game_setting.name%>
           </a>
           <div class="navbar-dropdown">
             <%= link_to "All Games", games_path, class: 'navbar-item'%>
@@ -52,20 +52,20 @@
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            <%= current_operator.name %>
+            <%= current_user.name %>
           </a>
           <div class="navbar-dropdown">
-            <%= link_to "Profile", operator_path(current_operator), class: "navbar-item" %> 
+            <%= link_to "Profile", user_path(current_user), class: "navbar-item" %> 
             <hr class="navbar-divider">
-            <%= link_to "Log out", destroy_operator_session_path, method:
+            <%= link_to "Log out", destroy_user_session_path, method:
           :delete, class: "navbar-item" %>
           </div>
         </div>
         <% end %>
         <div class="navbar-item">
           <div class="buttons">
-            <% unless operator_signed_in? %>
-              <%= link_to 'Login', new_operator_session_path, class: "button" %>
+            <% unless user_signed_in? %>
+              <%= link_to 'Login', new_user_session_path, class: "button" %>
             <% end %>
           </div>
         </div>

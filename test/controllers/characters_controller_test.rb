@@ -8,8 +8,8 @@ class CharactersControllerTest < ActionDispatch::IntegrationTest
     @character_two = @record = characters(:two)
     @game = games(:one)
     @game = games(:two)
-    @operator = operators(:one)
-    sign_in @operator
+    @user = users(:one)
+    sign_in @user
   end
 
   test 'should create character' do

@@ -28,7 +28,7 @@
         <tr>
           <th>Created By</th>
           <% commander = @recipe.commander%>
-          <td><%= link_to commander.name, operator_path(commander)%></td>
+          <td><%= link_to commander.name, user_path(commander)%></td>
         </tr>
         <tr>
           <th>Created At</th>

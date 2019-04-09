@@ -3,7 +3,7 @@ class CreateLoadouts < ActiveRecord::Migration[5.2]
     create_table :loadouts do |t|
       t.string :name
       t.references :game, foreign_key: true
-      t.references :operator, foreign_key: true
+      t.references :user, foreign_key: true
       t.string :kind
 
       t.timestamps

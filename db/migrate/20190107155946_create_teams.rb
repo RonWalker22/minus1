@@ -3,7 +3,7 @@ class CreateTeams < ActiveRecord::Migration[5.2]
     create_table :teams do |t|
       t.string :name, null: false
       t.references :commander,
-                   foreign_key: { to_table: :operators },
+                   foreign_key: { to_table: :users },
                    null: false
       t.string :password
 

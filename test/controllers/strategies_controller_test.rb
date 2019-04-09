@@ -9,8 +9,8 @@ class StrategiesControllerTest < ActionDispatch::IntegrationTest
     @mode = modes(:one)
     @strategy_one = strategies(:one)
     @strategy_two = strategies(:two)
-    @operator = operators(:one)
-    sign_in @operator
+    @user = users(:one)
+    sign_in @user
   end
 
   test 'should get index' do

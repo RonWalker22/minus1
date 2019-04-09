@@ -1,5 +1,5 @@
 class Room < ApplicationRecord
-  belongs_to :commander, class_name: 'Operator'
+  belongs_to :commander, class_name: 'User'
   belongs_to :strategy
-  has_many :operators
+  has_many :users
 end

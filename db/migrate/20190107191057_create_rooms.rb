@@ -2,7 +2,7 @@ class CreateRooms < ActiveRecord::Migration[5.2]
   def change
     create_table :rooms do |t|
       t.references :commander,
-                   foreign_key: { to_table: :operators },
+                   foreign_key: { to_table: :users },
                    null: false
       t.references :strategy
       t.string :name, null: false

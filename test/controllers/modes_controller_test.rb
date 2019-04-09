@@ -8,8 +8,8 @@ class ModesControllerTest < ActionDispatch::IntegrationTest
     @mode_two = @record = modes(:two)
     @game = games(:one)
     @game = games(:two)
-    @operator = operators(:one)
-    sign_in @operator
+    @user = users(:one)
+    sign_in @user
   end
 
   test 'should create mode' do

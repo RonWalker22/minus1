@@ -27,7 +27,7 @@ class ApplicationPolicy
   end
 
   def edit?
-    return true if record.operator_id == user.id
+    return true if record.user_id == user.id
 
     user.has_role?(:maintainer, record.game) || user.has_role?(:admin)
   end

@@ -1,13 +1,13 @@
 require 'test_helper'
 
-class OperatorRecipeTest < ActiveSupport::TestCase
+class UserRecipeTest < ActiveSupport::TestCase
   setup do
-    @operator = operators(:one)
+    @user = users(:one)
     @recipe = recipes(:one)
   end
-  test 'disallows duplicate OperatorRecipe' do
+  test 'disallows duplicate UserRecipe' do
     begin
-      OperatorRecipe.create!(operator_id: @operator.id,
+      UserRecipe.create!(user_id: @user.id,
                              recipe_id: @recipe.id)
     rescue ActiveRecord::RecordNotUnique => invalid
     end

@@ -6,12 +6,12 @@ class StrategyTest < ActiveSupport::TestCase
     @strategy_three = strategies(:three)
   end
 
-  test 'has operators' do
-    assert_equal 'Operator', @strategy.operators.first.class.name
+  test 'has users' do
+    assert_equal 'User', @strategy.users.first.class.name
   end
 
   test 'has a commander' do
-    assert_equal 'Operator', @strategy.commander.class.name
+    assert_equal 'User', @strategy.commander.class.name
   end
 
   test 'has objectives' do

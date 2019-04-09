@@ -14,13 +14,13 @@
         <dd class="content">The overall tactical plan at a commander level. A strategy will contain one or more objectives. Strategies can be simple, extremely complex, or anything in between.  </dd>
 
         <dt class="title is-5">Objective</dt>
-        <dd class="content">The tactical plan at an operator level. Each operator will be assigned to a maximum of a single objective. Each objective may have as many operators as it requires.</dd>
+        <dd class="content">The tactical plan at an user level. Each user will be assigned to a maximum of a single objective. Each objective may have as many users as it requires.</dd>
 
         <dt class="title is-5">Stacked Objective</dt>
         <dd class="content">An Objective that is linked to one or more other objectives. Stacked objectives have an order, and each objective must be completed separately.</dd>
 
         <dt class="title is-5">Recipe</dt>
-        <dd class="content">Outlines how an objective should be completed. Recipes are optional. An Objective without a mandatory recipe, allows the operator to complete the objective on his own terms. A Recipe may contains ingredients and or directions.
+        <dd class="content">Outlines how an objective should be completed. Recipes are optional. An Objective without a mandatory recipe, allows the user to complete the objective on his own terms. A Recipe may contains ingredients and or directions.
         </dd>
 
         <dt class="title is-5">Ingredient</dt>
@@ -50,17 +50,17 @@
     <div name="objective-form-terms" id="objective-form-terms">
       <h2 class="title is-3 has-text-centered">Objective Form Terms</h2>
       <dl>
-        <dt class="title is-5">Minimum operators</dt>
-        <dd class="content">When the app assigns objectives for each operator(at random), this value determines the minimum number of operators that will receive this objective.</dd>
+        <dt class="title is-5">Minimum users</dt>
+        <dd class="content">When the app assigns objectives for each user(at random), this value determines the minimum number of users that will receive this objective.</dd>
 
-        <dt class="title is-5">Maximum operators</dt>
-        <dd class="content">When the app assigns objectives for each operator(at random), this value determines the maximum number of operators that will receive this objective.</dd>
+        <dt class="title is-5">Maximum users</dt>
+        <dd class="content">When the app assigns objectives for each user(at random), this value determines the maximum number of users that will receive this objective.</dd>
 
         <dt class="title is-5">Priority level</dt>
-        <dd class="content">When the app assigns objectives to each operator, this value helps reduce the randomness. Higher priority objectives will receive operators before lower priority ones. 10 is the lowest priority level, 1 is the highest priority level. This is especially useful when the total number of operators is less than the minimum number of operators required for the entire strategy.</dd>
+        <dd class="content">When the app assigns objectives to each user, this value helps reduce the randomness. Higher priority objectives will receive users before lower priority ones. 10 is the lowest priority level, 1 is the highest priority level. This is especially useful when the total number of users is less than the minimum number of users required for the entire strategy.</dd>
 
         <dt class="title is-5">Stack objective</dt>
-        <dd class="content">Stack up objectives one after the other. This allow operators to be assigned multiple objectives, but each objective must be complete separately.</dd>
+        <dd class="content">Stack up objectives one after the other. This allow users to be assigned multiple objectives, but each objective must be complete separately.</dd>
 
         <dt class="title is-5">Dependency</dt>
         <dd class="content">Ensure the parent objective is completed before the children objectives can be started.</dd>
@@ -73,26 +73,26 @@
   <div class="column">
     <h2 class="title is-3 has-text-centered">Team Composition</h2>
     <dl>
-      <dt class="title is-5">Operator</dt>
+      <dt class="title is-5">User</dt>
       <dd class="content">A team member</dd>
 
-      <dt class="title is-5">Lead Operator</dt>
-      <dd class="content">An operator who has full strategy management.</dd>
+      <dt class="title is-5">Lead User</dt>
+      <dd class="content">An user who has full strategy management.</dd>
 
       <dt class="title is-5">Commander</dt>
-      <dd class="content">An operator with full strategy & team
+      <dd class="content">An user with full strategy & team
       management.</dd>
       
       <dt class="title is-5">Freelancer</dt>
-      <dd class="content">An operator that has either not been assigned an
+      <dd class="content">An user that has either not been assigned an
       objective or has already completed all of its assigned objectives. </dd>
     </dl>
   </div>
   <div class="column is-narrow">
     <div class="mermaid">
       graph TD
-          Commander-->LeadOp(Lead Operator)
-          LeadOp-->Operator
+          Commander-->LeadOp(Lead User)
+          LeadOp-->User
     </div>
   </div>
 </div>

@@ -3,11 +3,11 @@
 one:
   name: MyString
   game: one
-  operator: one
+  user: one
   kind: MyString
 
 two:
   name: MyString
   game: two
-  operator: two
+  user: two
   kind: MyString

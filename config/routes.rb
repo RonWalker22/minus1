@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  authenticate :operator, ->(op) { op.has_role?(:admin) } do
+  authenticate :user, ->(op) { op.has_role?(:admin) } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   resources :respawns
   resources :modes
   resources :characters
-  devise_for :operators,
-             controllers: { omniauth_callbacks: 'operators/omniauth_callbacks' }
-  resources :operators, only: [:index, :show]
+  devise_for :users,
+             controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  resources :users, only: [:index, :show]
   resources :games
   resources :levels
   resources :directions
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get '/docs' => 'static_pages#docs'
   get '/strategies/:id/xml' => 'strategies#show_xml', as: 'strategy_xml'
   patch '/games/:id/switch/' => 'games#switch', as: 'switch_game'
-  put '/operators/api_key' => 'operators#create_api_key', as: 'api_key'
+  put '/users/api_key' => 'users#create_api_key', as: 'api_key'
   put '/teams/:id/link/:game_id' => 'teams#link_game', as: 'game_link'
   delete '/teams/:id/link/:game_id' => 'teams#unlink_game', as: 'game_unlink'
   post 'teams/:id/join' => 'teams#join_team', as: 'join_team'

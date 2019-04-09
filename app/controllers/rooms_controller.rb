@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
-    @game = Game.find(current_operator.game_setting_id || 1)
+    @game = Game.find(current_user.game_setting_id || 1)
     @rooms = Room.all
   end
 
@@ -69,7 +69,7 @@ class RoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
-      params[:room][:commander_id] = current_operator.id
+      params[:room][:commander_id] = current_user.id
       params.fetch(:room, {}).permit(:name,
                                      :commander_id,
                                      :private,

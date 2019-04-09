@@ -5,11 +5,11 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  operator: one
+  user: one
   room: one
   objective: one
 
 two:
-  operator: two
+  user: two
   room: two
   objective: two

@@ -6,7 +6,7 @@
 #
 one:
   strategy: one
-  operator: one
+  user: one
   primary: one
   secondary: two
   tertiary: three
@@ -14,7 +14,7 @@ one:
 
 two:
   strategy: two
-  operator: two
+  user: two
   primary: two
   secondary: one
   tertiary: three

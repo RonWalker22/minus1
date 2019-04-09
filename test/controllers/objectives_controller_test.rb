@@ -3,9 +3,9 @@ class ObjectivesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @objective = objectives(:one)
-    @operator = operators(:one)
+    @user = users(:one)
     @strategy = strategies(:one)
-    sign_in @operator
+    sign_in @user
   end
 
   test 'should get index' do

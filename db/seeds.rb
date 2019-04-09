@@ -19,7 +19,7 @@ def create_r6_game
 end
 
 def create_admin
-  @admin = Operator.create! name: 'admin',
+  @admin = User.create! name: 'admin',
                             password: Rails.application.credentials.admin[:password],
                             game_setting_id: @r6_game.id
 end
@@ -69,7 +69,7 @@ def create_r6_characters
   r6_characters.each do |character|
     Character.create! name: character,
                       game_id: @r6_game.id,
-                      operator_id: @admin.id
+                      user_id: @admin.id
   end
 end
 
@@ -941,10 +941,10 @@ def create_r6_levels_locations
 
   r6_levels_locations.each do |level, locations|
     new_level = Level.create! name: level, game_id: @r6_game.id,
-                              operator_id: @admin.id
+                              user_id: @admin.id
     locations.each do |location|
       new_location = Location.create! name: location, game_id: @r6_game.id,
-                                      operator_id: @admin.id
+                                      user_id: @admin.id
       LevelLocation.create! level_id: new_level.id,
                             location_id: new_location.id
     rescue ActiveRecord::RecordNotUnique
@@ -954,9 +954,9 @@ def create_r6_levels_locations
 end
 
 def create_mode
-  Mode.create! name: 'Bomb', game_id: @r6_game.id, operator_id: @admin.id
-  Mode.create! name: 'Hostage', game_id: @r6_game.id, operator_id: @admin.id
-  Mode.create! name: 'Secure Area', game_id: @r6_game.id, operator_id: @admin.id
+  Mode.create! name: 'Bomb', game_id: @r6_game.id, user_id: @admin.id
+  Mode.create! name: 'Hostage', game_id: @r6_game.id, user_id: @admin.id
+  Mode.create! name: 'Secure Area', game_id: @r6_game.id, user_id: @admin.id
 end
 
 def create_rainbow_six
@@ -997,9 +997,9 @@ def create_room
   Room.create commander_id: 1, name: 'happy', strategy_id: 1
 end
 
-def create_operators
+def create_users
   100.times do |i|
-    Operator.create name: "Op #{i}",
+    User.create name: "Op #{i}",
                     password: '123456',
                     game_setting_id: @r6_game.id,
                     room_id: 1
@@ -1011,6 +1011,6 @@ create_rainbow_six
 create_strategies
 create_objectives
 create_room
-create_operators
+create_users
 
 @admin.add_role :admin

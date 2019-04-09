@@ -65,7 +65,7 @@ class CharactersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def character_params
-      params[:character][:operator_id] = current_operator.id
-      params.require(:character).permit(:game_id, :name, :operator_id)
+      params[:character][:user_id] = current_user.id
+      params.require(:character).permit(:game_id, :name, :user_id)
     end
 end

@@ -5,7 +5,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @game = current_operator.game_setting
+    @game = current_user.game_setting
     @teams = @game.teams
     @team = Team.new
     set_linkable_teams
@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @members = OperatorTeam.includes(:operator).where(team_id: @team.id)
+    @members = UserTeam.includes(:user).where(team_id: @team.id)
   end
 
   # GET /teams/new
@@ -78,7 +78,7 @@ class TeamsController < ApplicationController
 
   def join_team
     if params[:password] == @team.password || !@team.password
-      unless @team.operators << current_operator
+      unless @team.users << current_user
         flash.notice = 'You are not able to join this team.'
       end
     end
@@ -87,7 +87,7 @@ class TeamsController < ApplicationController
 
   def change_member_title
     authorize @team
-    members = OperatorTeam.find(params[:member_ids])
+    members = UserTeam.find(params[:member_ids])
 
     members.each do |member|
       member.title = params[:title]
@@ -109,14 +109,14 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params[:team][:commander_id] = current_operator.id
+      params[:team][:commander_id] = current_user.id
       params[:team][:password] = nil if params[:team][:password].empty?
       params.fetch(:team, {}).permit(:name, :commander_id, :password)
     end
 
     def set_linkable_teams
       @linkable_teams =
-        current_operator.commander_teams.preload(:game_teams).select do |team|
+        current_user.commander_teams.preload(:game_teams).select do |team|
           team.game_teams.pluck(:game_id).exclude?(@game.id)
         end
     end

@@ -66,7 +66,7 @@ class LoadoutsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loadout_params
-      params[:loadout][:operator_id] = current_operator.id
-      params.require(:loadout).permit(:name, :game_id, :operator_id, :kind)
+      params[:loadout][:user_id] = current_user.id
+      params.require(:loadout).permit(:name, :game_id, :user_id, :kind)
     end
 end

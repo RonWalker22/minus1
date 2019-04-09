@@ -23,24 +23,24 @@ class Objective < ApplicationRecord
            class_name: 'Objective',
            foreign_key: 'master_id', dependent: :nullify
   has_many :primaries,
-           class_name: 'OperatorStrategy',
+           class_name: 'UserStrategy',
            foreign_key: 'primary_id',
            dependent: :nullify
   has_many :secondaries,
-           class_name: 'OperatorStrategy',
+           class_name: 'UserStrategy',
            foreign_key: 'secondary_id',
            dependent: :nullify
   has_many :tertiaries,
-           class_name: 'OperatorStrategy',
+           class_name: 'UserStrategy',
            foreign_key: 'tertiary_id',
            dependent: :nullify
   has_many :defaults,
-           class_name: 'OperatorStrategy',
+           class_name: 'UserStrategy',
            foreign_key: 'default_id',
            dependent: :nullify
-  has_many :operator_strategies, dependent: :nullify
+  has_many :user_strategies, dependent: :nullify
   has_many :current_ops,
-           class_name: 'Operator',
+           class_name: 'User',
            foreign_key: 'current_objective_id'
   after_commit { UpdateAssignmentFlowJob.perform_later(strategy) }
 end

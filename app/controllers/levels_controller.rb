@@ -69,7 +69,7 @@ class LevelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params[:level][:operator_id] = current_operator.id
-      params.fetch(:level, {}).permit(:name, :game_id, :operator_id)
+      params[:level][:user_id] = current_user.id
+      params.fetch(:level, {}).permit(:name, :game_id, :user_id)
     end
 end

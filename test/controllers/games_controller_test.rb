@@ -4,8 +4,8 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @game = games(:one)
-    @operator = operators(:one)
-    sign_in @operator
+    @user = users(:one)
+    sign_in @user
   end
 
   test 'should get index' do

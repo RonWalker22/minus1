@@ -7,7 +7,7 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :new_password, for: "operator_password", class:"label"%> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.label :new_password, for: "user_password", class:"label"%> <i>(leave blank if you don't want to change it)</i><br />
       <%= f.password_field :password, autocomplete: "new-password", class:"input" %>
       <% if @minimum_password_length %>
         <br />

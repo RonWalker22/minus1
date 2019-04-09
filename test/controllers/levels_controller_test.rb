@@ -4,11 +4,11 @@ class LevelsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   include AuthorizationTests
   setup do
-    @operator = operators(:one)
+    @user = users(:one)
     @level = @record = levels(:one)
     @level_two = @record = levels(:two)
     @game = games(:one)
-    sign_in @operator
+    sign_in @user
   end
 
   test 'should create level' do

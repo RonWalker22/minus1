@@ -39,16 +39,16 @@
             <tr>
               <th>Maintainers:</th>
                 <td>
-                  <% @maintainers.map do |operator| %>
-                      <%= link_to operator.name, operator_path(operator.id)%>
+                  <% @maintainers.map do |user| %>
+                      <%= link_to user.name, user_path(user.id)%>
                   <% end %>
                 </td>
             </tr>
             <tr>
               <th>Contributors:</th>
                 <td>
-                  <% @contributors.map do |operator| %>
-                      <%= link_to operator.name, operator_path(operator.id)%>
+                  <% @contributors.map do |user| %>
+                      <%= link_to user.name, user_path(user.id)%>
                   <% end %>
                 </td>
             </tr>

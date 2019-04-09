@@ -11,10 +11,10 @@ class RecipePolicy < ApplicationPolicy
 
     return true if record_author == user || strategy_author == user
 
-    record.objective.strategy.teams.includes(:operators).each do |team|
-      if team.operators.include?(user)
-        member = OperatorTeam.find_by(team_id: team.id, operator_id: user.id)
-        return true unless member.title == 'Operator'
+    record.objective.strategy.teams.includes(:users).each do |team|
+      if team.users.include?(user)
+        member = UserTeam.find_by(team_id: team.id, user_id: user.id)
+        return true unless member.title == 'User'
       end
     end
     false

@@ -4,9 +4,9 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @recipe = recipes(:one)
-    @operator = operators(:one)
+    @user = users(:one)
     @objective = objectives(:one)
-    sign_in @operator
+    sign_in @user
   end
 
   test 'should get index' do

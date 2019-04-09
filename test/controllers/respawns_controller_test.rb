@@ -8,8 +8,8 @@ class RespawnsControllerTest < ActionDispatch::IntegrationTest
     @respawn_two = @record = respawns(:two)
     @game = games(:one)
     @game_two = games(:two)
-    @operator = operators(:one)
-    sign_in @operator
+    @user = users(:one)
+    sign_in @user
   end
 
   test 'should not create duplicate respawn' do
@@ -39,7 +39,7 @@ class RespawnsControllerTest < ActionDispatch::IntegrationTest
                                                       level_id: [@game.levels.first] } }
   end
 
-  # this operator is not authorized(did not create)
+  # this user is not authorized(did not create)
   test 'should not update respawn' do
     begin
       patch respawn_url(@respawn_two), params: { respawn: {

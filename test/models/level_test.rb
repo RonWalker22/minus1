@@ -3,7 +3,7 @@ require 'test_helper'
 class LevelTest < ActiveSupport::TestCase
   setup do
     @level = levels(:one)
-    @operator = operators(:one)
+    @user = users(:one)
   end
 
   test 'has game' do
@@ -14,7 +14,7 @@ class LevelTest < ActiveSupport::TestCase
     begin
       Level.create!(name: @level.name,
                     game_id: @level.game_id,
-                    operator_id: @operator.id)
+                    user_id: @user.id)
     rescue ActiveRecord::RecordNotUnique => invalid
     end
     assert invalid

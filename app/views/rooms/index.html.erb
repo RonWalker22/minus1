@@ -42,7 +42,7 @@
 
   <tbody>
     <% @rooms.each do |room| %>
-      <% next unless room.commander.id == current_operator.id %>
+      <% next unless room.commander.id == current_user.id %>
       <tr>
         <td><%= link_to room.name, room%></td>
         <td><%= link_to room.commander.name, room.commander %></td>
@@ -62,7 +62,7 @@
 
   <tbody>
     <% @rooms.each do |room| %>
-      <% next unless room.commander.id == current_operator.id %>
+      <% next unless room.commander.id == current_user.id %>
       <tr>
         <td><%= link_to room.name, room%></td>
         <td><%= link_to room.commander.name, room.commander %></td>

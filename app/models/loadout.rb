@@ -4,6 +4,6 @@ class Loadout < ApplicationRecord
   validates_inclusion_of :kind, in: KIND_OPTIONS
 
   belongs_to :game
-  belongs_to :operator
+  belongs_to :user
   has_many :ingredients, as: :piece
 end

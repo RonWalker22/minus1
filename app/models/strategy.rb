@@ -1,5 +1,5 @@
 class Strategy < ApplicationRecord
-  belongs_to :commander, class_name: 'Operator'
+  belongs_to :commander, class_name: 'User'
   belongs_to :mode
   belongs_to :game
   belongs_to :level
@@ -9,8 +9,8 @@ class Strategy < ApplicationRecord
            foreign_key: 'inspiration_id',
            dependent: :nullify
   has_many :rooms
-  has_many :operator_strategies
-  has_many :operators, through: :operator_strategies
+  has_many :user_strategies
+  has_many :users, through: :user_strategies
   has_many :objectives
   has_many :strategy_teams, dependent: :delete_all
   has_many :teams, through: :strategy_teams

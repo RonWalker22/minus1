@@ -21,9 +21,9 @@
               <td><%= i + 1 %>.</td>
               <td><%= link_to team.name, team %></td>
               <td>
-                <%= link_to team.commander.name, operator_path(team.commander) %>
+                <%= link_to team.commander.name, user_path(team.commander) %>
               </td>
-              <td><%= team.operators.count %></td>
+              <td><%= team.users.count %></td>
             </tr>
           <% end %>
         </tbody>

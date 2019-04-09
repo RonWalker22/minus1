@@ -14,7 +14,7 @@ class ActiveSupport::TestCase
   module AuthorizationTests
     extend ActiveSupport::Concern
     included do
-      # this operator is not authorized(did not create)
+      # this user is not authorized(did not create)
       test 'should not destroy' do
         assert_no_difference(@record.class.name + '.count', -1) do
           begin
@@ -26,22 +26,22 @@ class ActiveSupport::TestCase
       end
 
       test 'should allow admin to destroy' do
-        @operator.add_role(:admin)
+        @user.add_role(:admin)
         assert_difference(@record.class.name + '.count', -1) do
           delete url_for(@record)
         end
       end
 
       test 'should allow maintainer to destroy' do
-        @operator.add_role(:maintainer, @game_two)
+        @user.add_role(:maintainer, @game_two)
         assert_difference(@record.class.name + '.count', -1) do
           delete url_for(@record)
         end
       end
 
-      # this operator is not authorized(did not create)
+      # this user is not authorized(did not create)
       test 'should not allow contributor to destroy' do
-        @operator.add_role(:contributor, @game_two)
+        @user.add_role(:contributor, @game_two)
         assert_no_difference(@record.class.name + '.count', -1) do
           begin
             delete url_for(@record)

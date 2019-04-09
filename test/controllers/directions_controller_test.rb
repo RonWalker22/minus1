@@ -3,9 +3,9 @@ class DirectionsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @direction = directions(:one)
-    @operator = operators(:one)
+    @user = users(:one)
     @recipe = recipes(:one)
-    sign_in @operator
+    sign_in @user
   end
 
   test 'should get index' do

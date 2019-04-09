@@ -35,8 +35,8 @@ class ObjectiveTest < ActiveSupport::TestCase
     assert_not master_objective.master
   end
 
-  test 'has operators' do
-    assert_equal 'Operator', objective.operators.first.class.name
+  test 'has users' do
+    assert_equal 'User', objective.users.first.class.name
   end
 
   test 'has a strategy' do

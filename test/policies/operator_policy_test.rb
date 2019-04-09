@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class OperatorPolicyTest < ActiveSupport::TestCase
+class UserPolicyTest < ActiveSupport::TestCase
   def test_scope; end
 
   def test_show; end

@@ -49,7 +49,7 @@
   </thead>
 
   <tbody>
-    <% current_operator.teams.each do |team| %>
+    <% current_user.teams.each do |team| %>
       <% team.strategies.each do |strat| %>
         <tr>
           <td><%= link_to strat.name, strat%></td>
@@ -74,7 +74,7 @@
 
   <tbody>
     <% @strategies.each do |strat| %>
-      <% next unless strat.commander.id == current_operator.id %>
+      <% next unless strat.commander.id == current_user.id %>
       <tr>
         <td><%= link_to strat.name, strat%></td>
         <td>----</td>

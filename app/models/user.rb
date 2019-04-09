@@ -1,8 +1,10 @@
 # users
-class Operator < ApplicationRecord
+class User < ApplicationRecord
   attr_encrypted :email, key: [Rails.application.credentials.email[:ENCRYPTION_KEY]].pack("H*")
   blind_index :email, key: [Rails.application.credentials.email[:BLIND_INDEX_KEY]].pack("H*")
   rolify
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,
          omniauth_providers: [:steam, :discord]
@@ -22,13 +24,12 @@ class Operator < ApplicationRecord
   belongs_to :current_objective,
              class_name: 'Objective',
              optional: true
-  has_many :operator_strategies
-  has_many :strategies, through: :operator_strategies
-  has_many :operator_recipes
-  has_many :recipes, through: :operator_recipes
-  has_many :operator_teams
-  has_many :teams, through: :operator_teams
-  validates :name, uniqueness: { case_sensitive: false }
+  has_many :user_strategies
+  has_many :strategies, through: :user_strategies
+  has_many :user_recipes
+  has_many :recipes, through: :user_recipes
+  has_many :user_teams
+  has_many :teams, through: :user_teams
   belongs_to :game_setting, class_name: 'Game', foreign_key: 'game_setting_id'
 
   def email_required?

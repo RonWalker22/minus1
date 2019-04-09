@@ -2,7 +2,7 @@ class CreateStrategies < ActiveRecord::Migration[5.2]
   def change
     create_table :strategies do |t|
       t.references :commander,
-                   foreign_key: { to_table: :operators },
+                   foreign_key: { to_table: :users },
                    null: false
       t.references :mode
       t.references :level

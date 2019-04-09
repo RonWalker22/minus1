@@ -17,7 +17,7 @@ class LoadoutsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create loadout" do
     assert_difference('Loadout.count') do
-      post loadouts_url, params: { loadout: { game_id: @loadout.game_id, kind: @loadout.kind, name: @loadout.name, operator_id: @loadout.operator_id } }
+      post loadouts_url, params: { loadout: { game_id: @loadout.game_id, kind: @loadout.kind, name: @loadout.name, user_id: @loadout.user_id } }
     end
 
     assert_redirected_to loadout_url(Loadout.last)
@@ -34,7 +34,7 @@ class LoadoutsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update loadout" do
-    patch loadout_url(@loadout), params: { loadout: { game_id: @loadout.game_id, kind: @loadout.kind, name: @loadout.name, operator_id: @loadout.operator_id } }
+    patch loadout_url(@loadout), params: { loadout: { game_id: @loadout.game_id, kind: @loadout.kind, name: @loadout.name, user_id: @loadout.user_id } }
     assert_redirected_to loadout_url(@loadout)
   end
 
