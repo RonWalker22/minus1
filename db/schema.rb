@@ -201,13 +201,16 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
   end
 
   create_table "operators", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.boolean "online", default: false, null: false
     t.bigint "game_setting_id", default: 1
     t.bigint "room_id"
     t.string "uid"
     t.string "provider"
     t.string "api_key"
+    t.string "encrypted_email"
+    t.string "encrypted_email_iv"
+    t.string "encrypted_email_bidx"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -216,6 +219,8 @@ ActiveRecord::Schema.define(version: 2019_03_18_233026) do
     t.datetime "remember_created_at"
     t.bigint "current_objective_id"
     t.index ["current_objective_id"], name: "index_operators_on_current_objective_id"
+    t.index ["encrypted_email_bidx"], name: "index_operators_on_encrypted_email_bidx", unique: true
+    t.index ["encrypted_email_iv"], name: "index_operators_on_encrypted_email_iv", unique: true
     t.index ["game_setting_id"], name: "index_operators_on_game_setting_id"
     t.index ["name"], name: "index_operators_on_name", unique: true
     t.index ["reset_password_token"], name: "index_operators_on_reset_password_token", unique: true

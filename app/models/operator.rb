@@ -1,5 +1,7 @@
 # users
 class Operator < ApplicationRecord
+  attr_encrypted :email, key: [Rails.application.credentials.email[:ENCRYPTION_KEY]].pack("H*")
+  blind_index :email, key: [Rails.application.credentials.email[:BLIND_INDEX_KEY]].pack("H*")
   rolify
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,

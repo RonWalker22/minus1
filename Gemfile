@@ -87,3 +87,7 @@ gem 'sidekiq'
 # Required for Sidekiq::Web
 
 gem 'sassc', '>= 2.0.1'
+
+# securing User Emails
+gem 'attr_encrypted'
+gem 'blind_index'
