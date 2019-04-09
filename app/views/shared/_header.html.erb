@@ -2,7 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <%= image_tag 'm1-logo.png', alt: 'Minus 1
+        <%= image_tag 'm1-logo.png', alt: 'Minus1
         logo.', id:'m1-logo'%>
       </a>
 
@@ -81,7 +81,6 @@
           <div class="buttons">
             <% unless operator_signed_in? %>
               <%= link_to 'Login', new_operator_session_path, class: "button" %>
-              <%= link_to 'Sign up', new_operator_registration_path, class: "button" %>
             <% end %>
           </div>
         </div>
