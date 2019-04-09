@@ -42,21 +42,6 @@
 
       <div class="navbar-end">
       <% if operator_signed_in? %>
-        <% if controller_name == 'games' && action_name == 'index' %>
-          <div class="navbar-item">
-            <%= form_tag(games_path, :method => "get", id: "search-form") do %>
-              <div class="field has-addons">
-                <div class="control">
-                  <%= text_field_tag :search, params[:search], required: true,
-                  placeholder: "Add New Game", class: 'input' %>
-                </div>
-                <div class="control">
-                  <%= submit_tag "Search", :name => nil, class: 'button' %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             <%= @game ? @game.name : current_operator.game_setting.name%>
