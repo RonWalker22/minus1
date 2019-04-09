@@ -1,21 +1,10 @@
 <%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <% case provider %>
-    <% when :steam %>
+  <%- resource_class.omniauth_providers.reverse.each do |provider| %>
+    <div class="omniauth-logins">
       <a href="<%=omniauth_authorize_path(resource_name, provider)%>">
-        <i class="fab fa-steam fa-3x"></i>
+        <i class="fab fa-<%=provider%> fa-3x"></i>
         <%="Sign in with #{OmniAuth::Utils.camelize(provider)}"%>
       </a>
-      <br/> <br>
-    <% when :discord %>
-      <a href="<%=omniauth_authorize_path(resource_name, provider)%>">
-        <i class="fab fa-discord fa-3x"></i>
-        <%="Sign in with #{OmniAuth::Utils.camelize(provider)}"%>
-      </a>
-    <% else %>
-      <a href="<%=omniauth_authorize_path(resource_name, provider)%>">
-      <%="Sign in with #{OmniAuth::Utils.camelize(provider)}"%>
-    </a>
-    <% end %>
+    </div>
   <% end -%>
 <% end -%>
