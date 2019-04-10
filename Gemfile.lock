@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:RonWalker22/simple_discussion.git
+  remote: https://github.com/RonWalker22/simple_discussion.git
   revision: cf0b0fd2e8cd658825ad13d73d4c93dec9023d49
   branch: master
   specs:

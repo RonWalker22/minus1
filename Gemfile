@@ -92,4 +92,4 @@ gem 'sassc', '>= 2.0.1'
 gem 'attr_encrypted'
 gem 'blind_index'
 
-gem 'simple_discussion', :git => 'git@github.com:RonWalker22/simple_discussion.git', :branch => 'master'
+gem 'simple_discussion', :git => 'https://github.com/RonWalker22/simple_discussion.git', :branch => 'master'
