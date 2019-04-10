@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :ingredients
   require 'sidekiq/web'
 
+  mount SimpleDiscussion::Engine => "/forum"
   mount ActionCable.server => '/cable'
 
   authenticate :user, ->(op) { op.has_role?(:admin) } do

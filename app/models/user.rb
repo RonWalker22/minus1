@@ -1,5 +1,6 @@
 # users
 class User < ApplicationRecord
+  include SimpleDiscussion::ForumUser
   attr_encrypted :email, key: [Rails.application.credentials.email[:ENCRYPTION_KEY]].pack("H*")
   blind_index :email, key: [Rails.application.credentials.email[:BLIND_INDEX_KEY]].pack("H*")
   rolify

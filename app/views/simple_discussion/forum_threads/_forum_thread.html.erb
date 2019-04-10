@@ -1,0 +1,39 @@
+<%= cache forum_thread do %>
+  <div class="forum-thread">
+    <div class="columns">
+
+      <div class="column is-narrow has-text-center">
+          <%= avatar_tag(forum_thread.user.email) %>
+      </div>
+
+      <div class="column">
+        <h4>
+          <% if forum_thread.solved? %>
+            <span class="text-success">
+              <i class="fas fa-check-circle"></i>
+            </span>
+          <% end %>
+
+          <%= link_to simple_discussion.forum_thread_path(forum_thread) do %>
+            <i class="fas fa-thumbtack <%="text-muted" if forum_thread.pinned? %>"></i> 
+            
+            <%= forum_thread.title %>
+          <% end %>
+        </h4>
+
+        <div class="thread-details">
+          <strong><%= category_link(forum_thread.forum_category) %></strong>
+          • <%= t('asked_time_ago', time: time_ago_in_words(forum_thread.created_at), author: forum_thread.user.name) %>
+        </div>
+      </div>
+
+      <div class="column is-narrow">
+        <%= link_to simple_discussion.forum_thread_path(forum_thread), class: "thread-posts-count" do %>
+          <span class="count"><%= forum_thread.forum_posts_count %></span>
+          <small><%= t("post", count: forum_thread.forum_posts_count) %></small>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+<% end %>

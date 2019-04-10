@@ -1,0 +1,32 @@
+<div class="columns">
+  <div class="column is-narrow">
+    <h1>
+      <i class="fas fa-thumbtack <%="text-muted" if @forum_thread.pinned?%>">
+      </i> 
+      <%= @forum_thread.title %>
+    </h1>
+  </div>
+
+  <% if is_moderator_or_owner?(@forum_thread) %>
+    <div class="column">
+      <%= link_to simple_discussion.edit_forum_thread_path(@forum_thread),
+        class: "text-muted",
+        data: { toggle: "tooltip", placement: "left" },
+        title: t('edit_this_thread') do%>
+        <i class="fas fa-pencil-alt"></i> 
+      <% end %>
+    </div>
+  <% end %>
+
+</div>
+
+<p class="thread-details">
+  <strong><%= category_link(@forum_thread.forum_category) %></strong>
+  • <%= t('asked_time_ago', time: time_ago_in_words(@forum_thread.created_at), author: @forum_thread.user.name) %>
+</p>
+
+<%= render partial: "simple_discussion/forum_posts/forum_post", collection: @forum_thread.forum_posts.includes(:user).sorted %>
+
+<br>
+
+<%= render partial: "simple_discussion/forum_posts/form" if user_signed_in? %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_09_212915) do
+ActiveRecord::Schema.define(version: 2019_04_10_014943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,43 @@ ActiveRecord::Schema.define(version: 2019_04_09_212915) do
     t.datetime "updated_at", null: false
     t.index ["recipe_id", "step"], name: "index_directions_on_recipe_id_and_step", unique: true
     t.index ["recipe_id"], name: "index_directions_on_recipe_id"
+  end
+
+  create_table "forum_categories", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.string "color", default: "000000"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forum_posts", id: :serial, force: :cascade do |t|
+    t.integer "forum_thread_id"
+    t.integer "user_id"
+    t.text "body"
+    t.boolean "solved", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forum_subscriptions", id: :serial, force: :cascade do |t|
+    t.integer "forum_thread_id"
+    t.integer "user_id"
+    t.string "subscription_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forum_threads", id: :serial, force: :cascade do |t|
+    t.integer "forum_category_id"
+    t.integer "user_id"
+    t.string "title", null: false
+    t.string "slug", null: false
+    t.integer "forum_posts_count", default: 0
+    t.boolean "pinned", default: false
+    t.boolean "solved", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "game_teams", force: :cascade do |t|
@@ -320,6 +357,12 @@ ActiveRecord::Schema.define(version: 2019_04_09_212915) do
 
   add_foreign_key "characters", "games"
   add_foreign_key "characters", "users"
+  add_foreign_key "forum_posts", "forum_threads"
+  add_foreign_key "forum_posts", "users"
+  add_foreign_key "forum_subscriptions", "forum_threads"
+  add_foreign_key "forum_subscriptions", "users"
+  add_foreign_key "forum_threads", "forum_categories"
+  add_foreign_key "forum_threads", "users"
   add_foreign_key "ingredients", "ingredients", column: "parent_id"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "level_locations", "levels"

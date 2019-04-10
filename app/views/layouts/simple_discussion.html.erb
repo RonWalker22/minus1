@@ -1,0 +1,104 @@
+<div class="column">
+  <h1 class="title has-text-centered">
+    <%= t('community') %>
+  </h1>
+</div>
+
+<div class="columns simple_discussion is-multiline is-centered">
+
+  <div class="column is-one-fifth">
+
+    <div class="box">
+      <%= link_to t('ask_a_question'), simple_discussion.new_forum_thread_path, class: "button" %>
+      <hr />
+
+      <div class="forum-thread-filters">
+        <h5 class="title is-4">
+          <strong>
+            <%= t('filters') %>
+          </strong>
+        </h5>
+        <div>
+          <%= forum_link_to simple_discussion.forum_threads_path, exact: true do %>
+            <i class="fas fa-bars"></i>
+            <%= t('.all_threads') %>
+          <% end %>
+        </div>
+        <% if user_signed_in? %>
+          <div>
+            <%= forum_link_to simple_discussion.mine_forum_threads_path do %>
+              <i class="far fa-user-circle"></i>
+              <%= t('.my_questions') %>
+            <% end %>
+          </div>
+          <div>
+            <%= forum_link_to simple_discussion.participating_forum_threads_path do %>
+              <i class="far fa-comments"></i>
+              <%= t('.participating') %>
+            <% end %>
+          </div>
+        <% end %>
+        <div>
+          <%= forum_link_to simple_discussion.answered_forum_threads_path do %>
+            <i class="fas fa-check"></i>
+            <%= t('.answered') %>
+          <% end %>
+        </div>
+        <div>
+          <%= forum_link_to simple_discussion.unanswered_forum_threads_path do %>
+            <i class="fas fa-question"></i>
+            <%= t('.unanswered') %>
+          <% end %>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="forum-thread-filters">
+        <h6>
+          <strong class="title is-4">
+            <%= t('.by_category') %>
+          </strong>
+        </h6>
+        <div><%= forum_link_to simple_discussion.forum_threads_path, exact: true do %><i class="far fa-circle"></i> All<% end %></div>
+        <% ForumCategory.sorted.each do |category| %>
+          <div>
+            <%= forum_link_to simple_discussion.forum_category_forum_threads_path(category) do %>
+              <i class="far fa-circle"></i>
+              <%= category.name %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if @forum_thread.present? && @forum_thread.persisted? %>
+        <hr />
+
+        <%# User has not posted in the thread or subscribed %>
+        <h5><%= t('.notifications') %></h5>
+
+        <%= link_to simple_discussion.forum_thread_notifications_path(@forum_thread), method: :post, class: "btn btn-secondary btn-sm btn-block mb-2" do %>
+          <% if @forum_thread.subscribed? current_user %>
+            <i class="fas fa-bell-slash"></i> Unsubscribe
+          <% else %>
+            <i class="fas fa-bell"></i>
+            <%= t('.suscribe') %>
+          <% end %>
+        <% end %>
+
+        <small><%= @forum_thread.subscribed_reason(current_user) %></small>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div class="column">
+
+    <div class="box">
+      <%= yield %>
+    </div>
+
+  </div>
+</div>
+
+<% parent_layout("application") %>

@@ -91,3 +91,5 @@ gem 'sassc', '>= 2.0.1'
 # securing User Emails
 gem 'attr_encrypted'
 gem 'blind_index'
+
+gem 'simple_discussion', :git => 'git@github.com:RonWalker22/simple_discussion.git', :branch => 'master'

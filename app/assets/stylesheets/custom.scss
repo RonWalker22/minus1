@@ -17,12 +17,7 @@ input {
 }
 
 .menu {
-  background: repeating-linear-gradient(
-    -45deg,
-    $menu-bg,
-    $menu-bg 10px,
-    #69737f61 11px
-  );
+  background: white;
 }
 
 table {
