@@ -21,7 +21,9 @@ end
 def create_admin
   @admin = User.create! name: 'admin',
                             password: Rails.application.credentials.admin[:password],
+                            email: Rails.application.credentials.admin[:email],
                             game_setting_id: @r6_game.id
+
 end
 
 def create_r6_characters
