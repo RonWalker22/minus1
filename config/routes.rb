@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   resources :modes
   resources :characters
   devise_for :users,
-             controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+             controllers: { omniauth_callbacks: 'users/omniauth_callbacks', 
+                            registrations: 'users/registrations' }
   resources :users, only: [:index, :show]
   resources :games
   resources :levels
