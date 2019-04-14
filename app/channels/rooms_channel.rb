@@ -19,7 +19,7 @@ class RoomsChannel < ApplicationCable::Channel
     RoomsChannel.broadcast_to room, objective_completed: objective
   end
 
-  def minus_one(data)
+  def minus_one
     room = current_user.room
     room.increment!(kill_counter, by = 1)
     RoomsChannel.broadcast_to room, kill_counter: room.kill_counter
