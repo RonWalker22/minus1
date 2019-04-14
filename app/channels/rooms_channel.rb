@@ -26,6 +26,13 @@ class RoomsChannel < ApplicationCable::Channel
     RoomsChannel.broadcast_to room, kill_counter: room.kill_counter
   end
 
+  def execute_strategy
+    room = current_user.room
+    return unless room.commander_id == current_user.id
+    room.update_attributes kill_counter: 0, active: true
+    RoomsChannel.broadcast_to room, execute_strategy: true
+  end
+
   def scramble_objectives
     ScrambleObjectivesJob.perform_later(current_user.room)
   end
