@@ -21,7 +21,7 @@ class RoomsChannel < ApplicationCable::Channel
 
   def minus_one
     room = current_user.room
-    room.increment!(kill_counter, by = 1)
+    room.increment!(:kill_counter, by = 1)
     RoomsChannel.broadcast_to room, kill_counter: room.kill_counter
   end
 
