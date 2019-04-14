@@ -230,6 +230,8 @@ ActiveRecord::Schema.define(version: 2019_04_10_014943) do
   create_table "rooms", force: :cascade do |t|
     t.bigint "commander_id", null: false
     t.bigint "strategy_id"
+    t.integer "kill_counter", default: 0, null: false
+    t.boolean "active", default: false, null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
