@@ -7,6 +7,7 @@ class AssignObjectiveJob < ApplicationJob
     user.current_objective_id = strategy.assignment_flow[op_num]
     user.save
     UserChannel.broadcast_to user, 
-                             objective_preload: user.current_objective.uuid
+                             objective_preload: user.current_objective.uuid,
+                             strategy_preload: strategy.uuid
   end
 end
