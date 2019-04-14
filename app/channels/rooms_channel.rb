@@ -19,6 +19,13 @@ class RoomsChannel < ApplicationCable::Channel
     RoomsChannel.broadcast_to room, objective_completed: objective
   end
 
+  def minus_one(data)
+    room = current_user.room
+    room.increment!(kill_counter, by = 1)
+    objective = data['objective']
+    RoomsChannel.broadcast_to room, kill_counter: room.kill_counter
+  end
+
   def scramble_objectives
     ScrambleObjectivesJob.perform_later(current_user.room)
   end
