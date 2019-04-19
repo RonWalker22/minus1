@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   get '/about' => 'static_pages#about'
   get '/docs' => 'static_pages#docs'
-  get '/strategies/:id/xml' => 'strategies#show_xml', as: 'strategy_xml'
+  get '/strategies/xml/:uuid' => 'strategies#show_xml', as: 'strategy_xml'
   patch '/games/:id/switch/' => 'games#switch', as: 'switch_game'
   put '/users/api_key' => 'users#create_api_key', as: 'api_key'
   put '/teams/:id/link/:game_id' => 'teams#link_game', as: 'game_link'
