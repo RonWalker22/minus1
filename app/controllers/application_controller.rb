@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
     end
 
     def guests_controllers?
-      devise_controller? || controller_name == 'static_pages'
+      devise_controller? || controller_name == 'static_pages' || 
+        action_name == 'show_xml'
     end
 end
