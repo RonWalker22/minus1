@@ -3,14 +3,14 @@ class RoomsChannel < ApplicationCable::Channel
     op_name = current_user.name
     room = current_user.room
     stream_for room
-    moving_speech(room, op_name, 'joiner')
+    moving_speech(room, op_name, 'room_joiner')
     AssignObjectiveJob.perform_later(room, current_user)
   end
 
   def unsubscribed
     op_name = current_user.name
     room = current_user.room
-    moving_speech(room, op_name, 'leaver')
+    moving_speech(room, op_name, 'room_leaver')
   end
 
   def objective_completed(data)
