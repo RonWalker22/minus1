@@ -969,50 +969,6 @@ def create_rainbow_six
   create_mode
 end
 
-def create_strategies
-  Strategy.create commander_id: @admin.id,
-                  mode_id: 1,
-                  level_id: 1,
-                  game_id: 1,
-                  name: 'Rush',
-                  uuid: SecureRandom.uuid
-end
-
-def create_objectives
-  10.times do
-    10.times do |i|
-      Objective.create strategy_id: 1,
-                       name: "Objective #{i + 1}",
-                       priority: i + 1,
-                       min_ops: i + 1,
-                       max_ops: i + 2,
-                       target_id: 1,
-                       action: Objective::ACTION_OPTIONS.sample,
-                       uuid: SecureRandom.uuid
-    end
-  end
-  @admin.current_objective_id = 1
-  @admin.save
-end
-
-def create_room
-  Room.create commander_id: 1, name: 'happy', strategy_id: 1
-end
-
-def create_users
-  100.times do |i|
-    User.create name: "Op #{i}",
-                    password: '123456',
-                    game_setting_id: @r6_game.id,
-                    room_id: 1
-  end
-  @admin.update_attributes room_id:1
-end
-
 create_rainbow_six
-create_strategies
-create_objectives
-create_room
-create_users
 
 @admin.add_role :admin
