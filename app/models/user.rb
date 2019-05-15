@@ -32,7 +32,7 @@ class User < ApplicationRecord
   has_many :user_teams
   has_many :teams, through: :user_teams
   belongs_to :game_setting, class_name: 'Game', foreign_key: 'game_setting_id'
-  validates :email, uniqueness: true
+  validates_uniqueness_of :email, :allow_blank => true, :case_sensitive => false
 
   def email_required?
     false
